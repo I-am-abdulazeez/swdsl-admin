@@ -3,9 +3,14 @@ import { Link } from "react-router-dom";
 import { Button } from "@chakra-ui/button";
 import Brand from "../Brand";
 import { useAuth } from "../../hooks/useAuth";
+import { useBreakpointValue } from "@chakra-ui/media-query";
 
 const Navbar = (): JSX.Element => {
   const { user, signOutAdmin } = useAuth();
+  const buttonSize = useBreakpointValue({
+    base: "xs",
+    md: "sm",
+  });
   return (
     <Box
       as="header"
@@ -22,19 +27,19 @@ const Navbar = (): JSX.Element => {
           <HStack spacing={2}>
             {!user ? (
               <Link to="/">
-                <Button size="sm" variant="ghost">
+                <Button size={buttonSize} variant="ghost">
                   Home
                 </Button>
               </Link>
             ) : (
               <>
                 <Link to="/dashboard">
-                  <Button size="sm" variant="ghost">
+                  <Button size={buttonSize} variant="ghost">
                     Dashboard
                   </Button>
                 </Link>
                 <Link to="/upload">
-                  <Button size="sm" variant="ghost">
+                  <Button size={buttonSize} variant="ghost">
                     Drinks Upload
                   </Button>
                 </Link>
@@ -43,7 +48,7 @@ const Navbar = (): JSX.Element => {
             {user && (
               <Button
                 onClick={signOutAdmin}
-                size="sm"
+                size={buttonSize}
                 colorScheme="error"
                 variant="solid"
               >

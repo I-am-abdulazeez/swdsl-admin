@@ -56,7 +56,7 @@ const Products = (): JSX.Element => {
         </HStack>
       )}
       {storeQuery.isLoadingError && <Text>Error Fetching product</Text>}
-      <SimpleGrid columns={2} spacing={3}>
+      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={3}>
         {snapshot?.docs?.map((docsSnapshot: DocumentSnapshot) => {
           const product = docsSnapshot.data();
           return (

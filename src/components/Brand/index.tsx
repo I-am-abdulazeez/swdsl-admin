@@ -7,7 +7,11 @@ const Brand = (): JSX.Element => {
   return (
     <Box>
       <Link to="/">
-        <Image src={ShayoLogo} width="125px" alt="shayo-logo" />
+        <Image
+          src={ShayoLogo}
+          width={{ base: "100px", md: "125px" }}
+          alt="shayo-logo"
+        />
       </Link>
     </Box>
   );

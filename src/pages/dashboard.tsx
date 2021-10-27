@@ -5,11 +5,18 @@ import Products from "../components/Product/Products";
 const Dashboard = (): JSX.Element => {
   return (
     <Box>
-      <Flex justifyContent="space-between">
-        <Text fontSize="xl" fontWeight="semibold">
+      <Flex
+        flexDir={{ base: "column", md: "row" }}
+        justifyContent="space-between"
+      >
+        <Text mb={{ base: 4, md: 0 }} fontSize="xl" fontWeight="semibold">
           Dashboard Page
         </Text>
-        <Input maxWidth="max" type="text" placeholder="Search for drinks" />
+        <Input
+          maxWidth={{ base: "full", md: "max" }}
+          type="text"
+          placeholder="Search for drinks"
+        />
       </Flex>
       <Products />
     </Box>
