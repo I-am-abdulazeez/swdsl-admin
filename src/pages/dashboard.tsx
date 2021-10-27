@@ -1,4 +1,4 @@
-import { Box, Spacer, Text } from "@chakra-ui/layout";
+import { Box, Text } from "@chakra-ui/layout";
 import { Flex, Input } from "@chakra-ui/react";
 import Products from "../components/Product/Products";
 
