@@ -7,7 +7,14 @@ import { useAuth } from "../../hooks/useAuth";
 const Navbar = (): JSX.Element => {
   const { user, signOutAdmin } = useAuth();
   return (
-    <Box as="header" borderBottom="1px solid #EDF2F7">
+    <Box
+      as="header"
+      bg="rgba(255,255,255,0.8)"
+      zIndex={5}
+      position="sticky"
+      backdropFilter="blur(12px)"
+      borderBottom="1px solid #EDF2F7"
+    >
       <Container maxW="container.lg">
         <Flex h="10vh" align="center">
           <Brand />

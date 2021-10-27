@@ -16,6 +16,7 @@ export interface InputFieldProps {
   value: string;
   placeHolder: string;
   label: string;
+  isRequired: boolean;
 }
 
 export interface SelectFieldProps extends InputFieldProps {}

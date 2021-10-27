@@ -6,12 +6,13 @@ import {
 } from "@react-query-firebase/auth";
 import { useEffect, useState } from "react";
 import { firebaseAuth } from "../../lib/firebase";
+import { UserInfo } from "@firebase/auth";
 
 export const useAuth = () => {
   const toast = useToast();
   const history = useHistory();
-  const storage = localStorage;
-  const [user, setUser] = useState<{} | null>(null);
+  const [user, setUser] = useState<{} | null | UserInfo>(null);
+  const [userId, setUserId] = useState<string>("");
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const signOutMutation = useAuthSignOut(firebaseAuth);
   const { mutate, isLoading } = useAuthSignInWithEmailAndPassword(
@@ -31,8 +32,9 @@ export const useAuth = () => {
         const currentUser = data;
         setUser(currentUser);
         setIsLoggedIn(true);
+        setUserId(currentUser.user.uid);
         console.log(currentUser);
-        storage.setItem("user", JSON.stringify(data));
+        // storage.setItem("user", JSON.stringify(data));
         history.push("/dashboard");
       },
     }
@@ -48,6 +50,7 @@ export const useAuth = () => {
   const signOutAdmin = () => {
     signOutMutation.mutate();
     setUser(null);
+    setUserId("");
     setIsLoggedIn(false);
     history.push("/");
   };
@@ -56,9 +59,11 @@ export const useAuth = () => {
     const unsubscribe = firebaseAuth.onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
+        setUserId(user.uid);
         setIsLoggedIn(true);
       } else {
         setUser(null);
+        setUserId("");
         setIsLoggedIn(false);
       }
     });
@@ -68,6 +73,7 @@ export const useAuth = () => {
 
   return {
     user,
+    userId,
     signInAdmin,
     isLoggedIn,
     isLoading,

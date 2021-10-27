@@ -55,3 +55,5 @@ export const drinkCategoriesArray: DrinksCategory[] = [
     drink_id: nanoid(4),
   },
 ];
+
+export const fileTypes = ["image/png", "image/jpeg", "image/jpg"];

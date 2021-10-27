@@ -7,7 +7,11 @@ const Footer = (): JSX.Element => {
   return (
     <Box
       as="footer"
-      h={{ base: "10.5vh", sm: "10vh", md: "10vh" }}
+      p={2}
+      borderTopLeftRadius="lg"
+      position="fixed"
+      bottom={0}
+      right={0}
       bg="gray.100"
     >
       <Container maxW="container.lg" h="100%">

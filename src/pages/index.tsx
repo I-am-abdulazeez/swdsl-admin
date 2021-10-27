@@ -1,5 +1,5 @@
 import { Button } from "@chakra-ui/button";
-import { Box, Heading, Text, VStack } from "@chakra-ui/layout";
+import { Flex, Heading, Text, VStack } from "@chakra-ui/layout";
 import { Link } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
@@ -7,7 +7,7 @@ const Home = (): JSX.Element => {
   const { user } = useAuth();
   console.log(user);
   return (
-    <>
+    <Flex justify="center" align="center" height="70vh">
       <VStack spacing={3}>
         <Heading>ShayowithDSL Admin Page.</Heading>
         <Text>This is where all drinks uploads are done</Text>
@@ -21,7 +21,7 @@ const Home = (): JSX.Element => {
           </Link>
         )}
       </VStack>
-    </>
+    </Flex>
   );
 };
 

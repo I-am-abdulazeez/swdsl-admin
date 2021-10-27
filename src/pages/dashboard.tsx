@@ -1,14 +1,17 @@
-import { Box, Text } from "@chakra-ui/layout";
-import { useAuth } from "../hooks/useAuth";
+import { Box, Spacer, Text } from "@chakra-ui/layout";
+import { Flex, Input } from "@chakra-ui/react";
+import Products from "../components/Product/Products";
 
-const Dashboard = () => {
-  const { user } = useAuth();
+const Dashboard = (): JSX.Element => {
   return (
-    <Box textAlign="center">
-      <Text fontSize="xl" fontWeight="semibold">
-        Dashboard Page
-      </Text>
-      {/* <Text>The user is {JSON.stringify(user, null, 2)}</Text> */}
+    <Box>
+      <Flex justifyContent="space-between">
+        <Text fontSize="xl" fontWeight="semibold">
+          Dashboard Page
+        </Text>
+        <Input maxWidth="max" type="text" placeholder="Search for drinks" />
+      </Flex>
+      <Products />
     </Box>
   );
 };

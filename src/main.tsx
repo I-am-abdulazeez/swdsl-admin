@@ -1,14 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
+import { BrowserRouter as Router } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "react-query";
+import App from "./App";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import { BrowserRouter as Router } from "react-router-dom";
 import customTheme from "./assets/theme";
 import ClientOnly from "./components/ClientOnly";
+import "./index.css";
 
 const queryClient = new QueryClient();
 

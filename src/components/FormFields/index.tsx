@@ -11,7 +11,6 @@ import { Select } from "@chakra-ui/select";
 import { chakra } from "@chakra-ui/system";
 import { Box, Text } from "@chakra-ui/layout";
 import MotionBox from "../MotionBox";
-import ProgressBar from "../ProgressBar";
 
 export const InputField = ({
   name,
@@ -19,9 +18,10 @@ export const InputField = ({
   handleChange,
   placeHolder,
   value,
+  isRequired,
 }: InputFieldProps) => {
   return (
-    <FormControl isRequired id={name}>
+    <FormControl isRequired={isRequired} id={name}>
       <FormLabel fontSize="14px">{label}</FormLabel>
       <Input
         value={value}
@@ -97,8 +97,8 @@ export const FileInput = ({
         />
         <chakra.span
           position="absolute"
-          left="14px"
-          top="4.9px"
+          left="15px"
+          top="5px"
           fontSize="1.3rem"
         >
           +
@@ -111,14 +111,15 @@ export const FileInput = ({
           )}
         </Text>
         {file && (
-          <MotionBox
-            height="5px"
-            bg="primary.300"
-            borderRadius="md"
-            mt={2}
-            initial={{ width: 0 }}
-            animate={{ width: progress + "%" }}
-          />
+          <Box mt={2} height="5px" bg="gray.200" borderRadius="md">
+            <MotionBox
+              height="5px"
+              bg="primary.300"
+              borderRadius="md"
+              initial={{ width: 0 }}
+              animate={{ width: progress + "%" }}
+            />
+          </Box>
         )}
       </Box>
     </FormControl>
