@@ -1,33 +1,18 @@
-import { Button, IconButton } from "@chakra-ui/button";
+import { IconButton } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
-import {
-  Modal,
-  ModalBody,
-  ModalHeader,
-  ModalCloseButton,
-  ModalContent,
-  ModalOverlay,
-  useDisclosure,
-  ModalFooter,
-} from "@chakra-ui/react";
 import { Box, HStack, Text, Flex, Heading } from "@chakra-ui/layout";
-import { Spacer, Tooltip } from "@chakra-ui/react";
+import { Spacer } from "@chakra-ui/react";
 import { Spinner } from "@chakra-ui/spinner";
 import { chakra } from "@chakra-ui/system";
 import { doc } from "@firebase/firestore";
-import {
-  useFirestoreDocument,
-  useFirestoreDocumentDeletion,
-} from "@react-query-firebase/firestore";
-import {
-  RiArrowLeftLine,
-  RiDeleteBin3Line,
-  RiPencilLine,
-} from "react-icons/ri";
+import { useFirestoreDocument } from "@react-query-firebase/firestore";
+import { lazy } from "react";
+import { RiArrowLeftLine } from "react-icons/ri";
 import { useParams, useHistory } from "react-router-dom";
 import { firebaseFirstore } from "../../lib/firebase";
-import ProductBadge from "./ProductBadge";
-import ProductActions from "./ProductActions";
+
+const ProductBadge = lazy(() => import("./ProductBadge"));
+const ProductActions = lazy(() => import("./ProductActions"));
 
 type ProductDetailsParams = {
   id: string;
@@ -43,7 +28,7 @@ const ProductDetails = (): JSX.Element => {
   const snapshot = product.data;
 
   if (product.isLoading) {
-    return <Spinner color="blue" />;
+    return <Spinner color="red" />;
   }
 
   return (

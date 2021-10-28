@@ -1,7 +1,9 @@
 import { Image } from "@chakra-ui/image";
-import { Badge, Box, Heading, HStack, Stack, Text } from "@chakra-ui/layout";
+import { Box, Heading, HStack, Stack, Text } from "@chakra-ui/layout";
 import { chakra } from "@chakra-ui/system";
-import ProductBadge from "./ProductBadge";
+import { lazy } from "react";
+
+const ProductBadge = lazy(() => import("./ProductBadge"));
 
 const ProductList = ({ product }: any) => {
   return (

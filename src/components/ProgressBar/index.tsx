@@ -1,8 +1,8 @@
-import { useEffect } from "react";
+import { lazy, useEffect } from "react";
 import { useStorage } from "../../hooks/useStorage";
-import MotionBox from "../MotionBox";
 
-const ProgressBar = ({ file, setFile, fileUrl }: any) => {
+const MotionBox = lazy(() => import("../MotionBox"));
+const ProgressBar = ({ file, setFile }: any) => {
   const { progress, url } = useStorage(file);
 
   console.log(progress, url);

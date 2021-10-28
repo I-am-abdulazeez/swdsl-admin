@@ -4,25 +4,22 @@ import {
   FormHelperText,
   FormLabel,
 } from "@chakra-ui/form-control";
+import { useBoolean } from "@chakra-ui/hooks";
 import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
 import { Box, Text, VStack } from "@chakra-ui/layout";
 import { chakra } from "@chakra-ui/system";
 import { useToast } from "@chakra-ui/toast";
-import React, { useState } from "react";
-import { useLocation } from "react-router";
+import { FormEvent, useState } from "react";
 import { useAuth } from "../hooks/useAuth/index";
 
 const Login = (): JSX.Element => {
-  const location = useLocation();
   const toast = useToast();
   const { signInAdmin, isLoading } = useAuth();
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useBoolean();
   const [email, setEmail] = useState<string>("");
   const [password, setpassword] = useState<string>("");
 
-  const handleClick = () => setShowPassword(!showPassword);
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!email || !password) {
       toast({
@@ -36,7 +33,7 @@ const Login = (): JSX.Element => {
   };
 
   return (
-    <Box width="400px" mx="auto">
+    <Box width={{ base: "300px", md: "400px" }} mx="auto">
       <Text fontWeight="semibold" fontSize="lg" textAlign="center">
         SWDSL Admin Login Page
       </Text>
@@ -65,7 +62,11 @@ const Login = (): JSX.Element => {
                   placeholder="Password"
                 />
                 <InputRightElement width="4.5rem">
-                  <Button h="1.75rem" size="sm" onClick={handleClick}>
+                  <Button
+                    h="1.75rem"
+                    size="sm"
+                    onClick={setShowPassword.toggle}
+                  >
                     {showPassword ? "Hide" : "Show"}
                   </Button>
                 </InputRightElement>

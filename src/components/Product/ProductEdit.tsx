@@ -199,7 +199,11 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Edit Product {snapshot?.drinkName}?</ModalHeader>
+          <ModalHeader>
+            Edit Product{" "}
+            <chakra.span color="success.700">{snapshot?.drinkName}</chakra.span>
+            ?
+          </ModalHeader>
           <ModalCloseButton size="sm" />
           <chakra.form onSubmit={handleFileEdit}>
             <ModalBody>

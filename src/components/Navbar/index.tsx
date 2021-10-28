@@ -1,9 +1,11 @@
-import { Box, Container, Flex, HStack, Spacer } from "@chakra-ui/layout";
+import { Box, Container, Flex, HStack, Spacer, Text } from "@chakra-ui/layout";
 import { Link } from "react-router-dom";
 import { Button } from "@chakra-ui/button";
-import Brand from "../Brand";
 import { useAuth } from "../../hooks/useAuth";
 import { useBreakpointValue } from "@chakra-ui/media-query";
+import { lazy, Suspense } from "react";
+
+const Brand = lazy(() => import("../Brand"));
 
 const Navbar = (): JSX.Element => {
   const { user, signOutAdmin } = useAuth();
@@ -22,7 +24,9 @@ const Navbar = (): JSX.Element => {
     >
       <Container maxW="container.lg">
         <Flex h="10vh" align="center">
-          <Brand />
+          <Suspense fallback={<Text>Loading</Text>}>
+            <Brand />
+          </Suspense>
           <Spacer />
           <HStack spacing={2}>
             {!user ? (

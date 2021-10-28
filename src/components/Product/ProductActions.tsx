@@ -1,27 +1,16 @@
-import { HStack } from "@chakra-ui/layout";
-import { Tooltip } from "@chakra-ui/tooltip";
-import ProductDelete from "./ProductDelete";
-import ProductEdit from "./ProductEdit";
+import { lazy, Suspense } from "react";
+import { HStack, Text } from "@chakra-ui/layout";
+
+const ProductDelete = lazy(() => import("./ProductDelete"));
+const ProductEdit = lazy(() => import("./ProductEdit"));
 
 const ProductActions = ({ snapshot }: any): JSX.Element => {
   return (
     <HStack>
-      <Tooltip
-        borderRadius="md"
-        placement="right"
-        label="Edit product"
-        hasArrow
-      >
+      <Suspense fallback={<Text>Loading</Text>}>
         <ProductEdit snapshot={snapshot} />
-      </Tooltip>
-      <Tooltip
-        borderRadius="md"
-        placement="top"
-        label="Remove product"
-        hasArrow
-      >
         <ProductDelete snapshot={snapshot} />
-      </Tooltip>
+      </Suspense>
     </HStack>
   );
 };

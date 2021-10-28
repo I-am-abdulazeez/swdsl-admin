@@ -1,28 +1,38 @@
-import { Box, Container } from "@chakra-ui/react";
+import { Box, Container, Text } from "@chakra-ui/react";
 import { Switch } from "react-router-dom";
-import Home from "./pages";
-import Dashboard from "./pages/dashboard";
-import ProductDetails from "./components/Product/ProductDetails";
 import { PrivateRoute, PublicRoute } from "./components/Routes";
-import Login from "./pages/login";
-import Upload from "./pages/upload";
+import { lazy, Suspense } from "react";
+
+const Login = lazy(() => import("./pages/login"));
+const Home = lazy(() => import("./pages"));
+const Dashboard = lazy(() => import("./pages/dashboard"));
+const ProductDetails = lazy(
+  () => import("./components/Product/ProductDetails")
+);
+const Upload = lazy(() => import("./pages/upload"));
 
 function App() {
   return (
     <Box as="main" py={10} display="flex" alignItems="center">
       <Container maxW="container.lg">
-        <Switch>
-          <PublicRoute restricted={false} component={Home} path="/" exact />
-          <PrivateRoute component={Dashboard} path="/dashboard" exact />
-          <PrivateRoute component={ProductDetails} path="/product/:id" exact />
-          <PublicRoute
-            restricted={true}
-            component={Login}
-            path="/login"
-            exact
-          />
-          <PrivateRoute component={Upload} path="/upload" exact />
-        </Switch>
+        <Suspense fallback={<Text>Loading </Text>}>
+          <Switch>
+            <PublicRoute restricted={false} component={Home} path="/" exact />
+            <PrivateRoute component={Dashboard} path="/dashboard" exact />
+            <PrivateRoute
+              component={ProductDetails}
+              path="/product/:id"
+              exact
+            />
+            <PublicRoute
+              restricted={true}
+              component={Login}
+              path="/login"
+              exact
+            />
+            <PrivateRoute component={Upload} path="/upload" exact />
+          </Switch>
+        </Suspense>
       </Container>
     </Box>
   );

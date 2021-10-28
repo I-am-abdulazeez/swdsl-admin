@@ -1,6 +1,6 @@
 import { Box, HStack, SimpleGrid, Text } from "@chakra-ui/layout";
 import { Spinner } from "@chakra-ui/spinner";
-import { toast, useToast } from "@chakra-ui/toast";
+import { useToast } from "@chakra-ui/toast";
 import {
   collection,
   DocumentSnapshot,
@@ -8,9 +8,11 @@ import {
   query,
 } from "@firebase/firestore";
 import { useFirestoreQuery } from "@react-query-firebase/firestore";
+import { lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { firebaseFirstore } from "../../lib/firebase";
-import ProductList from "./ProductList";
+
+const ProductList = lazy(() => import("./ProductList"));
 
 const Products = (): JSX.Element => {
   const toast = useToast();
@@ -24,7 +26,7 @@ const Products = (): JSX.Element => {
     {},
     {
       onError(err) {
-        console.log(err);
+        // console.log(err);
         toast({
           title: `Error fetching data ${err.message}`,
           status: "error",
@@ -36,7 +38,7 @@ const Products = (): JSX.Element => {
   );
   const snapshot = storeQuery.data;
 
-  console.log(snapshot);
+  // console.log(snapshot);
 
   return (
     <Box mt={8}>
@@ -61,7 +63,9 @@ const Products = (): JSX.Element => {
           const product = docsSnapshot.data();
           return (
             <Link to={`product/${docsSnapshot.id}`} key={docsSnapshot.id}>
-              <ProductList product={product} />
+              <Suspense fallback={<Text>Loading...</Text>}>
+                <ProductList product={product} />
+              </Suspense>
             </Link>
           );
         })}

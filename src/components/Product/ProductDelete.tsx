@@ -53,7 +53,7 @@ const ProductDelete = forwardRef(({ snapshot }: any, stuffRef): JSX.Element => {
       toast({
         status: "error",
         description:
-          "Product name does not match. Did you enter the correct name?",
+          "Product name does not match. Did you enter the name correctly?",
         isClosable: true,
         duration: 3000,
       });
@@ -78,7 +78,10 @@ const ProductDelete = forwardRef(({ snapshot }: any, stuffRef): JSX.Element => {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Delete Product {snapshot?.drinkName}?</ModalHeader>
+          <ModalHeader>
+            Delete Product{" "}
+            <chakra.span color="error.700">{snapshot?.drinkName}</chakra.span>?
+          </ModalHeader>
           <ModalCloseButton size="sm" />
           <form onSubmit={handleDocDeletion}>
             <ModalBody>

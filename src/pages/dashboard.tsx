@@ -1,6 +1,7 @@
 import { Box, Text } from "@chakra-ui/layout";
 import { Flex, Input } from "@chakra-ui/react";
-import Products from "../components/Product/Products";
+import { lazy, Suspense } from "react";
+const Products = lazy(() => import("../components/Product/Products"));
 
 const Dashboard = (): JSX.Element => {
   return (
@@ -18,7 +19,9 @@ const Dashboard = (): JSX.Element => {
           placeholder="Search for drinks"
         />
       </Flex>
-      <Products />
+      <Suspense fallback={<Text>Loading</Text>}>
+        <Products />
+      </Suspense>
     </Box>
   );
 };
