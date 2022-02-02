@@ -1,7 +1,7 @@
 import { Image } from "@chakra-ui/image";
 import { Box } from "@chakra-ui/layout";
 import { Link } from "react-router-dom";
-import ShayoLogo from "../../assets/images/logo.png";
+import ShayoLogo from "../../assets/images/swdsl-logo.svg";
 
 const Brand = (): JSX.Element => {
   return (

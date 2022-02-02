@@ -1,6 +1,6 @@
 import { IconButton } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
-import { Box, HStack, Text, Flex, Heading } from "@chakra-ui/layout";
+import { Box, HStack, Text, Flex, Heading, VStack } from "@chakra-ui/layout";
 import { Spacer } from "@chakra-ui/react";
 import { Spinner } from "@chakra-ui/spinner";
 import { chakra } from "@chakra-ui/system";
@@ -55,19 +55,23 @@ const ProductDetails = (): JSX.Element => {
             src={snapshot?.data()?.url}
             alt={snapshot?.data()?.id}
           />
-          <Box>
+          <VStack align={"flex-start"}>
             <ProductBadge product={snapshot?.data()} />
-            <Heading my={0}>{snapshot?.data()?.drinkName}</Heading>
-            <chakra.span fontSize="lg">
-              Description: {snapshot?.data()?.description}
+            <Heading mt="0">{snapshot?.data()?.drinkName}</Heading>
+            <chakra.span mt="0" fontSize="md">
+              {snapshot?.data()?.description}
             </chakra.span>
-            <Heading fontWeight="semibold" size="md" mt={3} color="gray.500">
-              Price:{" "}
-              <chakra.span fontWeight="bold" color="secondary.500">
+            <Box>
+              <chakra.span
+                fontWeight="bold"
+                fontSize={"lg"}
+                color="secondary.600"
+              >
+                &#36;
                 {snapshot?.data()?.price}
               </chakra.span>
-            </Heading>
-          </Box>
+            </Box>
+          </VStack>
         </HStack>
       </Box>
     </Box>

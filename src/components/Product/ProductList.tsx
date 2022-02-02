@@ -38,7 +38,8 @@ const ProductList = ({ product }: any) => {
         <Box>
           <chakra.span>
             Price:{" "}
-            <chakra.span fontWeight="medium" color="secondary.500">
+            <chakra.span fontWeight="medium" color="secondary.600">
+              &#36;
               {product?.price}
             </chakra.span>
           </chakra.span>
