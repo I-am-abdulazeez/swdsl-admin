@@ -27,7 +27,6 @@ import { FormState } from "../../interfaces";
 import { useAuth } from "../../hooks/useAuth";
 import { fileTypes } from "../../data";
 import { getDownloadURL, ref, uploadBytesResumable } from "@firebase/storage";
-import { numberWithCommas } from "../../utils";
 
 type ProductEditParams = {
   id: string;
@@ -41,7 +40,7 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
     drinkName: "",
     description: "",
     category: "",
-    price: "",
+    price: 0,
   });
   const { drinkName, description, category, price } = formState;
   const [file, setFile] = useState<any>(null);
@@ -61,13 +60,15 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
           duration: 3000,
           status: "error",
           isClosable: true,
-          title: `Error deleting Product: ${err.message}`,
+          variant: "subtle",
+          title: `Error editing Product: ${err.message}`,
         });
       },
       onSuccess() {
         toast({
           status: "success",
           title: `Data updated successfully`,
+          variant: "subtle",
           isClosable: true,
           duration: 3000,
         });
@@ -75,7 +76,7 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
           category: "",
           description: "",
           drinkName: "",
-          price: "",
+          price: 0,
         });
         setFile(null);
         setUrl("");
@@ -103,6 +104,7 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
         duration: 3000,
         isClosable: true,
         status: "error",
+        variant: "subtle",
         title: "File too large, Minimum of 2MB",
       });
     } else {
@@ -110,6 +112,7 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
       toast({
         duration: 3000,
         isClosable: true,
+        variant: "subtle",
         status: "error",
         title: "Please select an image file",
       });
@@ -144,6 +147,7 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
         toast({
           status: "error",
           title: `${error.message}`,
+          variant: "subtle",
           isClosable: true,
           duration: 3000,
         });
@@ -157,6 +161,7 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
           toast({
             status: "success",
             title: `File updated to storage successfully`,
+            variant: "subtle",
             isClosable: true,
             duration: 3000,
           });
@@ -173,7 +178,7 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
       description: description || snapshot?.description,
       category: category || snapshot?.category,
       url: url || snapshot?.url,
-      price: numberWithCommas(price) || snapshot?.price,
+      price: price || snapshot?.price,
     };
     console.log(newUpdate);
     docsEditMutation.mutate(newUpdate);

@@ -30,7 +30,9 @@ const ProductBadge = ({ product, addMargin }: any): JSX.Element => {
           ? "primary"
           : product?.category === "Brandy"
           ? "secondary"
-          : "accent"
+          : product?.category === "Others"
+          ? "telegram"
+          : undefined
       }
     >
       {product?.category}

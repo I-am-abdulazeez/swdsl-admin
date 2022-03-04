@@ -25,6 +25,7 @@ const Login = (): JSX.Element => {
       toast({
         title: "Please fill out the credentials",
         status: "error",
+        variant: "subtle",
         duration: 5000,
         isClosable: true,
       });

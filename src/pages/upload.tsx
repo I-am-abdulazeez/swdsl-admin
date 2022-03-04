@@ -23,7 +23,7 @@ const Upload = (): JSX.Element => {
     drinkName: "",
     description: "",
     category: "",
-    price: "",
+    price: 0,
   });
   const { drinkName, description, category, price } = formState;
   const [file, setFile] = useState<any>(null);
@@ -38,27 +38,30 @@ const Upload = (): JSX.Element => {
       toast({
         status: "error",
         title: `${err.message}`,
+        variant: "subtle",
         isClosable: true,
         duration: 3000,
       });
     },
-    onSuccess() {
+    onSuccess(data) {
       toast({
         status: "success",
         title: `Data saved successfully`,
         isClosable: true,
+        variant: "subtle",
         duration: 3000,
       });
       setFormState({
         category: "",
         description: "",
         drinkName: "",
-        price: "",
+        price: 0,
       });
       setFile(null);
       setUrl("");
       setProgress(0);
       setCreatedAt("");
+      console.log(data);
       // history.push("/dashboard");
     },
   });
@@ -99,6 +102,7 @@ const Upload = (): JSX.Element => {
         toast({
           status: "error",
           title: `${error.message}`,
+          variant: "subtle",
           isClosable: true,
           duration: 3000,
         });
@@ -115,6 +119,7 @@ const Upload = (): JSX.Element => {
             status: "success",
             title: `File uploaded to storage successfully`,
             isClosable: true,
+            variant: "subtle",
             duration: 3000,
           });
           setUploadLoading(false);
@@ -133,6 +138,7 @@ const Upload = (): JSX.Element => {
         duration: 3000,
         isClosable: true,
         status: "error",
+        variant: "subtle",
         title: "File too large, Minimum of 2MB",
       });
     } else {
@@ -141,6 +147,7 @@ const Upload = (): JSX.Element => {
         duration: 3000,
         isClosable: true,
         status: "error",
+        variant: "subtle",
         title: "Please select an image file",
       });
     }
@@ -152,7 +159,7 @@ const Upload = (): JSX.Element => {
       drinkName,
       description,
       category,
-      price: numberWithCommas(price),
+      price: price,
       url,
       createdAt,
     };

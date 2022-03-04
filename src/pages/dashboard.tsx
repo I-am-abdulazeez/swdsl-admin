@@ -1,6 +1,7 @@
+import { lazy, Suspense } from "react";
 import { Box, Text } from "@chakra-ui/layout";
 import { Flex, Input } from "@chakra-ui/react";
-import { lazy, Suspense } from "react";
+
 const Products = lazy(() => import("../components/Product/Products"));
 
 const Dashboard = (): JSX.Element => {

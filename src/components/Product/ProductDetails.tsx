@@ -24,6 +24,7 @@ const ProductDetails = (): JSX.Element => {
   const ref = doc(firebaseFirstore, "products", id);
   const product = useFirestoreDocument(["products", id], ref, {
     subscribe: true,
+    includeMetadataChanges: true,
   });
   const snapshot = product.data;
 

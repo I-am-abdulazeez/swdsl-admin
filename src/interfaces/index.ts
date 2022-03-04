@@ -1,8 +1,10 @@
+import { Timestamp } from "firebase/firestore";
+
 export interface FormState {
   drinkName: string;
   description: string;
   category: string;
-  price: string;
+  price: number;
 }
 
 export interface DrinksCategory {
@@ -13,7 +15,7 @@ export interface DrinksCategory {
 export interface InputFieldProps {
   name: string;
   handleChange: (e: any) => void;
-  value: string;
+  value: string | number;
   placeHolder: string;
   label: string;
   isRequired: boolean;
@@ -24,4 +26,26 @@ export interface FileInputProps {
   file: any;
   handleFileChange: (e: any) => void;
   progress: number;
+}
+
+export interface ProductsProps {
+  category:
+    | "Cognac"
+    | "Juice"
+    | "Whisky"
+    | "Non alcoholic"
+    | "Red wine"
+    | "Champagne"
+    | "Rum"
+    | "Irish cream"
+    | "White wine"
+    | "Gin"
+    | "Sparkling wine"
+    | "Brandy"
+    | "Others";
+  createdAt: Timestamp;
+  description: string;
+  drinkName: string;
+  price: string;
+  url: string;
 }

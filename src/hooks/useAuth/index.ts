@@ -24,6 +24,7 @@ export const useAuth = () => {
           status: "error",
           title: `${error.message}`,
           isClosable: true,
+          variant: "subtle",
           duration: 5000,
         });
         setIsLoggedIn(false);

@@ -37,6 +37,7 @@ const ProductDelete = forwardRef(({ snapshot }: any, stuffRef): JSX.Element => {
         duration: 3000,
         status: "error",
         isClosable: true,
+        variant: "subtle",
         title: `Error deleting Product: ${err.message}`,
       });
     },
@@ -55,6 +56,7 @@ const ProductDelete = forwardRef(({ snapshot }: any, stuffRef): JSX.Element => {
         description:
           "Product name does not match. Did you enter the name correctly?",
         isClosable: true,
+        variant: "subtle",
         duration: 3000,
       });
     }

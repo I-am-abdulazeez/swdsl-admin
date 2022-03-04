@@ -1,11 +1,18 @@
 import { Image } from "@chakra-ui/image";
 import { Box, Heading, HStack, Stack, Text } from "@chakra-ui/layout";
 import { chakra } from "@chakra-ui/system";
+import { DocumentData } from "firebase/firestore";
 import { lazy } from "react";
+import { ProductsProps } from "../../interfaces";
+import { numberWithCommas } from "../../utils";
 
 const ProductBadge = lazy(() => import("./ProductBadge"));
 
-const ProductList = ({ product }: any) => {
+const ProductList = ({
+  product,
+}: {
+  product: DocumentData | undefined | ProductsProps;
+}) => {
   return (
     <HStack
       transition="all 0.3s ease-in-out"
@@ -23,7 +30,7 @@ const ProductList = ({ product }: any) => {
         border="1px solid #EDF2F7"
         borderRadius="md"
         src={product?.url}
-        alt={product?.id}
+        alt={`product-${product?.drinkName}`}
       />
       <Stack spacing={2} flex={1}>
         <Box>
@@ -40,7 +47,7 @@ const ProductList = ({ product }: any) => {
             Price:{" "}
             <chakra.span fontWeight="medium" color="secondary.600">
               &#36;
-              {product?.price}
+              {numberWithCommas(product?.price)}
             </chakra.span>
           </chakra.span>
         </Box>

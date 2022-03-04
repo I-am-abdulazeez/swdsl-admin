@@ -30,6 +30,7 @@ const Products = (): JSX.Element => {
         toast({
           title: `Error fetching data ${err.message}`,
           status: "error",
+          variant: "subtle",
           duration: 3000,
           isClosable: true,
         });
