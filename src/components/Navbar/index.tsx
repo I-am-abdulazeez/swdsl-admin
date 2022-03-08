@@ -7,7 +7,7 @@ import { lazy, Suspense } from "react";
 
 const Brand = lazy(() => import("../Brand"));
 
-const Navbar = (): JSX.Element => {
+const Navbar: React.FC = () => {
   const { user, signOutAdmin } = useAuth();
   const buttonSize = useBreakpointValue({
     base: "xs",

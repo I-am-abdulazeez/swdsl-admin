@@ -23,7 +23,7 @@ const Products = (): JSX.Element => {
   const storeQuery = useFirestoreQuery(
     ["products"],
     ref,
-    {},
+    { includeMetadataChanges: true, subscribe: true },
     {
       onError(err) {
         // console.log(err);
@@ -44,7 +44,7 @@ const Products = (): JSX.Element => {
   return (
     <Box mt={8}>
       {snapshot?.empty && (
-        <Text>No product added. click on Drink upload to add one</Text>
+        <Text>No product added. click on Drinks upload to add one</Text>
       )}
       {storeQuery.isLoading && (
         <HStack spacing={2}>
@@ -60,16 +60,17 @@ const Products = (): JSX.Element => {
       )}
       {storeQuery.isLoadingError && <Text>Error Fetching product</Text>}
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={3}>
-        {snapshot?.docs?.map((docsSnapshot: DocumentSnapshot) => {
-          const product = docsSnapshot.data();
-          return (
-            <Link to={`product/${docsSnapshot.id}`} key={docsSnapshot.id}>
-              <Suspense fallback={<Text>Loading...</Text>}>
-                <ProductList product={product} />
-              </Suspense>
-            </Link>
-          );
-        })}
+        {snapshot &&
+          snapshot?.docs?.map((docsSnapshot: DocumentSnapshot) => {
+            const product = docsSnapshot.data();
+            return (
+              <Link to={`product/${docsSnapshot.id}`} key={docsSnapshot.id}>
+                <Suspense fallback={<Text>Loading...</Text>}>
+                  <ProductList product={product} />
+                </Suspense>
+              </Link>
+            );
+          })}
       </SimpleGrid>
     </Box>
   );

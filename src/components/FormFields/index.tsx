@@ -10,6 +10,7 @@ import { drinkCategoriesArray } from "../../data";
 import { Select } from "@chakra-ui/select";
 import { chakra } from "@chakra-ui/system";
 import { Box, Text } from "@chakra-ui/layout";
+
 import MotionBox from "../MotionBox";
 
 export const InputField = ({
@@ -18,6 +19,7 @@ export const InputField = ({
   handleChange,
   placeHolder,
   value,
+  type,
   isRequired,
 }: InputFieldProps) => {
   return (
@@ -27,7 +29,7 @@ export const InputField = ({
         value={value}
         name={name}
         onChange={handleChange}
-        type="text"
+        type={type}
         borderRadius="md"
         placeholder={placeHolder}
       />

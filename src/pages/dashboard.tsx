@@ -4,7 +4,7 @@ import { Flex, Input } from "@chakra-ui/react";
 
 const Products = lazy(() => import("../components/Product/Products"));
 
-const Dashboard = (): JSX.Element => {
+const Dashboard: React.FC = () => {
   return (
     <Box>
       <Flex

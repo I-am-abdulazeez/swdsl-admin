@@ -12,7 +12,7 @@ import { useToast } from "@chakra-ui/toast";
 import { FormEvent, useState } from "react";
 import { useAuth } from "../hooks/useAuth/index";
 
-const Login = (): JSX.Element => {
+const Login: React.FC = () => {
   const toast = useToast();
   const { signInAdmin, isLoading } = useAuth();
   const [showPassword, setShowPassword] = useBoolean();

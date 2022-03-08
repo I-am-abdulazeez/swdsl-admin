@@ -7,7 +7,7 @@ export const drinkCategoriesArray: DrinksCategory[] = [
     drink_id: nanoid(4),
   },
   {
-    drinkCategory: "Whisky",
+    drinkCategory: "Whiskey",
     drink_id: nanoid(4),
   },
   {

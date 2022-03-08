@@ -1,6 +1,6 @@
 import { Box, Container, Heading, HStack, Text } from "@chakra-ui/layout";
 
-const Footer = (): JSX.Element => {
+const Footer: React.FC = () => {
   const date: Date = new Date();
   const year = date.getFullYear();
 

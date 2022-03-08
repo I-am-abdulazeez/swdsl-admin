@@ -3,6 +3,7 @@ import { Box, Heading, HStack, Stack, Text } from "@chakra-ui/layout";
 import { chakra } from "@chakra-ui/system";
 import { DocumentData } from "firebase/firestore";
 import { lazy } from "react";
+
 import { ProductsProps } from "../../interfaces";
 import { numberWithCommas } from "../../utils";
 

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Box,
   Text,
@@ -10,14 +11,14 @@ import {
 import { collection } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "@firebase/storage";
 import { useFirestoreCollectionMutation } from "@react-query-firebase/firestore";
-import { useState } from "react";
+
 import { FileInput, InputField, SelectField } from "../components/FormFields";
+import { firebaseFirstore, firebaseStorage, timestamp } from "../lib/firebase";
+
 import { fileTypes } from "../data";
 import { FormState } from "../interfaces";
-import { firebaseFirstore, firebaseStorage, timestamp } from "../lib/firebase";
-import { numberWithCommas } from "../utils";
 
-const Upload = (): JSX.Element => {
+const Upload: React.FC = () => {
   const toast = useToast();
   const [formState, setFormState] = useState<FormState>({
     drinkName: "",
@@ -25,6 +26,7 @@ const Upload = (): JSX.Element => {
     category: "",
     price: 0,
   });
+
   const { drinkName, description, category, price } = formState;
   const [file, setFile] = useState<any>(null);
   const [uploadLoading, setUploadLoading] = useState<boolean>(false);
@@ -179,6 +181,7 @@ const Upload = (): JSX.Element => {
             handleChange={handleChange}
             label="Drink Name"
             name="drinkName"
+            type={"text"}
             placeHolder="Meridian"
             value={drinkName}
           />
@@ -187,6 +190,7 @@ const Upload = (): JSX.Element => {
             handleChange={handleChange}
             label="Drink Description"
             name="description"
+            type={"text"}
             placeHolder="Meridian wine @the best"
             value={description}
           />
@@ -203,7 +207,8 @@ const Upload = (): JSX.Element => {
             handleChange={handleChange}
             label="Drink Price"
             name="price"
-            placeHolder="50,000 (in Naira)"
+            type={"number"}
+            placeHolder="500 (in Dollars)"
             value={price}
           />
         </SimpleGrid>

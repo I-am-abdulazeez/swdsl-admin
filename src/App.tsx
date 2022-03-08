@@ -1,7 +1,8 @@
-import { Box, Container, Text } from "@chakra-ui/react";
-import { Switch } from "react-router-dom";
-import { PrivateRoute, PublicRoute } from "./components/Routes";
 import { lazy, Suspense } from "react";
+import { Box, Container, Flex, Spinner } from "@chakra-ui/react";
+import { Switch } from "react-router-dom";
+
+import { PrivateRoute, PublicRoute } from "./components/Routes";
 
 const Login = lazy(() => import("./pages/login"));
 const Home = lazy(() => import("./pages"));
@@ -15,7 +16,13 @@ function App() {
   return (
     <Box as="main" py={10} display="flex" alignItems="center">
       <Container maxW="container.lg">
-        <Suspense fallback={<Text>Loading </Text>}>
+        <Suspense
+          fallback={
+            <Flex height={"90vh"} justifyContent="center" alignItems={"center"}>
+              <Spinner colorScheme={"primary.400"} />
+            </Flex>
+          }
+        >
           <Switch>
             <PublicRoute restricted={false} component={Home} path="/" exact />
             <PrivateRoute component={Dashboard} path="/dashboard" exact />

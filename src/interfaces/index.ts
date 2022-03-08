@@ -19,6 +19,7 @@ export interface InputFieldProps {
   placeHolder: string;
   label: string;
   isRequired: boolean;
+  type?: React.HTMLInputTypeAttribute | undefined;
 }
 
 export interface SelectFieldProps extends InputFieldProps {}

@@ -1,9 +1,10 @@
 import { Button } from "@chakra-ui/button";
 import { Flex, Heading, Text, VStack } from "@chakra-ui/layout";
 import { Link } from "react-router-dom";
+
 import { useAuth } from "../hooks/useAuth";
 
-const Home = (): JSX.Element => {
+const Home: React.FC = () => {
   const { user } = useAuth();
   console.log(user);
   return (

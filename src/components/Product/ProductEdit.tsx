@@ -222,6 +222,7 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
                   handleChange={handleChange}
                   label="Drink Name"
                   name="drinkName"
+                  type={"text"}
                   placeHolder="Meridian"
                   value={drinkName || snapshot?.drinkName}
                 />
@@ -230,6 +231,7 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
                   handleChange={handleChange}
                   label="Drink Description"
                   name="description"
+                  type={"text"}
                   placeHolder="Meridian wine @the best"
                   value={description || snapshot?.description}
                 />
@@ -246,7 +248,8 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
                   handleChange={handleChange}
                   label="Drink Price"
                   name="price"
-                  placeHolder="50,000 (in Naira)"
+                  type={"number"}
+                  placeHolder="500 (in Dollars)"
                   value={price || snapshot?.price}
                 />
               </SimpleGrid>
