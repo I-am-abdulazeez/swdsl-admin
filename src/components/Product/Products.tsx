@@ -10,7 +10,8 @@ import {
 import { useFirestoreQuery } from "@react-query-firebase/firestore";
 import { lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
-import { firebaseFirstore } from "../../lib/firebase";
+
+import { firebaseFirstore } from "@lib/firebase/index";
 
 const ProductList = lazy(() => import("./ProductList"));
 

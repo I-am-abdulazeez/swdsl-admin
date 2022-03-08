@@ -12,11 +12,12 @@ import { collection } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "@firebase/storage";
 import { useFirestoreCollectionMutation } from "@react-query-firebase/firestore";
 
-import { FileInput, InputField, SelectField } from "../components/FormFields";
-import { firebaseFirstore, firebaseStorage, timestamp } from "../lib/firebase";
+import { FileInput, InputField, SelectField } from "@components/FormFields";
 
-import { fileTypes } from "../data";
-import { FormState } from "../interfaces";
+import { firebaseFirstore, firebaseStorage, timestamp } from "@lib/firebase";
+
+import { fileTypes } from "@data/index";
+import { FormState } from "@interfaces/index";
 
 const Upload: React.FC = () => {
   const toast = useToast();

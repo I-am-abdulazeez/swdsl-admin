@@ -5,6 +5,18 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,
     "skipLibCheck": false,
+    "baseUrl": ".",
+    "paths": {
+      "@assets*": ["src/assets*"],
+      "@components*": ["src/components*"],
+      "@pages*": ["src/pages*"],
+      "@interfaces*": ["src/interfaces*"],
+      "@hooks*": ["src/hooks*"],
+      "@data*": ["src/data*"],
+      "@styles*": ["src/styles*"],
+      "@lib*": ["src/lib*"],
+      "@utils*": ["src/utils*"]
+    },
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,

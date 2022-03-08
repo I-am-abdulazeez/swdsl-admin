@@ -21,12 +21,13 @@ import { doc } from "@firebase/firestore";
 import { useFirestoreDocumentMutation } from "@react-query-firebase/firestore";
 import { FormEvent, forwardRef, useState } from "react";
 import { RiPencilLine } from "react-icons/ri";
-import { useParams } from "react-router";
-import { firebaseFirstore, firebaseStorage } from "../../lib/firebase";
-import { FormState } from "../../interfaces";
-import { useAuth } from "../../hooks/useAuth";
-import { fileTypes } from "../../data";
 import { getDownloadURL, ref, uploadBytesResumable } from "@firebase/storage";
+import { useParams } from "react-router";
+
+import { FormState } from "@interfaces/index";
+import { useAuth } from "@hooks/useAuth";
+import { fileTypes } from "@data/index";
+import { firebaseFirstore, firebaseStorage } from "@lib/firebase";
 
 type ProductEditParams = {
   id: string;

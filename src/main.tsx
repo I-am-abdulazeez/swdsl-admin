@@ -5,10 +5,11 @@ import { ChakraProvider, Text } from "@chakra-ui/react";
 import customTheme from "./assets/theme";
 import { QueryClient, QueryClientProvider } from "react-query";
 
+const Navbar = lazy(() => import("@components/Navbar"));
+const Footer = lazy(() => import("@components/Footer"));
+const ClientOnly = lazy(() => import("@components/ClientOnly"));
+
 const App = lazy(() => import("./App"));
-const Navbar = lazy(() => import("./components/Navbar"));
-const Footer = lazy(() => import("./components/Footer"));
-const ClientOnly = lazy(() => import("./components/ClientOnly"));
 
 import "./index.css";
 

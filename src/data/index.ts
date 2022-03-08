@@ -1,4 +1,4 @@
-import { DrinksCategory } from "../interfaces";
+import { DrinksCategory } from "@interfaces/index";
 import { nanoid } from "nanoid";
 
 export const drinkCategoriesArray: DrinksCategory[] = [

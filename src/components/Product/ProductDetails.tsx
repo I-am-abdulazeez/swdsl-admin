@@ -1,15 +1,16 @@
+import { Box, HStack, Text, Flex, Heading, VStack } from "@chakra-ui/layout";
+import { lazy } from "react";
 import { IconButton } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
-import { Box, HStack, Text, Flex, Heading, VStack } from "@chakra-ui/layout";
 import { Spacer } from "@chakra-ui/react";
 import { Spinner } from "@chakra-ui/spinner";
 import { chakra } from "@chakra-ui/system";
 import { doc } from "@firebase/firestore";
 import { useFirestoreDocument } from "@react-query-firebase/firestore";
-import { lazy } from "react";
 import { RiArrowLeftLine } from "react-icons/ri";
 import { useParams, useHistory } from "react-router-dom";
-import { firebaseFirstore } from "../../lib/firebase";
+
+import { firebaseFirstore } from "@lib/firebase";
 
 const ProductBadge = lazy(() => import("./ProductBadge"));
 const ProductActions = lazy(() => import("./ProductActions"));

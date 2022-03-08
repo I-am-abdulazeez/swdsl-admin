@@ -10,7 +10,8 @@ import { Box, Text, VStack } from "@chakra-ui/layout";
 import { chakra } from "@chakra-ui/system";
 import { useToast } from "@chakra-ui/toast";
 import { FormEvent, useState } from "react";
-import { useAuth } from "../hooks/useAuth/index";
+
+import { useAuth } from "@hooks/useAuth/index";
 
 const Login: React.FC = () => {
   const toast = useToast();

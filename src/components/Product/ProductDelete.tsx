@@ -18,7 +18,8 @@ import { useFirestoreDocumentDeletion } from "@react-query-firebase/firestore";
 import { FormEvent, forwardRef, useState } from "react";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { useHistory, useParams } from "react-router";
-import { firebaseFirstore } from "../../lib/firebase";
+
+import { firebaseFirstore } from "@lib/firebase";
 
 type ProductDeletionParams = {
   id: string;

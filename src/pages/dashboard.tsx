@@ -2,7 +2,7 @@ import { lazy, Suspense } from "react";
 import { Box, Text } from "@chakra-ui/layout";
 import { Flex, Input } from "@chakra-ui/react";
 
-const Products = lazy(() => import("../components/Product/Products"));
+const Products = lazy(() => import("@components/Product/Products"));
 
 const Dashboard: React.FC = () => {
   return (

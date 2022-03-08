@@ -1,11 +1,11 @@
+import { lazy } from "react";
 import { Image } from "@chakra-ui/image";
 import { Box, Heading, HStack, Stack, Text } from "@chakra-ui/layout";
 import { chakra } from "@chakra-ui/system";
 import { DocumentData } from "firebase/firestore";
-import { lazy } from "react";
 
-import { ProductsProps } from "../../interfaces";
-import { numberWithCommas } from "../../utils";
+import { ProductsProps } from "@interfaces/index";
+import { numberWithCommas } from "@utils/index";
 
 const ProductBadge = lazy(() => import("./ProductBadge"));
 

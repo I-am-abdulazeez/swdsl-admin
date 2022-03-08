@@ -1,6 +1,9 @@
 import { Badge } from "@chakra-ui/layout";
 
-const ProductBadge = ({ product, addMargin }: any): JSX.Element => {
+const ProductBadge: React.FC<{ product: any; addMargin?: any }> = ({
+  product,
+  addMargin,
+}: any) => {
   return (
     <Badge
       ml={addMargin}
