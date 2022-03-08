@@ -2,13 +2,13 @@ import { lazy, Suspense } from "react";
 import { Box, Container, Flex, Spinner } from "@chakra-ui/react";
 import { Switch } from "react-router-dom";
 
-import { PrivateRoute, PublicRoute } from "@components/Routes";
+import { PrivateRoute, PublicRoute } from "./components/Routes";
 
 const Login = lazy(() => import("@pages/login"));
 const Home = lazy(() => import("@pages/index"));
 const Dashboard = lazy(() => import("@pages/dashboard"));
 const ProductDetails = lazy(() => import("@components/Product/ProductDetails"));
-const Upload = lazy(() => import("@pages/upload"));
+const Upload = lazy(() => import("./pages/upload"));
 
 function App() {
   return (
