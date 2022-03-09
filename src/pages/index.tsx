@@ -6,6 +6,7 @@ import { useAuth } from "@hooks/useAuth";
 
 const Home: React.FC = () => {
   const { user } = useAuth();
+
   console.log(user);
   return (
     <Flex justify="center" align="center" height="70vh">

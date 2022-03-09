@@ -1,36 +1,19 @@
-import { Route, Redirect } from "react-router-dom";
+import { useLocation } from "react-router";
+import { Navigate, Outlet } from "react-router-dom";
 
-import { useAuth } from "@hooks/useAuth";
+export const PrivateRoute = ({ children }: any) => {
+  const user = localStorage.getItem("user");
+  const location = useLocation();
 
-export const PrivateRoute = ({ component: Component, ...rest }: any) => {
-  const { isLoggedIn } = useAuth();
+  if (user) {
+    console.log("Yes, user exist");
+  } else {
+    console.log("No user");
+  }
 
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        isLoggedIn ? <Component {...props} /> : <Redirect to="/dashboard" />
-      }
-    />
-  );
-};
+  if (!user) {
+    return <Navigate to="/login" state={{ from: location }} />;
+  }
 
-export const PublicRoute = ({
-  component: Component,
-  restricted,
-  ...rest
-}: any) => {
-  const { isLoggedIn } = useAuth();
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        isLoggedIn && restricted ? (
-          <Redirect to="/dashboard" />
-        ) : (
-          <Component {...props} />
-        )
-      }
-    />
-  );
+  return children;
 };

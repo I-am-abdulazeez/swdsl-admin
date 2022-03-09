@@ -1,8 +1,8 @@
 import { lazy, Suspense } from "react";
 import { Box, Container, Flex, Spinner } from "@chakra-ui/react";
-import { Switch } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
-import { PrivateRoute, PublicRoute } from "./components/Routes";
+import { PrivateRoute } from "./components/Routes";
 
 const Login = lazy(() => import("@pages/login"));
 const Home = lazy(() => import("@pages/index"));
@@ -10,7 +10,7 @@ const Dashboard = lazy(() => import("@pages/dashboard"));
 const ProductDetails = lazy(() => import("@components/Product/ProductDetails"));
 const Upload = lazy(() => import("./pages/upload"));
 
-function App() {
+const App = () => {
   return (
     <Box as="main" py={10} display="flex" alignItems="center">
       <Container maxW="container.lg">
@@ -21,26 +21,38 @@ function App() {
             </Flex>
           }
         >
-          <Switch>
-            <PublicRoute restricted={false} component={Home} path="/" exact />
-            <PrivateRoute component={Dashboard} path="/dashboard" exact />
-            <PrivateRoute
-              component={ProductDetails}
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route
+              path="/dashboard"
+              element={
+                <PrivateRoute>
+                  <Dashboard />
+                </PrivateRoute>
+              }
+            />
+            <Route
               path="/product/:id"
-              exact
+              element={
+                <PrivateRoute>
+                  <ProductDetails />
+                </PrivateRoute>
+              }
             />
-            <PublicRoute
-              restricted={true}
-              component={Login}
-              path="/login"
-              exact
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/upload"
+              element={
+                <PrivateRoute>
+                  <Upload />
+                </PrivateRoute>
+              }
             />
-            <PrivateRoute component={Upload} path="/upload" exact />
-          </Switch>
+          </Routes>
         </Suspense>
       </Container>
     </Box>
   );
-}
+};
 
 export default App;

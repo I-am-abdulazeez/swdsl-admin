@@ -1,9 +1,10 @@
 import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router } from "react-router-dom";
 import { ChakraProvider, Text } from "@chakra-ui/react";
-import customTheme from "./assets/theme";
+import { BrowserRouter as Router } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
+
+import customTheme from "@assets/theme";
 
 const Navbar = lazy(() => import("@components/Navbar"));
 const Footer = lazy(() => import("@components/Footer"));

@@ -8,7 +8,7 @@ import { chakra } from "@chakra-ui/system";
 import { doc } from "@firebase/firestore";
 import { useFirestoreDocument } from "@react-query-firebase/firestore";
 import { RiArrowLeftLine } from "react-icons/ri";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import { firebaseFirstore } from "@lib/firebase";
 
@@ -21,8 +21,8 @@ type ProductDetailsParams = {
 
 const ProductDetails = (): JSX.Element => {
   const { id } = useParams<ProductDetailsParams>();
-  const history = useHistory();
-  const ref = doc(firebaseFirstore, "products", id);
+  const navigateTo = useNavigate();
+  const ref = doc(firebaseFirstore, "products", String(id));
   const product = useFirestoreDocument(["products", id], ref, {
     subscribe: true,
     includeMetadataChanges: true,
@@ -39,7 +39,7 @@ const ProductDetails = (): JSX.Element => {
         <IconButton
           aria-label="back-button"
           size="sm"
-          onClick={() => history.goBack()}
+          onClick={() => navigateTo(-1)}
           icon={<RiArrowLeftLine size="18px" />}
         />
         <Spacer />

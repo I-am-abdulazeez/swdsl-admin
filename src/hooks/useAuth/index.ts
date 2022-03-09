@@ -1,16 +1,16 @@
 import { useToast } from "@chakra-ui/toast";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   useAuthSignInWithEmailAndPassword,
   useAuthSignOut,
 } from "@react-query-firebase/auth";
 import { useEffect, useState } from "react";
-import { firebaseAuth } from "../../lib/firebase";
+import { firebaseAuth } from "@lib/firebase";
 import { UserInfo } from "@firebase/auth";
 
 export const useAuth = () => {
   const toast = useToast();
-  const history = useHistory();
+  const navigateTo = useNavigate();
   const [user, setUser] = useState<{} | null | UserInfo>(null);
   const [userId, setUserId] = useState<string>("");
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -35,8 +35,8 @@ export const useAuth = () => {
         setIsLoggedIn(true);
         setUserId(currentUser.user.uid);
         console.log(currentUser);
-        // storage.setItem("user", JSON.stringify(data));
-        history.push("/dashboard");
+        localStorage.setItem("user", JSON.stringify(data?.user));
+        navigateTo("/dashboard");
       },
     }
   );
@@ -53,7 +53,8 @@ export const useAuth = () => {
     setUser(null);
     setUserId("");
     setIsLoggedIn(false);
-    history.push("/");
+    localStorage.clear();
+    navigateTo("/");
   };
 
   useEffect(() => {
@@ -62,10 +63,12 @@ export const useAuth = () => {
         setUser(user);
         setUserId(user.uid);
         setIsLoggedIn(true);
+        localStorage.setItem("user", JSON.stringify(user));
       } else {
         setUser(null);
         setUserId("");
         setIsLoggedIn(false);
+        localStorage.clear();
       }
     });
     // Cleanup subscription on unmount

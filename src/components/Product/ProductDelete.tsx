@@ -17,7 +17,7 @@ import { doc } from "@firebase/firestore";
 import { useFirestoreDocumentDeletion } from "@react-query-firebase/firestore";
 import { FormEvent, forwardRef, useState } from "react";
 import { RiDeleteBin2Line } from "react-icons/ri";
-import { useHistory, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 import { firebaseFirstore } from "@lib/firebase";
 
@@ -30,8 +30,8 @@ const ProductDelete = forwardRef(({ snapshot }: any, stuffRef): JSX.Element => {
   const [snapText, setSnapText] = useState<string>("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
-  const history = useHistory();
-  const ref = doc(firebaseFirstore, "products", id);
+  const navigateTo = useNavigate();
+  const ref = doc(firebaseFirstore, "products", String(id));
   const mutationDocDeletion = useFirestoreDocumentDeletion(ref, {
     onError(err) {
       toast({
@@ -43,7 +43,7 @@ const ProductDelete = forwardRef(({ snapshot }: any, stuffRef): JSX.Element => {
       });
     },
     onSuccess() {
-      history.goBack();
+      navigateTo(-1);
     },
   });
 
