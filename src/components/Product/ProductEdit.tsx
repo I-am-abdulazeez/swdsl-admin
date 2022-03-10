@@ -48,7 +48,7 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
   const [uploadLoading, setUploadLoading] = useState<boolean>(false);
   const [url, setUrl] = useState<any>("");
   const [progress, setProgress] = useState<number>(0);
-  const docsRef = doc(firebaseFirstore, "products", id);
+  const docsRef = doc(firebaseFirstore, "products", String(id));
   const { isOpen, onOpen, onClose } = useDisclosure();
   const docsEditMutation = useFirestoreDocumentMutation(
     docsRef,
@@ -179,7 +179,7 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
       description: description || snapshot?.description,
       category: category || snapshot?.category,
       url: url || snapshot?.url,
-      price: price || snapshot?.price,
+      price: Number(price),
     };
     console.log(newUpdate);
     docsEditMutation.mutate(newUpdate);
@@ -249,7 +249,7 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
                   handleChange={handleChange}
                   label="Drink Price"
                   name="price"
-                  type={"number"}
+                  type="number"
                   placeHolder="500 (in Dollars)"
                   value={price || snapshot?.price}
                 />

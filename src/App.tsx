@@ -2,15 +2,15 @@ import { lazy, Suspense } from "react";
 import { Box, Container, Flex, Spinner } from "@chakra-ui/react";
 import { Routes, Route } from "react-router-dom";
 
-import { PrivateRoute } from "./components/Routes";
+import { AnonymousRoute, PrivateRoute } from "./components/Routes";
 
 const Login = lazy(() => import("@pages/login"));
 const Home = lazy(() => import("@pages/index"));
 const Dashboard = lazy(() => import("@pages/dashboard"));
 const ProductDetails = lazy(() => import("@components/Product/ProductDetails"));
-const Upload = lazy(() => import("./pages/upload"));
+const Upload = lazy(() => import("@pages/upload"));
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <Box as="main" py={10} display="flex" alignItems="center">
       <Container maxW="container.lg">
@@ -39,7 +39,14 @@ const App = () => {
                 </PrivateRoute>
               }
             />
-            <Route path="/login" element={<Login />} />
+            <Route
+              path="/login"
+              element={
+                <AnonymousRoute>
+                  <ProductDetails />
+                </AnonymousRoute>
+              }
+            />
             <Route
               path="/upload"
               element={

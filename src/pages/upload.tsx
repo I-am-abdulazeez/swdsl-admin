@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import {
   Box,
   Text,
@@ -156,13 +156,13 @@ const Upload: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const newFormState = {
       drinkName,
       description,
       category,
-      price: price,
+      price: Number(price),
       url,
       createdAt,
     };
@@ -208,7 +208,7 @@ const Upload: React.FC = () => {
             handleChange={handleChange}
             label="Drink Price"
             name="price"
-            type={"number"}
+            type="number"
             placeHolder="500 (in Dollars)"
             value={price}
           />

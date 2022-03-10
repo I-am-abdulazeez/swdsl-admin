@@ -8,7 +8,7 @@ import {
   query,
 } from "@firebase/firestore";
 import { useFirestoreQuery } from "@react-query-firebase/firestore";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { firebaseFirstore } from "@lib/firebase/index";
@@ -32,7 +32,7 @@ const Products = (): JSX.Element => {
           title: `Error fetching data ${err.message}`,
           status: "error",
           variant: "subtle",
-          duration: 3000,
+          duration: 5000,
           isClosable: true,
         });
       },
@@ -41,6 +41,10 @@ const Products = (): JSX.Element => {
   const snapshot = storeQuery.data;
 
   // console.log(snapshot);
+
+  useEffect(() => {
+    console.log(snapshot);
+  }, [snapshot]);
 
   return (
     <Box mt={8}>
@@ -61,17 +65,16 @@ const Products = (): JSX.Element => {
       )}
       {storeQuery.isLoadingError && <Text>Error Fetching product</Text>}
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={3}>
-        {snapshot &&
-          snapshot?.docs?.map((docsSnapshot: DocumentSnapshot) => {
-            const product = docsSnapshot.data();
-            return (
-              <Link to={`product/${docsSnapshot.id}`} key={docsSnapshot.id}>
-                <Suspense fallback={<Text>Loading...</Text>}>
-                  <ProductList product={product} />
-                </Suspense>
-              </Link>
-            );
-          })}
+        {snapshot?.docs?.map((docsSnapshot: DocumentSnapshot) => {
+          const product = docsSnapshot.data();
+          return (
+            <Link to={`/product/${docsSnapshot.id}`} key={docsSnapshot.id}>
+              <Suspense fallback={<Text>Loading...</Text>}>
+                <ProductList product={product} />
+              </Suspense>
+            </Link>
+          );
+        })}
       </SimpleGrid>
     </Box>
   );
