@@ -16,7 +16,6 @@
     "@emotion/styled": "11",
     "@react-query-firebase/auth": "^0.3.4",
     "@react-query-firebase/firestore": "^0.4.2",
-    "@types/react-router-dom": "^5.3.3",
     "firebase": "^9.6.8",
     "framer-motion": "6",
     "nanoid": "^3.3.1",
