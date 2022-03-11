@@ -174,7 +174,13 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
 
   const handleFileEdit = (e: FormEvent) => {
     e.preventDefault();
-    const newUpdate = {
+    const newUpdate: {
+      drinkName: string;
+      description: string;
+      category: string;
+      url: string;
+      price: number;
+    } = {
       drinkName: drinkName || snapshot?.drinkName,
       description: description || snapshot?.description,
       category: category || snapshot?.category,
@@ -251,7 +257,7 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
                   name="price"
                   type="number"
                   placeHolder="500 (in Dollars)"
-                  value={price || snapshot?.price}
+                  value={price || Number(snapshot?.price)}
                 />
               </SimpleGrid>
 

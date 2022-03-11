@@ -55,6 +55,10 @@ export const drinkCategoriesArray: DrinksCategory[] = [
     drink_id: nanoid(4),
   },
   {
+    drinkCategory: "Vodka",
+    drink_id: nanoid(4),
+  },
+  {
     drinkCategory: "Others",
     drink_id: nanoid(4),
   },
