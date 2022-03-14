@@ -8,6 +8,7 @@ import { chakra } from "@chakra-ui/system";
 import { doc } from "@firebase/firestore";
 import { useFirestoreDocument } from "@react-query-firebase/firestore";
 import { RiArrowLeftLine } from "react-icons/ri";
+
 import { useParams, useNavigate } from "react-router-dom";
 
 import { firebaseFirstore } from "@lib/firebase";

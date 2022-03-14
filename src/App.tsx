@@ -43,7 +43,7 @@ const App: React.FC = () => {
               path="/login"
               element={
                 <AnonymousRoute>
-                  <ProductDetails />
+                  <Login />
                 </AnonymousRoute>
               }
             />

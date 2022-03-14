@@ -1,9 +1,10 @@
+import { lazy, Suspense } from "react";
 import { Box, Container, Flex, HStack, Spacer, Text } from "@chakra-ui/layout";
 import { Link } from "react-router-dom";
 import { Button } from "@chakra-ui/button";
-import { useAuth } from "../../hooks/useAuth";
 import { useBreakpointValue } from "@chakra-ui/media-query";
-import { lazy, Suspense } from "react";
+
+import { useAuth } from "@hooks/useAuth";
 
 const Brand = lazy(() => import("../Brand"));
 

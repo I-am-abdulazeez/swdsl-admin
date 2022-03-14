@@ -43,6 +43,9 @@ export interface ProductsProps {
     | "Gin"
     | "Sparkling wine"
     | "Brandy"
+    | "Juice"
+    | "Tequila"
+    | "Vodka"
     | "Others";
   createdAt: Timestamp;
   description: string;

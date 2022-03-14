@@ -1,11 +1,7 @@
 import { Button, ButtonGroup, IconButton } from "@chakra-ui/button";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { Box, SimpleGrid, Text } from "@chakra-ui/layout";
-import {
-  FileInput,
-  InputField,
-  SelectField,
-} from "../../components/FormFields";
+import { FileInput, InputField, SelectField } from "@components/FormFields";
 import {
   Modal,
   ModalBody,
@@ -24,9 +20,12 @@ import { RiPencilLine } from "react-icons/ri";
 import { getDownloadURL, ref, uploadBytesResumable } from "@firebase/storage";
 import { useParams } from "react-router";
 
-import { FormState } from "@interfaces/index";
-import { useAuth } from "@hooks/useAuth";
 import { fileTypes } from "@data/index";
+
+import { FormState } from "@interfaces/index";
+
+import { useAuth } from "@hooks/useAuth";
+
 import { firebaseFirstore, firebaseStorage } from "@lib/firebase";
 
 type ProductEditParams = {

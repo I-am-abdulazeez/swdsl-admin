@@ -4,12 +4,13 @@ import {
   FileInputProps,
   InputFieldProps,
   SelectFieldProps,
-} from "../../interfaces";
+} from "@interfaces/index";
 import { Input } from "@chakra-ui/input";
-import { drinkCategoriesArray } from "../../data";
 import { Select } from "@chakra-ui/select";
 import { chakra } from "@chakra-ui/system";
 import { Box, Text } from "@chakra-ui/layout";
+
+import { drinkCategoriesArray } from "@data/index";
 
 import MotionBox from "../MotionBox";
 

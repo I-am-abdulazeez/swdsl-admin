@@ -12,7 +12,6 @@ import { useToast } from "@chakra-ui/toast";
 import { FormEvent, useState } from "react";
 
 import { useAuth } from "@hooks/useAuth/index";
-import { useNavigate } from "react-router";
 
 const Login: React.FC = () => {
   const toast = useToast();
