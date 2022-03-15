@@ -36,7 +36,7 @@ const ProductBadge: React.FC<{ product: any; addMargin?: any }> = ({
           : product?.category === "Tequila"
           ? "messenger"
           : product?.category === "Vodka"
-          ? "success"
+          ? "blackAlpha"
           : product?.category === "Others"
           ? "telegram"
           : undefined
