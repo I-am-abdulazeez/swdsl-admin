@@ -5,6 +5,7 @@ import { chakra } from "@chakra-ui/system";
 import { DocumentData } from "firebase/firestore";
 
 import { ProductsProps } from "@interfaces/index";
+
 import { numberWithCommas } from "@utils/index";
 
 const ProductBadge = lazy(() => import("./ProductBadge"));

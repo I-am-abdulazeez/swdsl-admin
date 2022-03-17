@@ -26,11 +26,11 @@ type ProductDeletionParams = {
 };
 
 const ProductDelete = forwardRef(({ snapshot }: any, stuffRef): JSX.Element => {
+  const toast = useToast();
+  const navigateTo = useNavigate();
   const { id } = useParams<ProductDeletionParams>();
   const [snapText, setSnapText] = useState<string>("");
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const toast = useToast();
-  const navigateTo = useNavigate();
   const ref = doc(firebaseFirstore, "products", String(id));
   const mutationDocDeletion = useFirestoreDocumentDeletion(ref, {
     onError(err) {
@@ -58,7 +58,7 @@ const ProductDelete = forwardRef(({ snapshot }: any, stuffRef): JSX.Element => {
           "Product name does not match. Did you enter the name correctly?",
         isClosable: true,
         variant: "subtle",
-        duration: 3000,
+        duration: 5000,
       });
     }
   };

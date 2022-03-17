@@ -24,10 +24,7 @@ const ProductDetails = (): JSX.Element => {
   const { id } = useParams<ProductDetailsParams>();
   const navigateTo = useNavigate();
   const ref = doc(firebaseFirstore, "products", String(id));
-  const product = useFirestoreDocument(["products", id], ref, {
-    subscribe: true,
-    includeMetadataChanges: true,
-  });
+  const product = useFirestoreDocument(["products", id], ref, {});
   const snapshot = product.data;
 
   if (product.isLoading) {

@@ -1,10 +1,15 @@
 import { Timestamp } from "firebase/firestore";
+import { ChangeEvent } from "react";
 
 export interface FormState {
   drinkName: string;
   description: string;
   category: string;
   price: number;
+}
+
+export interface NewFormState extends FormState {
+  url: string;
 }
 
 export interface DrinksCategory {
@@ -14,7 +19,9 @@ export interface DrinksCategory {
 
 export interface InputFieldProps {
   name: string;
-  handleChange: (e: any) => void;
+  handleChange: (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
+  ) => void;
   value: string | number;
   placeHolder: string;
   label: string;
@@ -24,8 +31,8 @@ export interface InputFieldProps {
 
 export interface SelectFieldProps extends InputFieldProps {}
 export interface FileInputProps {
-  file: any;
-  handleFileChange: (e: any) => void;
+  file: File | null;
+  handleFileChange: (e: ChangeEvent<HTMLInputElement>) => void;
   progress: number;
 }
 
@@ -50,6 +57,6 @@ export interface ProductsProps {
   createdAt: Timestamp;
   description: string;
   drinkName: string;
-  price: string;
+  price: number;
   url: string;
 }

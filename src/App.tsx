@@ -2,7 +2,7 @@ import { lazy, Suspense } from "react";
 import { Box, Container, Flex, Spinner } from "@chakra-ui/react";
 import { Routes, Route } from "react-router-dom";
 
-import { AnonymousRoute, PrivateRoute } from "./components/Routes";
+import { AnonymousRoute, PrivateRoute } from "@components/Routes";
 
 const Login = lazy(() => import("@pages/login"));
 const Home = lazy(() => import("@pages/index"));

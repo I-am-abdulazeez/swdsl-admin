@@ -15,14 +15,14 @@ import { chakra } from "@chakra-ui/system";
 import { useToast } from "@chakra-ui/toast";
 import { doc } from "@firebase/firestore";
 import { useFirestoreDocumentMutation } from "@react-query-firebase/firestore";
-import { FormEvent, forwardRef, useState } from "react";
+import { ChangeEvent, FormEvent, forwardRef, useEffect, useState } from "react";
 import { RiPencilLine } from "react-icons/ri";
 import { getDownloadURL, ref, uploadBytesResumable } from "@firebase/storage";
 import { useParams } from "react-router";
 
 import { fileTypes } from "@data/index";
 
-import { FormState } from "@interfaces/index";
+import { FormState, NewFormState } from "@interfaces/index";
 
 import { useAuth } from "@hooks/useAuth";
 
@@ -43,9 +43,9 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
     price: 0,
   });
   const { drinkName, description, category, price } = formState;
-  const [file, setFile] = useState<any>(null);
+  const [file, setFile] = useState<File | null>(null);
   const [uploadLoading, setUploadLoading] = useState<boolean>(false);
-  const [url, setUrl] = useState<any>("");
+  const [url, setUrl] = useState<string>("");
   const [progress, setProgress] = useState<number>(0);
   const docsRef = doc(firebaseFirstore, "products", String(id));
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -57,7 +57,7 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
     {
       onError(err) {
         toast({
-          duration: 3000,
+          duration: 5000,
           status: "error",
           isClosable: true,
           variant: "subtle",
@@ -70,7 +70,7 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
           title: `Data updated successfully`,
           variant: "subtle",
           isClosable: true,
-          duration: 3000,
+          duration: 5000,
         });
         setFormState({
           category: "",
@@ -86,7 +86,9 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
     }
   );
 
-  const handleChange = (e: any) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setFormState({
       ...formState,
@@ -94,23 +96,23 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
     });
   };
 
-  const handleFileChange = (e: any) => {
-    let selected = e.target.files[0];
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    let selected = e.target.files![0];
     if (selected && fileTypes.includes(selected.type)) {
       setFile(selected);
       setProgress(0);
-    } else if (file?.size > 2048) {
+    } else if (file?.size! > 2048) {
       toast({
-        duration: 3000,
+        duration: 5000,
         isClosable: true,
         status: "error",
         variant: "subtle",
-        title: "File too large, Minimum of 2MB",
+        title: "File too large, Maximum of 2MB",
       });
     } else {
       setFile(null);
       toast({
-        duration: 3000,
+        duration: 5000,
         isClosable: true,
         variant: "subtle",
         status: "error",
@@ -120,12 +122,12 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
   };
 
   const uploadImage = () => {
-    const storageRef = ref(firebaseStorage, `upload/${userId}/${file.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, file);
+    const storageRef = ref(firebaseStorage, `upload/${userId}/${file?.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file!);
 
     uploadTask.on(
       "state_changed",
-      (snapshot: any) => {
+      (snapshot) => {
         setUploadLoading(true);
         let percentage =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -154,7 +156,7 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
       },
       async () => {
         // On Success
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL: any) => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           console.log("File available at ", downloadURL);
           const url = downloadURL;
           setUrl(url);
@@ -173,13 +175,7 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
 
   const handleFileEdit = (e: FormEvent) => {
     e.preventDefault();
-    const newUpdate: {
-      drinkName: string;
-      description: string;
-      category: string;
-      url: string;
-      price: number;
-    } = {
+    const newUpdate: NewFormState = {
       drinkName: drinkName || snapshot?.drinkName,
       description: description || snapshot?.description,
       category: category || snapshot?.category,

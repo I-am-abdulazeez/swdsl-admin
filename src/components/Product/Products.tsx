@@ -24,7 +24,7 @@ const Products = (): JSX.Element => {
   const storeQuery = useFirestoreQuery(
     ["products"],
     ref,
-    { includeMetadataChanges: true, subscribe: true },
+    {},
     {
       onError(err) {
         // console.log(err);

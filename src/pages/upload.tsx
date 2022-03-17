@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import {
   Box,
   Text,
@@ -8,7 +8,7 @@ import {
   ButtonGroup,
   Button,
 } from "@chakra-ui/react";
-import { collection } from "@firebase/firestore";
+import { collection, Timestamp } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "@firebase/storage";
 import { useFirestoreCollectionMutation } from "@react-query-firebase/firestore";
 
@@ -29,11 +29,11 @@ const Upload: React.FC = () => {
   });
 
   const { drinkName, description, category, price } = formState;
-  const [file, setFile] = useState<any>(null);
+  const [file, setFile] = useState<File | null>(null);
   const [uploadLoading, setUploadLoading] = useState<boolean>(false);
-  const [url, setUrl] = useState<any>("");
+  const [url, setUrl] = useState<string>("");
   const [progress, setProgress] = useState<number>(0);
-  const [createdAt, setCreatedAt] = useState<any>();
+  const [createdAt, setCreatedAt] = useState<Timestamp | string>("");
   const collectionRef = collection(firebaseFirstore, "products");
   const mutationCollection = useFirestoreCollectionMutation(collectionRef, {
     onError(err) {
@@ -64,12 +64,13 @@ const Upload: React.FC = () => {
       setUrl("");
       setProgress(0);
       setCreatedAt("");
-      console.log(data);
-      // history.push("/dashboard");
+      console.log(data.id);
     },
   });
 
-  const handleChange = (e: any) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setFormState({
       ...formState,
@@ -78,12 +79,12 @@ const Upload: React.FC = () => {
   };
 
   const uploadImage = () => {
-    const storageRef = ref(firebaseStorage, `upload/${file.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, file);
+    const storageRef = ref(firebaseStorage, `upload/${file?.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file!);
 
     uploadTask.on(
       "state_changed",
-      (snapshot: any) => {
+      (snapshot) => {
         setUploadLoading(true);
         let percentage =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -131,18 +132,18 @@ const Upload: React.FC = () => {
     );
   };
 
-  const handleFileChange = (e: any) => {
-    let selected = e.target.files[0];
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    let selected = e.target.files![0];
     if (selected && fileTypes.includes(selected.type)) {
       setFile(selected);
       setProgress(0);
-    } else if (file?.size > 2048) {
+    } else if (file?.size! > 2048) {
       toast({
         duration: 3000,
         isClosable: true,
         status: "error",
         variant: "subtle",
-        title: "File too large, Minimum of 2MB",
+        title: "File too large, Maximum of 2MB",
       });
     } else {
       setFile(null);
@@ -192,7 +193,7 @@ const Upload: React.FC = () => {
             label="Drink Description"
             name="description"
             type={"text"}
-            placeHolder="Meridian wine @the best"
+            placeHolder="Meridian wine is the best"
             value={description}
           />
           <SelectField
