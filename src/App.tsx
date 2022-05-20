@@ -9,6 +9,7 @@ const Home = lazy(() => import("@pages/index"));
 const Dashboard = lazy(() => import("@pages/dashboard"));
 const ProductDetails = lazy(() => import("@components/Product/ProductDetails"));
 const Upload = lazy(() => import("@pages/upload"));
+const Orders = lazy(() => import("@pages/orders"));
 
 const App: React.FC = () => {
   return (
@@ -45,6 +46,14 @@ const App: React.FC = () => {
                 <AnonymousRoute>
                   <Login />
                 </AnonymousRoute>
+              }
+            />
+            <Route
+              path="/orders"
+              element={
+                <PrivateRoute>
+                  <Orders />
+                </PrivateRoute>
               }
             />
             <Route
