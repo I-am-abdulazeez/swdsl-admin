@@ -15,6 +15,8 @@ export const useProduct = () => {
   const [products, setProducts] = useState<
     QueryDocumentSnapshot<DocumentData>[]
   >([]);
+  const [emptyProduct, setEmptyProduct] = useState(false);
+
   const ref = query(
     collection(firebaseFirstore, "products"),
     orderBy("createdAt", "desc")
@@ -29,6 +31,7 @@ export const useProduct = () => {
     {
       onSuccess: (data) => {
         const products = data?.docs;
+        setEmptyProduct(data.empty);
         setProducts(products);
       },
       onError: (error) => {
@@ -49,5 +52,6 @@ export const useProduct = () => {
   return {
     products,
     storeQuery,
+    emptyProduct,
   };
 };
