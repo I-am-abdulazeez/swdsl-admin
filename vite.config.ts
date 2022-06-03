@@ -6,6 +6,6 @@ import tsconfigPaths from "vite-tsconfig-paths";
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   build: {
-    chunkSizeWarningLimit: 600,
+    chunkSizeWarningLimit: 800,
   },
 });
