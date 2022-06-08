@@ -11,21 +11,18 @@ const DrinkSearch: React.FC = () => {
   const { products } = useProduct();
   const [searchTerm, setSearchTerm] = useState<string>("");
 
-  useEffect(() => {
-    console.log(products);
-  });
-
   return (
     <div>
       <Input
         width={"100%"}
         type="text"
         placeholder="Search for drinks"
-        onChange={(e) => setSearchTerm(e.target?.value)}
+        onChange={(e) => setSearchTerm(e.target?.value.trim())}
       />
-      {searchTerm && (
+
+      {searchTerm.length > 0 && (
         <Box
-          padding={searchTerm ? 3 : 0}
+          padding={3}
           bgColor={"white"}
           maxHeight={"180px"}
           overflowY={"auto"}
@@ -34,7 +31,7 @@ const DrinkSearch: React.FC = () => {
         >
           {products
             .filter((drink) => {
-              if (searchTerm === "" || searchTerm === " ") {
+              if (searchTerm === "") {
                 return drink;
               } else if (
                 drink
@@ -43,6 +40,13 @@ const DrinkSearch: React.FC = () => {
                   ?.includes(searchTerm?.toLowerCase())
               ) {
                 return drink;
+              } else if (
+                drink
+                  .data()
+                  ?.drinkName?.toLowerCase()
+                  ?.includes(!searchTerm?.toLowerCase())
+              ) {
+                return <Text>No product found with that name</Text>;
               }
             })
             .map((drinkSnap) => {
