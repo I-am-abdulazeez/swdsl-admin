@@ -18,10 +18,10 @@ export const useAuth = () => {
   const { mutate, isLoading } = useAuthSignInWithEmailAndPassword(
     firebaseAuth,
     {
-      onError() {
+      onError: () => {
         setIsLoggedIn(false);
       },
-      onSuccess(data) {
+      onSuccess: (data) => {
         const currentUser = data;
         setUser(currentUser);
         setIsLoggedIn(true);
