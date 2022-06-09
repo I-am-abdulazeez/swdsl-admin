@@ -27,7 +27,7 @@ export const useProduct = () => {
   const storeQuery = useFirestoreQuery(
     ["products"],
     ref,
-    { subscribe: true, includeMetadataChanges: true },
+    {},
     {
       onSuccess: (data) => {
         const products = data?.docs;
