@@ -1,7 +1,7 @@
 import { Box, HStack, SimpleGrid, Text } from "@chakra-ui/layout";
 import { Spinner } from "@chakra-ui/spinner";
 import { DocumentSnapshot } from "@firebase/firestore";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { useProduct } from "@hooks/useProduct";
@@ -16,7 +16,7 @@ const Products: React.FC = () => {
       {emptyProduct && (
         <Text>No product added. click on Drinks upload to add one</Text>
       )}
-      {storeQuery.isLoading && (
+      {storeQuery.isFetching && (
         <HStack spacing={2}>
           <Spinner
             thickness="1px"
