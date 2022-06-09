@@ -33,7 +33,7 @@ const ProductDelete = forwardRef(({ snapshot }: any, stuffRef): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const ref = doc(firebaseFirstore, "products", String(id));
   const mutationDocDeletion = useFirestoreDocumentDeletion(ref, {
-    onSuccess() {
+    onSuccess: () => {
       navigateTo(-1);
     },
   });
