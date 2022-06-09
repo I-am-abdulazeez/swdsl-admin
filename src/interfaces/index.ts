@@ -60,3 +60,7 @@ export interface ProductsProps {
   price: number;
   url: string;
 }
+
+export interface QueryClientWrapperProps {
+  children: React.ReactNode;
+}

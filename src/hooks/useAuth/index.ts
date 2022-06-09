@@ -18,18 +18,10 @@ export const useAuth = () => {
   const { mutate, isLoading } = useAuthSignInWithEmailAndPassword(
     firebaseAuth,
     {
-      onError(error) {
-        console.log(error);
-        toast({
-          status: "error",
-          title: `${error.message}`,
-          isClosable: true,
-          variant: "subtle",
-          duration: 5000,
-        });
+      onError: () => {
         setIsLoggedIn(false);
       },
-      onSuccess(data) {
+      onSuccess: (data) => {
         const currentUser = data;
         setUser(currentUser);
         setIsLoggedIn(true);
