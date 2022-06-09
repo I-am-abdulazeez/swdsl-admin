@@ -61,6 +61,6 @@ export interface ProductsProps {
   url: string;
 }
 
-export interface QueryCllientWrapperProps {
+export interface QueryClientWrapperProps {
   children: React.ReactNode;
 }
