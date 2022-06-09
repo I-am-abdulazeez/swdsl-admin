@@ -55,16 +55,7 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
       merge: true,
     },
     {
-      onError(err) {
-        toast({
-          duration: 5000,
-          status: "error",
-          isClosable: true,
-          variant: "subtle",
-          title: `Error editing Product: ${err.message}`,
-        });
-      },
-      onSuccess() {
+      onSuccess: () => {
         toast({
           status: "success",
           title: `Data updated successfully`,

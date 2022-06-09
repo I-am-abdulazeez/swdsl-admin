@@ -33,16 +33,7 @@ const ProductDelete = forwardRef(({ snapshot }: any, stuffRef): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const ref = doc(firebaseFirstore, "products", String(id));
   const mutationDocDeletion = useFirestoreDocumentDeletion(ref, {
-    onError(err) {
-      toast({
-        duration: 3000,
-        status: "error",
-        isClosable: true,
-        variant: "subtle",
-        title: `Error deleting Product: ${err.message}`,
-      });
-    },
-    onSuccess() {
+    onSuccess: () => {
       navigateTo(-1);
     },
   });

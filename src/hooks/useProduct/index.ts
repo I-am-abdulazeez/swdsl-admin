@@ -34,18 +34,6 @@ export const useProduct = () => {
         setEmptyProduct(data.empty);
         setProducts(products);
       },
-      onError: (error) => {
-        chakraToast({
-          status: "error",
-          title: `${error.message}`,
-          isClosable: true,
-          containerStyle: {
-            fontSize: "12.5px",
-          },
-          variant: "subtle",
-          position: "bottom-right",
-        });
-      },
     }
   );
 
