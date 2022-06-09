@@ -10,7 +10,7 @@ export const PrivateRoute = ({ children }: any) => {
   }
 
   if (!user) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/login" replace />;
   }
 
   return children;
@@ -26,7 +26,7 @@ export const AnonymousRoute = ({ children }: any) => {
   }
 
   if (user) {
-    return <Navigate to="/dashboard" />;
+    return <Navigate to="/dashboard" replace />;
   }
 
   return children;

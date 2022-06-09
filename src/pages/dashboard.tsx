@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Box, Text } from "@chakra-ui/layout";
-import { Flex, Input } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import DrinkSearch from "@components/DrinkSearch";
 
 const Products = lazy(() => import("@components/Product/Products"));
