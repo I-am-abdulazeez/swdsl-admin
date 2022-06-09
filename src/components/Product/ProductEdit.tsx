@@ -55,7 +55,7 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
       merge: true,
     },
     {
-      onSuccess() {
+      onSuccess: () => {
         toast({
           status: "success",
           title: `Data updated successfully`,
