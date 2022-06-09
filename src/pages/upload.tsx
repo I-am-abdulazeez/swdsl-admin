@@ -36,16 +36,6 @@ const Upload: React.FC = () => {
   const [createdAt, setCreatedAt] = useState<Timestamp | string>("");
   const collectionRef = collection(firebaseFirstore, "products");
   const mutationCollection = useFirestoreCollectionMutation(collectionRef, {
-    onError(err) {
-      console.log(err);
-      toast({
-        status: "error",
-        title: `${err.message}`,
-        variant: "subtle",
-        isClosable: true,
-        duration: 3000,
-      });
-    },
     onSuccess(data) {
       toast({
         status: "success",
