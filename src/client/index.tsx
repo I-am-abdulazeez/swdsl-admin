@@ -6,9 +6,9 @@ import { MutationCache, QueryClient, QueryClientProvider } from "react-query";
 
 import { useToast } from "@chakra-ui/react";
 
-import { QueryCllientWrapperProps } from "@interfaces/index";
+import { QueryClientWrapperProps } from "@interfaces/index";
 
-const QueryClientWrapper: React.FC<QueryCllientWrapperProps> = (props) => {
+const QueryClientWrapper: React.FC<QueryClientWrapperProps> = (props) => {
   const chakraToast = useToast();
   const { children } = props;
 
