@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import { ChakraProvider, Text } from "@chakra-ui/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -12,11 +12,14 @@ const ClientOnly = lazy(() => import("@components/ClientOnly"));
 
 const App = lazy(() => import("./App"));
 
-import "./index.css";
-
 const queryClient = new QueryClient();
 
-ReactDOM.render(
+const container = document.getElementById("app");
+const root = createRoot(container!);
+
+import "./index.css";
+
+root.render(
   <React.StrictMode>
     <Suspense fallback={<Text>Loading...</Text>}>
       <ClientOnly>
@@ -31,6 +34,5 @@ ReactDOM.render(
         </QueryClientProvider>
       </ClientOnly>
     </Suspense>
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 );
