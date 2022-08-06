@@ -1,90 +1,77 @@
-import { Button } from "@chakra-ui/button";
+import { Button } from '@chakra-ui/button';
 import {
   FormControl,
   FormHelperText,
   FormLabel,
-} from "@chakra-ui/form-control";
-import { useBoolean } from "@chakra-ui/hooks";
-import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
-import { Box, Text, VStack } from "@chakra-ui/layout";
-import { chakra } from "@chakra-ui/system";
-import { useToast } from "@chakra-ui/toast";
-import { FormEvent, useState } from "react";
+} from '@chakra-ui/form-control';
+import { useBoolean } from '@chakra-ui/hooks';
+import { Input, InputGroup, InputRightElement } from '@chakra-ui/input';
+import { Box, Text, VStack } from '@chakra-ui/layout';
+import { useToast } from '@chakra-ui/toast';
 
-import { useAuth } from "@hooks/useAuth/index";
+import { useAuth } from '@hooks/useAuth/index';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { Admin } from '@interfaces/index';
 
 const Login: React.FC = () => {
-  const toast = useToast();
+  const { register, handleSubmit } = useForm<Admin>();
+  const [showPassword, toggleShowPassword] = useBoolean(false);
   const { signInAdmin, isLoading } = useAuth();
-  const [showPassword, setShowPassword] = useBoolean();
-  const [email, setEmail] = useState<string>("");
-  const [password, setpassword] = useState<string>("");
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    if (!email || !password) {
-      toast({
-        title: "Please fill out the credentials",
-        status: "error",
-        variant: "subtle",
-        duration: 5000,
-        isClosable: true,
-      });
-    }
-    signInAdmin(email, password);
+  const handleAdminLogin: SubmitHandler<Admin> = (data) => {
+    console.log(data);
+    // signInAdmin(data.email, data.password);
   };
 
   return (
-    <Box width={{ base: "300px", md: "400px" }} mx="auto">
+    <Box width={{ base: '300px', md: '400px' }} mx="auto">
       <Text fontWeight="semibold" fontSize="lg" textAlign="center">
         SWDSL Admin Login Page
       </Text>
       <Box mt={6}>
-        <chakra.form onSubmit={handleSubmit}>
-          <VStack spacing={3}>
-            <FormControl id="email">
+        <form onSubmit={handleSubmit(handleAdminLogin)}>
+          <VStack spacing={7}>
+            <FormControl>
               <FormLabel>Email address</FormLabel>
               <Input
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                {...register('email', {
+                  required: true,
+                })}
                 type="email"
                 placeholder="Email Address"
               />
-              <FormHelperText>We'll never share your email.</FormHelperText>
             </FormControl>
-            <FormControl id="password">
+            <FormControl>
               <FormLabel>Password</FormLabel>
               <InputGroup>
                 <Input
-                  name="password"
-                  value={password}
-                  onChange={(e) => setpassword(e.target.value)}
-                  type={showPassword ? "text" : "password"}
+                  {...register('password', {
+                    required: true,
+                  })}
+                  type={showPassword ? 'text' : 'password'}
                   placeholder="Password"
                 />
                 <InputRightElement width="4.5rem">
                   <Button
                     h="1.75rem"
                     size="sm"
-                    onClick={setShowPassword.toggle}
+                    onClick={toggleShowPassword.toggle}
                   >
-                    {showPassword ? "Hide" : "Show"}
+                    {showPassword ? 'Hide' : 'Show'}
                   </Button>
                 </InputRightElement>
-              </InputGroup>
-              <FormHelperText>We'll never share your password.</FormHelperText>
+              </InputGroup>{' '}
             </FormControl>
             <Button
               isLoading={isLoading}
               type="submit"
               colorScheme="primary"
-              isFullWidth
+              width={'full'}
             >
               Login as an Admin
             </Button>
           </VStack>
-        </chakra.form>
+        </form>
       </Box>
     </Box>
   );
