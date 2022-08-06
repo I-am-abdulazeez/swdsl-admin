@@ -1,5 +1,5 @@
-import { Timestamp } from "firebase/firestore";
-import { ChangeEvent } from "react";
+import { Timestamp } from 'firebase/firestore';
+import { ChangeEvent } from 'react';
 
 export interface FormState {
   drinkName: string;
@@ -38,22 +38,22 @@ export interface FileInputProps {
 
 export interface ProductsProps {
   category:
-    | "Cognac"
-    | "Juice"
-    | "Whisky"
-    | "Non alcoholic"
-    | "Red wine"
-    | "Champagne"
-    | "Rum"
-    | "Irish cream"
-    | "White wine"
-    | "Gin"
-    | "Sparkling wine"
-    | "Brandy"
-    | "Juice"
-    | "Tequila"
-    | "Vodka"
-    | "Others";
+    | 'Cognac'
+    | 'Juice'
+    | 'Whisky'
+    | 'Non alcoholic'
+    | 'Red wine'
+    | 'Champagne'
+    | 'Rum'
+    | 'Irish cream'
+    | 'White wine'
+    | 'Gin'
+    | 'Sparkling wine'
+    | 'Brandy'
+    | 'Juice'
+    | 'Tequila'
+    | 'Vodka'
+    | 'Others';
   createdAt: Timestamp;
   description: string;
   drinkName: string;
@@ -63,4 +63,9 @@ export interface ProductsProps {
 
 export interface QueryClientWrapperProps {
   children: React.ReactNode;
+}
+
+export interface Admin {
+  email: string;
+  password: string;
 }
