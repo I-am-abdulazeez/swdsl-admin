@@ -15,7 +15,8 @@
       "@data*": ["src/data*"],
       "@styles*": ["src/styles*"],
       "@lib*": ["src/lib*"],
-      "@utils*": ["src/utils*"]
+      "@utils*": ["src/utils*"],
+      "@store*": ["src/store*"]
     },
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
