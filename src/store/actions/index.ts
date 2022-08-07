@@ -6,11 +6,7 @@ import { AuthActions } from '@store/types';
 
 import { useAuthStore } from '@store/useAuthStore';
 
-import { createStandaloneToast } from '@chakra-ui/react';
-
-import customTheme from '@assets/theme';
-
-const { toast } = createStandaloneToast({ theme: customTheme });
+import { customToast } from '@utils/index';
 
 export const Actions: AuthActions = {
   signInAdmin: (user: Admin) => {
@@ -28,14 +24,9 @@ export const Actions: AuthActions = {
           isLoggedIn: true,
           userId: user.user.uid,
         }));
-        toast({
+        customToast({
           status: 'success',
           title: 'Logged in successfully',
-          duration: 3000,
-          isClosable: true,
-          containerStyle: {
-            fontSize: '12px',
-          },
         });
       })
       .catch((error: AuthError) => {
@@ -46,14 +37,9 @@ export const Actions: AuthActions = {
           userId: '',
         }));
         console.log(error);
-        toast({
+        customToast({
           status: 'error',
           title: error.message,
-          duration: 3000,
-          isClosable: true,
-          containerStyle: {
-            fontSize: '12px',
-          },
         });
       });
   },
