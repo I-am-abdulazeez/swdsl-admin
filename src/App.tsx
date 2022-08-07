@@ -13,16 +13,15 @@ const Orders = lazy(() => import('@pages/orders'));
 
 const App: React.FC = () => {
   return (
-    <Flex
-      as="main"
-      py={10}
-      align={'center'}
-      height={'80vh'}
-      overflowY={'scroll'}
-    >
+    <Flex as="main" py={10} alignItems={'center'} height={'80vh'}>
       <Suspense
         fallback={
-          <Flex height={'90vh'} justifyContent="center" alignItems={'center'}>
+          <Flex
+            height={'90vh'}
+            width={'100%'}
+            justifyContent="center"
+            alignItems={'center'}
+          >
             <Spinner colorScheme={'primary.400'} />
           </Flex>
         }
