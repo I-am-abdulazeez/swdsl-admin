@@ -1,20 +1,24 @@
 import create from 'zustand';
 import { persist, devtools } from 'zustand/middleware';
 
-import { AuthState, AuthStore } from '@store/types';
 import { Actions } from '@store/actions';
+import { AuthState, AuthStore } from '@store/types';
 
 const initialState: AuthState = {
   user: null,
   isLoading: false,
   isLoggedIn: false,
+  userId: '',
 };
 
 export const useAuthStore = create<AuthStore>()(
   devtools(
-    persist(() => ({
-      ...initialState,
-      ...Actions,
-    }))
+    persist(
+      () => ({
+        ...initialState,
+        ...Actions,
+      }),
+      { name: 'auth' }
+    )
   )
 );
