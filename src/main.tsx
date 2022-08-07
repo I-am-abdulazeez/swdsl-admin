@@ -1,36 +1,34 @@
-import React, { lazy, Suspense } from "react";
-import { createRoot } from "react-dom/client";
-import { ChakraProvider, Text } from "@chakra-ui/react";
-import { BrowserRouter as Router } from "react-router-dom";
+import React, { lazy, Suspense } from 'react';
+import { createRoot } from 'react-dom/client';
+import { ChakraProvider, Text } from '@chakra-ui/react';
+import { unstable_HistoryRouter as Router } from 'react-router-dom';
 
-import customTheme from "@assets/theme";
-import QueryClientWrapper from "./client";
+import { Router as history } from '@utils/index';
 
-const Navbar = lazy(() => import("@components/Navbar"));
-const Footer = lazy(() => import("@components/Footer"));
-const ClientOnly = lazy(() => import("@components/ClientOnly"));
+import customTheme from '@assets/theme';
+import QueryClientWrapper from './client';
 
-const App = lazy(() => import("./App"));
+const Navbar = lazy(() => import('@components/Navbar'));
+const Footer = lazy(() => import('@components/Footer'));
+const App = lazy(() => import('./App'));
 
-const container = document.getElementById("app");
+const container = document.getElementById('app');
 const root = createRoot(container!);
 
-import "./index.css";
+import './index.css';
 
 root.render(
   <React.StrictMode>
     <Suspense fallback={<Text>Loading...</Text>}>
-      <ClientOnly>
-        <QueryClientWrapper>
-          <ChakraProvider theme={customTheme}>
-            <Router>
-              <Navbar />
-              <App />
-              <Footer />
-            </Router>
-          </ChakraProvider>
-        </QueryClientWrapper>
-      </ClientOnly>
+      <QueryClientWrapper>
+        <ChakraProvider theme={customTheme}>
+          <Router history={history}>
+            <Navbar />
+            <App />
+            <Footer />
+          </Router>
+        </ChakraProvider>
+      </QueryClientWrapper>
     </Suspense>
   </React.StrictMode>
 );
