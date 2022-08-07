@@ -21,8 +21,9 @@ export type AuthStore = AuthState & AuthActions;
 // Product types
 export type ProductState = {
   products: DocumentData[] | null;
-  emptyProduct: boolean;
+  isEmptyProduct: boolean;
   isLoading: boolean | undefined;
+  isLoadingError: boolean | undefined;
 };
 
 export type ProductActions = {
