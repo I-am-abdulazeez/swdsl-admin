@@ -24,26 +24,35 @@ const ProductList = ({
       }}
       border="1px solid #EDF2F7"
       borderRadius="lg"
-      spacing={6}
-      p={4}
+      spacing={1}
     >
       <Image
-        width={'120px'}
+        display={'block'}
+        p={7}
+        height={'250px'}
         src={product?.url}
         alt={`product-${product?.drinkName}`}
       />
-      <Stack spacing={2} py={4} width={'full'}>
+      <Stack spacing={2} p={4} width={'full'}>
         <Box>
-          <Heading as="h2" size="md" mb={1}>
-            {product?.drinkName}
-            <ProductBadge addMargin={2} product={product} />
-          </Heading>
-          <Text fontWeight="medium" fontSize="sm">
+          <HStack>
+            <Heading
+              textOverflow={'ellipsis'}
+              whiteSpace={'nowrap'}
+              overflow={'hidden'}
+              as="h2"
+              fontSize={'17px'}
+            >
+              {product?.drinkName}
+            </Heading>
+            <ProductBadge product={product} />
+          </HStack>
+          <Text fontWeight="semibold" fontSize="sm">
             {product?.description}
           </Text>
         </Box>
         <Box>
-          <chakra.span>
+          <chakra.span fontSize={'20px'} fontWeight={'semibold'}>
             Price:{' '}
             <chakra.span fontWeight="medium" color="secondary.600">
               &#36;
