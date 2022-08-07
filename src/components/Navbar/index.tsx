@@ -1,18 +1,18 @@
-import { lazy, Suspense } from "react";
-import { Box, Container, Flex, HStack, Spacer, Text } from "@chakra-ui/layout";
-import { Link } from "react-router-dom";
-import { Button } from "@chakra-ui/button";
-import { useBreakpointValue } from "@chakra-ui/media-query";
+import { lazy, Suspense } from 'react';
+import { Box, Container, Flex, HStack, Spacer, Text } from '@chakra-ui/layout';
+import { Link } from 'react-router-dom';
+import { Button } from '@chakra-ui/button';
+import { useBreakpointValue } from '@chakra-ui/media-query';
 
-import { useAuth } from "@hooks/useAuth";
+import { useAuth } from '@hooks/useAuth';
 
-const Brand = lazy(() => import("../Brand"));
+const Brand = lazy(() => import('../Brand'));
 
 const Navbar: React.FC = () => {
   const { user, signOutAdmin } = useAuth();
   const buttonSize = useBreakpointValue({
-    base: "xs",
-    md: "sm",
+    base: 'xs',
+    md: 'sm',
   });
   return (
     <Box
