@@ -56,6 +56,7 @@ export const Actions: AuthActions = {
         status: 'success',
         title: 'Logged out successfully',
       });
+      Router.push('/');
     });
   },
 };
