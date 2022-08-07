@@ -21,7 +21,7 @@ const Login: React.FC = () => {
   };
 
   return (
-    <Box width={{ base: '300px', md: '400px' }} mx="auto">
+    <Box width={{ base: '280px', md: '350px' }} mx="auto">
       <Text fontWeight="semibold" fontSize="2xl" textAlign="center">
         SWDSL Admin Login Page
       </Text>
