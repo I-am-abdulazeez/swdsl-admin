@@ -1,16 +1,18 @@
 import { PropsWithChildren } from 'react';
 import { Navigate } from 'react-router-dom';
 
-export const PrivateRoute = ({ children }: PropsWithChildren) => {
-  const user = localStorage.getItem('user');
+import { useAuthStore } from '@store/useAuthStore';
 
-  if (user) {
+export const PrivateRoute = ({ children }: PropsWithChildren) => {
+  const { isLoggedIn } = useAuthStore();
+
+  if (isLoggedIn) {
     console.log('Yes, user exist');
   } else {
     console.log('No user');
   }
 
-  if (!user) {
+  if (!isLoggedIn) {
     return <Navigate to="/login" replace />;
   }
 
@@ -18,15 +20,15 @@ export const PrivateRoute = ({ children }: PropsWithChildren) => {
 };
 
 export const AnonymousRoute = ({ children }: PropsWithChildren) => {
-  const user = localStorage.getItem('user');
+  const { isLoggedIn } = useAuthStore();
 
-  if (user) {
+  if (isLoggedIn) {
     console.log('Yes, user exist');
   } else {
     console.log('No user');
   }
 
-  if (user) {
+  if (isLoggedIn) {
     return <Navigate to="/dashboard" replace />;
   }
 
