@@ -36,24 +36,26 @@ export interface FileInputProps {
   progress: number;
 }
 
+export type CategoryType =
+  | 'Cognac'
+  | 'Juice'
+  | 'Whisky'
+  | 'Non alcoholic'
+  | 'Red wine'
+  | 'Champagne'
+  | 'Rum'
+  | 'Irish cream'
+  | 'White wine'
+  | 'Gin'
+  | 'Sparkling wine'
+  | 'Brandy'
+  | 'Juice'
+  | 'Tequila'
+  | 'Vodka'
+  | 'Others';
+
 export interface ProductsProps {
-  category:
-    | 'Cognac'
-    | 'Juice'
-    | 'Whisky'
-    | 'Non alcoholic'
-    | 'Red wine'
-    | 'Champagne'
-    | 'Rum'
-    | 'Irish cream'
-    | 'White wine'
-    | 'Gin'
-    | 'Sparkling wine'
-    | 'Brandy'
-    | 'Juice'
-    | 'Tequila'
-    | 'Vodka'
-    | 'Others';
+  category: CategoryType;
   createdAt: Timestamp;
   description: string;
   drinkName: string;
