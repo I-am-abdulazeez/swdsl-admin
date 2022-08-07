@@ -19,4 +19,4 @@ export const customToast = (options?: UseToastOptions | undefined) => {
   });
 };
 
-export const navigateTo = createBrowserHistory({ window });
+export const Router = createBrowserHistory({ window });
