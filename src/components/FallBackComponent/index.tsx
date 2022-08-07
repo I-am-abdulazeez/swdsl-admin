@@ -3,7 +3,7 @@ import { Flex, Spinner } from '@chakra-ui/react';
 const FallBackComponent = () => {
   return (
     <Flex
-      height={'90vh'}
+      height={'70vh'}
       width={'100%'}
       justifyContent="center"
       alignItems={'center'}
