@@ -5,6 +5,7 @@ export type AuthState = {
   user: User | null;
   isLoading: boolean | undefined;
   isLoggedIn: boolean;
+  userId: string | null;
 };
 
 export type AuthActions = {
