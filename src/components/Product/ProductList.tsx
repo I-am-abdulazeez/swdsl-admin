@@ -1,14 +1,14 @@
-import { lazy } from "react";
-import { Image } from "@chakra-ui/image";
-import { Box, Heading, HStack, Stack, Text } from "@chakra-ui/layout";
-import { chakra } from "@chakra-ui/system";
-import { DocumentData } from "firebase/firestore";
+import { lazy } from 'react';
+import { Image } from '@chakra-ui/image';
+import { Box, Heading, HStack, Stack, Text, VStack } from '@chakra-ui/layout';
+import { chakra } from '@chakra-ui/system';
+import { DocumentData } from 'firebase/firestore';
 
-import { ProductsProps } from "@interfaces/index";
+import { ProductsProps } from '@interfaces/index';
 
-import { numberWithCommas } from "@utils/index";
+import { numberWithCommas } from '@utils/index';
 
-const ProductBadge = lazy(() => import("./ProductBadge"));
+const ProductBadge = lazy(() => import('./ProductBadge'));
 
 const ProductList = ({
   product,
@@ -16,11 +16,11 @@ const ProductList = ({
   product: DocumentData | undefined | ProductsProps;
 }) => {
   return (
-    <HStack
+    <VStack
       transition="all 0.3s ease-in-out"
       _hover={{
-        shadow: "sm",
-        cursor: "pointer",
+        shadow: 'sm',
+        cursor: 'pointer',
       }}
       border="1px solid #EDF2F7"
       borderRadius="lg"
@@ -28,13 +28,11 @@ const ProductList = ({
       p={4}
     >
       <Image
-        width="80px"
-        border="1px solid #EDF2F7"
-        borderRadius="md"
+        width={'120px'}
         src={product?.url}
         alt={`product-${product?.drinkName}`}
       />
-      <Stack spacing={2} flex={1}>
+      <Stack spacing={2} py={4} width={'full'}>
         <Box>
           <Heading as="h2" size="md" mb={1}>
             {product?.drinkName}
@@ -46,7 +44,7 @@ const ProductList = ({
         </Box>
         <Box>
           <chakra.span>
-            Price:{" "}
+            Price:{' '}
             <chakra.span fontWeight="medium" color="secondary.600">
               &#36;
               {numberWithCommas(product?.price)}
@@ -60,16 +58,16 @@ const ProductList = ({
             fontWeight="medium"
             mt="0px !important"
           >
-            CreatedAt:{" "}
+            CreatedAt:{' '}
             <chakra.span>
               {new Date(product?.createdAt.seconds * 1000).toLocaleDateString(
-                "en-US"
+                'en-US'
               )}
-            </chakra.span>{" "}
+            </chakra.span>{' '}
           </chakra.span>
         </Box>
       </Stack>
-    </HStack>
+    </VStack>
   );
 };
 
