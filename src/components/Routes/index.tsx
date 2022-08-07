@@ -1,12 +1,13 @@
-import { Navigate } from "react-router-dom";
+import { PropsWithChildren } from 'react';
+import { Navigate } from 'react-router-dom';
 
-export const PrivateRoute = ({ children }: any) => {
-  const user = localStorage.getItem("user");
+export const PrivateRoute = ({ children }: PropsWithChildren) => {
+  const user = localStorage.getItem('user');
 
   if (user) {
-    console.log("Yes, user exist");
+    console.log('Yes, user exist');
   } else {
-    console.log("No user");
+    console.log('No user');
   }
 
   if (!user) {
@@ -16,13 +17,13 @@ export const PrivateRoute = ({ children }: any) => {
   return children;
 };
 
-export const AnonymousRoute = ({ children }: any) => {
-  const user = localStorage.getItem("user");
+export const AnonymousRoute = ({ children }: PropsWithChildren) => {
+  const user = localStorage.getItem('user');
 
   if (user) {
-    console.log("Yes, user exist");
+    console.log('Yes, user exist');
   } else {
-    console.log("No user");
+    console.log('No user');
   }
 
   if (user) {
