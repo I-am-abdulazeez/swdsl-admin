@@ -2,7 +2,7 @@ import { extendTheme } from '@chakra-ui/react';
 
 const FontFamily: string = 'Quicksand';
 
-const customTheme: object = extendTheme({
+const customTheme = extendTheme({
   fonts: {
     body: FontFamily,
     heading: FontFamily,
