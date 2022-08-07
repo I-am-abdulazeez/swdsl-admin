@@ -1,12 +1,12 @@
-import { Box, HStack, SimpleGrid, Text } from "@chakra-ui/layout";
-import { Spinner } from "@chakra-ui/spinner";
-import { DocumentSnapshot } from "@firebase/firestore";
-import { lazy, Suspense, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Box, HStack, SimpleGrid, Text } from '@chakra-ui/layout';
+import { Spinner } from '@chakra-ui/spinner';
+import { DocumentSnapshot } from '@firebase/firestore';
+import { lazy, Suspense, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-import { useProduct } from "@hooks/useProduct";
+import { useProduct } from '@hooks/useProduct';
 
-const ProductList = lazy(() => import("./ProductList"));
+const ProductList = lazy(() => import('./ProductList'));
 
 const Products: React.FC = () => {
   const { products, storeQuery, emptyProduct } = useProduct();
@@ -29,7 +29,7 @@ const Products: React.FC = () => {
         </HStack>
       )}
       {storeQuery.isLoadingError && <Text>Error Fetching product</Text>}
-      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={3}>
+      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={4}>
         {products.map((docsSnapshot: DocumentSnapshot) => {
           const product = docsSnapshot.data();
           return (
