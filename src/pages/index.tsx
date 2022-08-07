@@ -1,13 +1,18 @@
-import { Button } from '@chakra-ui/button';
+import { useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
+
+import { Button } from '@chakra-ui/button';
 import { Flex, Heading, Text, VStack } from '@chakra-ui/layout';
 
-import { useAuth } from '@hooks/useAuth';
+import { useAuthStore } from '@store/useAuthStore';
 
 const Home: React.FC = () => {
-  const { user } = useAuth();
+  const { user } = useAuthStore();
 
-  console.log(user);
+  useLayoutEffect(() => {
+    console.log(user);
+  });
+
   return (
     <Flex justify="center" align="center" height="70vh" width={'full'}>
       <VStack spacing={3}>
