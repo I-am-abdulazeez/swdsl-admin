@@ -1,15 +1,15 @@
-import { Button } from "@chakra-ui/button";
-import { Link } from "react-router-dom";
-import { Flex, Heading, Text, VStack } from "@chakra-ui/layout";
+import { Button } from '@chakra-ui/button';
+import { Link } from 'react-router-dom';
+import { Flex, Heading, Text, VStack } from '@chakra-ui/layout';
 
-import { useAuth } from "@hooks/useAuth";
+import { useAuth } from '@hooks/useAuth';
 
 const Home: React.FC = () => {
   const { user } = useAuth();
 
   console.log(user);
   return (
-    <Flex justify="center" align="center" height="70vh">
+    <Flex justify="center" align="center" height="70vh" width={'full'}>
       <VStack spacing={3}>
         <Heading>ShayowithDSL Admin Page.</Heading>
         <Text>This is where all drinks uploads are done</Text>
