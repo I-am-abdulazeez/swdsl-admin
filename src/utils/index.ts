@@ -1,6 +1,7 @@
 import { createStandaloneToast, UseToastOptions } from '@chakra-ui/react';
 
 import customTheme from '@assets/theme';
+import { createBrowserHistory } from 'history';
 
 export const numberWithCommas = (x: string) => {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -17,3 +18,5 @@ export const customToast = (options?: UseToastOptions | undefined) => {
     ...options,
   });
 };
+
+export const navigateTo = createBrowserHistory({ window });
