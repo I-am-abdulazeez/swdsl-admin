@@ -20,9 +20,9 @@ const Products: React.FC = () => {
         <Text>No product added. click on Drinks upload to add one</Text>
       )}
       {isLoading && (
-        <HStack spacing={2}>
+        <HStack spacing={2} mb={2}>
           <Spinner
-            thickness="1px"
+            thickness="2px"
             speed="0.65s"
             emptyColor="gray.200"
             size="sm"
