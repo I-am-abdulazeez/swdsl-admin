@@ -1,4 +1,4 @@
-import { AuthError, signInWithEmailAndPassword } from 'firebase/auth';
+import { AuthError, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 
 import { Admin } from '@interfaces/index';
 import { firebaseAuth } from '@lib/firebase';
@@ -6,7 +6,7 @@ import { AuthActions } from '@store/types';
 
 import { useAuthStore } from '@store/useAuthStore';
 
-import { customToast } from '@utils/index';
+import { customToast, Router } from '@utils/index';
 
 export const Actions: AuthActions = {
   signInAdmin: (user: Admin) => {
@@ -28,6 +28,7 @@ export const Actions: AuthActions = {
           status: 'success',
           title: 'Logged in successfully',
         });
+        Router.push('/dashboard');
       })
       .catch((error: AuthError) => {
         useAuthStore.setState((state) => ({
@@ -44,6 +45,17 @@ export const Actions: AuthActions = {
       });
   },
   signOutAdmin: () => {
-    console.log('Clicked');
+    signOut(firebaseAuth).then(() => {
+      useAuthStore.setState((state) => ({
+        ...state,
+        user: null,
+        isLoggedIn: false,
+        userId: '',
+      }));
+      customToast({
+        status: 'success',
+        title: 'Logged out successfully',
+      });
+    });
   },
 };
