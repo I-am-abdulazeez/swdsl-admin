@@ -25,10 +25,13 @@ const Navbar: React.FC = () => {
       borderBottom="1px solid #EDF2F7"
     >
       <Container maxW="container.lg">
-        <Flex h="10vh" align="center">
-          <Suspense fallback={<Text>Loading</Text>}>
-            <Brand />
-          </Suspense>
+        <Flex
+          flexDirection={{ base: 'column', md: 'row' }}
+          h={{ base: 'auto', md: '10vh' }}
+          align="center"
+          py={{ base: 4, md: 0 }}
+        >
+          <Brand />
           <Spacer />
           <HStack spacing={2}>
             {!user ? (
