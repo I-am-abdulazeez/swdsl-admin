@@ -1,7 +1,7 @@
-import { Button, ButtonGroup, IconButton } from "@chakra-ui/button";
-import { useDisclosure } from "@chakra-ui/hooks";
-import { Box, SimpleGrid, Text } from "@chakra-ui/layout";
-import { FileInput, InputField, SelectField } from "@components/FormFields";
+import { Button, ButtonGroup, IconButton } from '@chakra-ui/button';
+import { useDisclosure } from '@chakra-ui/hooks';
+import { Box, SimpleGrid, Text } from '@chakra-ui/layout';
+import { FileInput, InputField, SelectField } from '@components/FormFields';
 import {
   Modal,
   ModalBody,
@@ -10,44 +10,44 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-} from "@chakra-ui/modal";
-import { chakra } from "@chakra-ui/system";
-import { useToast } from "@chakra-ui/toast";
-import { doc } from "@firebase/firestore";
-import { useFirestoreDocumentMutation } from "@react-query-firebase/firestore";
-import { ChangeEvent, FormEvent, forwardRef, useEffect, useState } from "react";
-import { RiPencilLine } from "react-icons/ri";
-import { getDownloadURL, ref, uploadBytesResumable } from "@firebase/storage";
-import { useParams } from "react-router";
+} from '@chakra-ui/modal';
+import { chakra } from '@chakra-ui/system';
+import { useToast } from '@chakra-ui/toast';
+import { doc } from '@firebase/firestore';
+import { useFirestoreDocumentMutation } from '@react-query-firebase/firestore';
+import { ChangeEvent, FormEvent, forwardRef, useEffect, useState } from 'react';
+import { RiPencilLine } from 'react-icons/ri';
+import { getDownloadURL, ref, uploadBytesResumable } from '@firebase/storage';
+import { useParams } from 'react-router';
 
-import { fileTypes } from "@data/index";
+import { fileTypes } from '@data/index';
 
-import { FormState, NewFormState } from "@interfaces/index";
+import { FormState, NewFormState } from '@interfaces/index';
 
-import { useAuth } from "@hooks/useAuth";
+import { useAuthStore } from '@store/useAuthStore';
 
-import { firebaseFirstore, firebaseStorage } from "@lib/firebase";
+import { firebaseFirstore, firebaseStorage } from '@lib/firebase';
 
 type ProductEditParams = {
   id: string;
 };
 
 const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
-  const { userId } = useAuth();
+  const { userId } = useAuthStore();
   const { id } = useParams<ProductEditParams>();
   const toast = useToast();
   const [formState, setFormState] = useState<FormState>({
-    drinkName: "",
-    description: "",
-    category: "",
+    drinkName: '',
+    description: '',
+    category: '',
     price: 0,
   });
   const { drinkName, description, category, price } = formState;
   const [file, setFile] = useState<File | null>(null);
   const [uploadLoading, setUploadLoading] = useState<boolean>(false);
-  const [url, setUrl] = useState<string>("");
+  const [url, setUrl] = useState<string>('');
   const [progress, setProgress] = useState<number>(0);
-  const docsRef = doc(firebaseFirstore, "products", String(id));
+  const docsRef = doc(firebaseFirstore, 'products', String(id));
   const { isOpen, onOpen, onClose } = useDisclosure();
   const docsEditMutation = useFirestoreDocumentMutation(
     docsRef,
@@ -57,20 +57,20 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
     {
       onSuccess: () => {
         toast({
-          status: "success",
+          status: 'success',
           title: `Data updated successfully`,
-          variant: "subtle",
+          variant: 'subtle',
           isClosable: true,
           duration: 5000,
         });
         setFormState({
-          category: "",
-          description: "",
-          drinkName: "",
+          category: '',
+          description: '',
+          drinkName: '',
           price: 0,
         });
         setFile(null);
-        setUrl("");
+        setUrl('');
         setProgress(0);
         onClose();
       },
@@ -96,18 +96,18 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
       toast({
         duration: 5000,
         isClosable: true,
-        status: "error",
-        variant: "subtle",
-        title: "File too large, Maximum of 2MB",
+        status: 'error',
+        variant: 'subtle',
+        title: 'File too large, Maximum of 2MB',
       });
     } else {
       setFile(null);
       toast({
         duration: 5000,
         isClosable: true,
-        variant: "subtle",
-        status: "error",
-        title: "Please select an image file",
+        variant: 'subtle',
+        status: 'error',
+        title: 'Please select an image file',
       });
     }
   };
@@ -117,30 +117,30 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
     const uploadTask = uploadBytesResumable(storageRef, file!);
 
     uploadTask.on(
-      "state_changed",
+      'state_changed',
       (snapshot) => {
         setUploadLoading(true);
         let percentage =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         setProgress(percentage);
-        console.log("Upload is " + progress + "% done");
+        console.log('Upload is ' + progress + '% done');
         switch (snapshot.state) {
-          case "paused":
-            console.log("Upload is paused");
+          case 'paused':
+            console.log('Upload is paused');
             break;
-          case "running":
-            console.log("Upload is running");
+          case 'running':
+            console.log('Upload is running');
             break;
         }
-        console.log("Upload is " + progress + "% done");
+        console.log('Upload is ' + progress + '% done');
       },
       (error) => {
         console.log(error);
         setUploadLoading(false);
         toast({
-          status: "error",
+          status: 'error',
           title: `${error.message}`,
-          variant: "subtle",
+          variant: 'subtle',
           isClosable: true,
           duration: 3000,
         });
@@ -148,13 +148,13 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
       async () => {
         // On Success
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log("File available at ", downloadURL);
+          console.log('File available at ', downloadURL);
           const url = downloadURL;
           setUrl(url);
           toast({
-            status: "success",
+            status: 'success',
             title: `File updated to storage successfully`,
-            variant: "subtle",
+            variant: 'subtle',
             isClosable: true,
             duration: 3000,
           });
@@ -198,7 +198,7 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
-            Edit Product{" "}
+            Edit Product{' '}
             <chakra.span color="success.700">{snapshot?.drinkName}</chakra.span>
             ?
           </ModalHeader>
@@ -215,7 +215,7 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
                   handleChange={handleChange}
                   label="Drink Name"
                   name="drinkName"
-                  type={"text"}
+                  type={'text'}
                   placeHolder="Meridian"
                   value={drinkName || snapshot?.drinkName}
                 />
@@ -224,7 +224,7 @@ const ProductEdit = forwardRef(({ snapshot }: any, StuffRef): JSX.Element => {
                   handleChange={handleChange}
                   label="Drink Description"
                   name="description"
-                  type={"text"}
+                  type={'text'}
                   placeHolder="Meridian wine @the best"
                   value={description || snapshot?.description}
                 />
