@@ -1,5 +1,7 @@
 {
   "projects": {
     "default": "swdsl-admin"
-  }
+  },
+  "targets": {},
+  "etags": {}
 }
