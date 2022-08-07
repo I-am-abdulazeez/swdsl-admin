@@ -1,15 +1,16 @@
 import { lazy, Suspense } from 'react';
-import { Box, Container, Flex, HStack, Spacer, Text } from '@chakra-ui/layout';
 import { Link } from 'react-router-dom';
+
+import { Box, Container, Flex, HStack, Spacer, Text } from '@chakra-ui/layout';
 import { Button } from '@chakra-ui/button';
 import { useBreakpointValue } from '@chakra-ui/media-query';
 
-import { useAuth } from '@hooks/useAuth';
+import { useAuthStore } from '@store/useAuthStore';
 
 const Brand = lazy(() => import('../Brand'));
 
 const Navbar: React.FC = () => {
-  const { user, signOutAdmin } = useAuth();
+  const { user, signOutAdmin } = useAuthStore();
   const buttonSize = useBreakpointValue({
     base: 'xs',
     md: 'sm',
