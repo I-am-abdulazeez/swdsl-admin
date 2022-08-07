@@ -1,31 +1,28 @@
 import { Button } from '@chakra-ui/button';
-import {
-  FormControl,
-  FormHelperText,
-  FormLabel,
-} from '@chakra-ui/form-control';
+import { FormControl, FormLabel } from '@chakra-ui/form-control';
 import { useBoolean } from '@chakra-ui/hooks';
 import { Input, InputGroup, InputRightElement } from '@chakra-ui/input';
 import { Box, Text, VStack } from '@chakra-ui/layout';
-import { useToast } from '@chakra-ui/toast';
 
-import { useAuth } from '@hooks/useAuth/index';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Admin } from '@interfaces/index';
+import { useAuthStore } from '@store/useAuthStore';
 
 const Login: React.FC = () => {
   const { register, handleSubmit } = useForm<Admin>();
   const [showPassword, toggleShowPassword] = useBoolean(false);
-  const { signInAdmin, isLoading } = useAuth();
+
+  const isLoading = useAuthStore((state) => state.isLoading);
+  const SignInAdmin = useAuthStore((state) => state.signInAdmin);
 
   const handleAdminLogin: SubmitHandler<Admin> = (data) => {
     console.log(data);
-    // signInAdmin(data.email, data.password);
+    SignInAdmin(data);
   };
 
   return (
     <Box width={{ base: '300px', md: '400px' }} mx="auto">
-      <Text fontWeight="semibold" fontSize="lg" textAlign="center">
+      <Text fontWeight="semibold" fontSize="2xl" textAlign="center">
         SWDSL Admin Login Page
       </Text>
       <Box mt={6}>
@@ -39,6 +36,7 @@ const Login: React.FC = () => {
                 })}
                 type="email"
                 placeholder="Email Address"
+                fontSize={'15px'}
               />
             </FormControl>
             <FormControl>
@@ -50,6 +48,7 @@ const Login: React.FC = () => {
                   })}
                   type={showPassword ? 'text' : 'password'}
                   placeholder="Password"
+                  fontSize={'15px'}
                 />
                 <InputRightElement width="4.5rem">
                   <Button
@@ -60,7 +59,7 @@ const Login: React.FC = () => {
                     {showPassword ? 'Hide' : 'Show'}
                   </Button>
                 </InputRightElement>
-              </InputGroup>{' '}
+              </InputGroup>
             </FormControl>
             <Button
               isLoading={isLoading}
@@ -68,7 +67,7 @@ const Login: React.FC = () => {
               colorScheme="primary"
               width={'full'}
             >
-              Login as an Admin
+              Admin Login
             </Button>
           </VStack>
         </form>
