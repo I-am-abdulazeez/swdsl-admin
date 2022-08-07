@@ -1,7 +1,7 @@
 import create from 'zustand';
 import { persist, devtools } from 'zustand/middleware';
 
-import { Actions } from '@store/actions';
+import { authActions } from '@store/actions/auth-actions';
 import { AuthState, AuthStore } from '@store/types';
 
 const initialState: AuthState = {
@@ -16,7 +16,7 @@ export const useAuthStore = create<AuthStore>()(
     persist(
       () => ({
         ...initialState,
-        ...Actions,
+        ...authActions,
       }),
       { name: 'authState' }
     )
