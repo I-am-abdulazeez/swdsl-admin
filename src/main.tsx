@@ -16,6 +16,7 @@ const container = document.getElementById('app');
 const root = createRoot(container!);
 
 import './index.css';
+import BackToTop from '@components/BackToTop';
 
 root.render(
   <React.StrictMode>
@@ -26,6 +27,7 @@ root.render(
             <Navbar />
             <App />
             <Footer />
+            <BackToTop />
           </Router>
         </ChakraProvider>
       </QueryClientWrapper>
