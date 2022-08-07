@@ -1,6 +1,9 @@
-import { Admin } from '@interfaces/index';
 import { User } from 'firebase/auth';
+import { DocumentData } from 'firebase/firestore';
 
+import { Admin } from '@interfaces/index';
+
+// Auth types
 export type AuthState = {
   user: User | null;
   isLoading: boolean | undefined;
@@ -14,3 +17,16 @@ export type AuthActions = {
 };
 
 export type AuthStore = AuthState & AuthActions;
+
+// Product types
+export type ProductState = {
+  products: DocumentData[] | null;
+  emptyProduct: boolean;
+  isLoading: boolean | undefined;
+};
+
+export type ProductActions = {
+  fetchProducts: () => void;
+};
+
+export type ProductStore = ProductState & ProductActions;
