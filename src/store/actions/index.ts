@@ -45,18 +45,26 @@ export const Actions: AuthActions = {
       });
   },
   signOutAdmin: () => {
-    signOut(firebaseAuth).then(() => {
-      useAuthStore.setState((state) => ({
-        ...state,
-        user: null,
-        isLoggedIn: false,
-        userId: '',
-      }));
-      customToast({
-        status: 'success',
-        title: 'Logged out successfully',
+    signOut(firebaseAuth)
+      .then(() => {
+        useAuthStore.setState((state) => ({
+          ...state,
+          user: null,
+          isLoggedIn: false,
+          userId: '',
+        }));
+        customToast({
+          status: 'success',
+          title: 'Logged out successfully',
+        });
+        Router.push('/');
+      })
+      .catch((error: AuthError) => {
+        console.log(error);
+        customToast({
+          status: 'error',
+          title: error.message,
+        });
       });
-      Router.push('/');
-    });
   },
 };
