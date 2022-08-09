@@ -1,6 +1,8 @@
 import { Badge } from '@chakra-ui/layout';
 
-const ProductBadge: React.FC<{ product: any }> = ({ product }) => {
+import { ProductType } from 'src/types';
+
+const ProductBadge: React.FC<ProductType> = ({ product }) => {
   return (
     <Badge
       colorScheme={
