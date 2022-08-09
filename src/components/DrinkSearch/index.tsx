@@ -1,20 +1,21 @@
-import { useEffect, useState } from "react";
+import { useState } from 'react';
 
-import { Box, HStack, Input, Text } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Box, HStack, Input, Text } from '@chakra-ui/react';
 
-import ProductBadge from "@components/Product/ProductBadge";
+import { Link } from 'react-router-dom';
 
-import { useProduct } from "@hooks/useProduct";
+import ProductBadge from '@components/Product/ProductBadge';
+
+import { useProductStore } from '@store/useProductStore';
 
 const DrinkSearch: React.FC = () => {
-  const { products } = useProduct();
-  const [searchTerm, setSearchTerm] = useState<string>("");
+  const { products } = useProductStore();
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
   return (
     <div>
       <Input
-        width={"100%"}
+        width={'100%'}
         type="text"
         placeholder="Search for drinks"
         onChange={(e) => setSearchTerm(e.target?.value.trim())}
@@ -23,48 +24,45 @@ const DrinkSearch: React.FC = () => {
       {searchTerm.length > 0 && (
         <Box
           padding={3}
-          bgColor={"white"}
-          maxHeight={"180px"}
-          overflowY={"auto"}
-          borderBottomRadius={"8px"}
-          border={"1px solid #EDF2F7"}
+          bgColor={'white'}
+          maxHeight={'180px'}
+          overflowY={'auto'}
+          borderBottomRadius={'8px'}
+          border={'1px solid #EDF2F7'}
         >
           {products
-            .filter((drink) => {
-              if (searchTerm === "") {
+            ?.filter((drink) => {
+              if (searchTerm === '') {
                 return drink;
               } else if (
-                drink
-                  .data()
-                  ?.drinkName?.toLowerCase()
+                drink?.drinkName
+                  ?.toLowerCase()
                   ?.includes(searchTerm?.toLowerCase())
               ) {
                 return drink;
               } else if (
-                drink
-                  .data()
-                  ?.drinkName?.toLowerCase()
+                drink?.drinkName
+                  ?.toLowerCase()
                   ?.includes(!searchTerm?.toLowerCase())
               ) {
                 return <Text>No product found with that name</Text>;
               }
             })
             .map((drinkSnap) => {
-              const drinks = drinkSnap?.data();
               return (
                 <Link key={drinkSnap?.id} to={`product/${drinkSnap?.id}`}>
                   <HStack
-                    cursor={"pointer"}
-                    justify={"space-between"}
-                    padding={"10px"}
-                    borderRadius={"8px"}
-                    fontSize={"15px"}
+                    cursor={'pointer'}
+                    justify={'space-between'}
+                    padding={'10px'}
+                    borderRadius={'8px'}
+                    fontSize={'15px'}
                     _hover={{
-                      bgColor: "#F7FAFC",
+                      bgColor: '#F7FAFC',
                     }}
                   >
-                    <Text fontWeight={"normal"}>{drinks?.drinkName}</Text>
-                    <ProductBadge product={drinks} />
+                    <Text fontWeight={'normal'}>{drinkSnap?.drinkName}</Text>
+                    <ProductBadge product={drinkSnap} />
                   </HStack>
                 </Link>
               );
