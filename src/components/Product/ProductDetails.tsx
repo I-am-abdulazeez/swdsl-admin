@@ -1,33 +1,38 @@
-import { Box, HStack, Text, Flex, Heading, VStack } from "@chakra-ui/layout";
-import { lazy } from "react";
-import { IconButton } from "@chakra-ui/button";
-import { Image } from "@chakra-ui/image";
-import { Spacer } from "@chakra-ui/react";
-import { Spinner } from "@chakra-ui/spinner";
-import { chakra } from "@chakra-ui/system";
-import { doc } from "@firebase/firestore";
-import { useFirestoreDocument } from "@react-query-firebase/firestore";
-import { RiArrowLeftLine } from "react-icons/ri";
+import { Box, HStack, Text, Flex, Heading, VStack } from '@chakra-ui/layout';
+import { lazy, useEffect, useLayoutEffect } from 'react';
+import { IconButton } from '@chakra-ui/button';
+import { Image } from '@chakra-ui/image';
+import { Spacer } from '@chakra-ui/react';
+import { Spinner } from '@chakra-ui/spinner';
+import { chakra } from '@chakra-ui/system';
+import { doc } from '@firebase/firestore';
+import { useFirestoreDocument } from '@react-query-firebase/firestore';
+import { RiArrowLeftLine } from 'react-icons/ri';
 
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from 'react-router-dom';
 
-import { firebaseFirstore } from "@lib/firebase";
+import { firebaseFirstore } from '@lib/firebase';
+import { ProductDetailsParams } from 'src/types';
+import { useProductStore } from '@store/useProductStore';
 
-const ProductBadge = lazy(() => import("./ProductBadge"));
-const ProductActions = lazy(() => import("./ProductActions"));
-
-type ProductDetailsParams = {
-  id: string;
-};
+const ProductBadge = lazy(() => import('./ProductBadge'));
+const ProductActions = lazy(() => import('./ProductActions'));
 
 const ProductDetails = (): JSX.Element => {
   const { id } = useParams<ProductDetailsParams>();
   const navigateTo = useNavigate();
-  const ref = doc(firebaseFirstore, "products", String(id));
-  const product = useFirestoreDocument(["products", id], ref, {});
-  const snapshot = product.data;
 
-  if (product.isLoading) {
+  const { product } = useProductStore();
+  const isLoading = useProductStore((state) => state.isLoadingProduct);
+  const fetchSingleProduct = useProductStore(
+    (state) => state.fetchSingleProduct
+  );
+
+  useLayoutEffect(() => {
+    fetchSingleProduct(id);
+  }, []);
+
+  if (isLoading) {
     return <Spinner color="red" />;
   }
 
@@ -41,7 +46,7 @@ const ProductDetails = (): JSX.Element => {
           icon={<RiArrowLeftLine size="18px" />}
         />
         <Spacer />
-        <ProductActions snapshot={snapshot?.data()} />
+        <ProductActions product={product} />
       </Flex>
       <Box mt={4}>
         <Text>
@@ -52,23 +57,23 @@ const ProductDetails = (): JSX.Element => {
             width="150px"
             border="1px solid #EDF2F7"
             borderRadius="md"
-            src={snapshot?.data()?.url}
-            alt={snapshot?.data()?.id}
+            src={product?.url}
+            alt={product?.id}
           />
-          <VStack align={"flex-start"}>
-            <ProductBadge product={snapshot?.data()} />
-            <Heading mt="0">{snapshot?.data()?.drinkName}</Heading>
+          <VStack align={'flex-start'}>
+            <ProductBadge product={product} />
+            <Heading mt="0">{product?.drinkName}</Heading>
             <chakra.span mt="0" fontSize="md">
-              {snapshot?.data()?.description}
+              {product?.description}
             </chakra.span>
             <Box>
               <chakra.span
                 fontWeight="bold"
-                fontSize={"lg"}
+                fontSize={'lg'}
                 color="secondary.600"
               >
                 &#36;
-                {snapshot?.data()?.price}
+                {product?.price}
               </chakra.span>
             </Box>
           </VStack>
