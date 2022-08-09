@@ -2,19 +2,13 @@ import { lazy } from 'react';
 import { Image } from '@chakra-ui/image';
 import { Box, Heading, HStack, Stack, Text, VStack } from '@chakra-ui/layout';
 import { chakra } from '@chakra-ui/system';
-import { DocumentData } from 'firebase/firestore';
-
-import { ProductsProps } from '@interfaces/index';
 
 import { numberWithCommas } from '@utils/index';
+import { ProductType } from 'src/types';
 
 const ProductBadge = lazy(() => import('./ProductBadge'));
 
-const ProductList = ({
-  product,
-}: {
-  product: DocumentData | undefined | ProductsProps;
-}) => {
+const ProductList = ({ product }: ProductType) => {
   return (
     <VStack
       transition="all 0.3s ease-in-out"

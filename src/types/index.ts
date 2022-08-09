@@ -1,4 +1,4 @@
-import { Timestamp } from 'firebase/firestore';
+import { DocumentData, Timestamp } from 'firebase/firestore';
 
 export type CategoryType =
   | 'Cognac'
@@ -26,3 +26,7 @@ export type UploadImageParams = {
   setUrl: React.Dispatch<React.SetStateAction<string>>;
   setCreatedAt: React.Dispatch<React.SetStateAction<Timestamp | null>>;
 };
+
+export type ProductType = {
+  product: DocumentData | undefined;
+}
