@@ -1,67 +1,67 @@
-import { DrinksCategory } from "@interfaces/index";
-import { nanoid } from "nanoid";
+import { DrinksCategory } from '@interfaces/index';
+import { nanoid } from 'nanoid';
 
 export const drinkCategoriesArray: DrinksCategory[] = [
   {
-    drinkCategory: "Non alcoholic",
+    drinkCategory: 'Non alcoholic',
     drink_id: nanoid(4),
   },
   {
-    drinkCategory: "Whiskey",
+    drinkCategory: 'Whiskey',
     drink_id: nanoid(4),
   },
   {
-    drinkCategory: "Cognac",
+    drinkCategory: 'Cognac',
     drink_id: nanoid(4),
   },
   {
-    drinkCategory: "Red wine",
+    drinkCategory: 'Red wine',
     drink_id: nanoid(4),
   },
   {
-    drinkCategory: "Champagne",
+    drinkCategory: 'Champagne',
     drink_id: nanoid(4),
   },
   {
-    drinkCategory: "Rum",
+    drinkCategory: 'Rum',
     drink_id: nanoid(4),
   },
   {
-    drinkCategory: "Irish cream",
+    drinkCategory: 'Irish cream',
     drink_id: nanoid(4),
   },
   {
-    drinkCategory: "White wine",
+    drinkCategory: 'White wine',
     drink_id: nanoid(4),
   },
   {
-    drinkCategory: "Gin",
+    drinkCategory: 'Gin',
     drink_id: nanoid(4),
   },
   {
-    drinkCategory: "Sparkling wine",
+    drinkCategory: 'Sparkling wine',
     drink_id: nanoid(4),
   },
   {
-    drinkCategory: "Brandy",
+    drinkCategory: 'Brandy',
     drink_id: nanoid(4),
   },
   {
-    drinkCategory: "Juice",
+    drinkCategory: 'Juice',
     drink_id: nanoid(4),
   },
   {
-    drinkCategory: "Tequila",
+    drinkCategory: 'Tequila',
     drink_id: nanoid(4),
   },
   {
-    drinkCategory: "Vodka",
+    drinkCategory: 'Vodka',
     drink_id: nanoid(4),
   },
   {
-    drinkCategory: "Others",
+    drinkCategory: 'Others',
     drink_id: nanoid(4),
   },
 ];
 
-export const fileTypes = ["image/png", "image/jpeg", "image/jpg"];
+export const fileTypes = ['image/png', 'image/jpeg', 'image/jpg'];
