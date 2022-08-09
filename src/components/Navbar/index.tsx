@@ -47,14 +47,14 @@ const Navbar: React.FC = () => {
                     Dashboard
                   </Button>
                 </Link>
-                <Link to="/orders">
-                  <Button size={buttonSize} variant="ghost">
-                    Orders
-                  </Button>
-                </Link>
                 <Link to="/upload">
                   <Button size={buttonSize} variant="ghost">
                     Drinks Upload
+                  </Button>
+                </Link>
+                <Link to="/orders">
+                  <Button size={buttonSize} variant="ghost">
+                    Orders
                   </Button>
                 </Link>
               </>
