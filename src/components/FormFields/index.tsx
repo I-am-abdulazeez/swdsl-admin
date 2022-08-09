@@ -1,18 +1,22 @@
-import { FormControl, FormLabel } from "@chakra-ui/form-control";
+import { ChangeEvent } from 'react';
+import { FormControl, FormLabel } from '@chakra-ui/form-control';
 import {
   DrinksCategory,
   FileInputProps,
   InputFieldProps,
   SelectFieldProps,
-} from "@interfaces/index";
-import { Input } from "@chakra-ui/input";
-import { Select } from "@chakra-ui/select";
-import { chakra } from "@chakra-ui/system";
-import { Box, Text } from "@chakra-ui/layout";
+  UploadFormState,
+} from '@interfaces/index';
+import { Input } from '@chakra-ui/input';
+import { Select } from '@chakra-ui/select';
+import { chakra } from '@chakra-ui/system';
+import { Box, Text } from '@chakra-ui/layout';
 
-import { drinkCategoriesArray } from "@data/index";
+import { drinkCategoriesArray, fileTypes } from '@data/index';
 
-import MotionBox from "../MotionBox";
+import MotionBox from '../MotionBox';
+
+import { customToast } from '@utils/index';
 
 export const InputField = ({
   name,
@@ -66,11 +70,31 @@ export const SelectField = ({
   );
 };
 
-export const FileInput = ({
-  file,
-  handleFileChange,
+export const FileInput: React.FC<FileInputProps> = ({
   progress,
-}: FileInputProps) => {
+  file,
+  setFile,
+  setProgress,
+}) => {
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    let selected = e.target.files![0];
+    if (selected && fileTypes.includes(selected.type)) {
+      setFile(selected);
+      setProgress(0);
+    } else if (file?.size! > 2048) {
+      customToast({
+        status: 'error',
+        title: 'File too large, Maximum of 2MB',
+      });
+    } else {
+      setFile(null);
+      customToast({
+        status: 'error',
+        title: 'Please select an image file',
+      });
+    }
+  };
+
   return (
     <FormControl>
       <FormLabel
@@ -86,9 +110,9 @@ export const FileInput = ({
         fontSize="24px"
         transition="all .3s ease-in-out"
         _hover={{
-          bg: "#cc534b",
-          color: "#fff",
-          cursor: "pointer",
+          bg: '#cc534b',
+          color: '#fff',
+          cursor: 'pointer',
         }}
       >
         <Input
@@ -100,9 +124,9 @@ export const FileInput = ({
         />
         <chakra.span
           position="absolute"
-          left="15px"
-          top="5px"
-          fontSize="1.3rem"
+          left="13px"
+          top="4px"
+          fontSize="1.5rem"
         >
           +
         </chakra.span>
@@ -120,7 +144,7 @@ export const FileInput = ({
               bg="primary.300"
               borderRadius="md"
               initial={{ width: 0 }}
-              animate={{ width: progress + "%" }}
+              animate={{ width: progress + '%' }}
             />
           </Box>
         )}
