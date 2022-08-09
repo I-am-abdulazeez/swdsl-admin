@@ -16,6 +16,7 @@ export type CategoryType =
   | 'Juice'
   | 'Tequila'
   | 'Vodka'
+  | 'Whiskey'
   | 'Others';
 
 export type UploadImageParams = {
@@ -29,4 +30,8 @@ export type UploadImageParams = {
 
 export type ProductType = {
   product: DocumentData | undefined;
-}
+};
+
+export type ProductDetailsParams = {
+  id: string;
+};
