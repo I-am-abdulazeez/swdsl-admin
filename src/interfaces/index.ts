@@ -1,20 +1,18 @@
 import { Timestamp } from 'firebase/firestore';
 import { ChangeEvent } from 'react';
+import { UseFormRegister } from 'react-hook-form';
+import { CategoryType } from 'src/types';
 
-export interface FormState {
+export interface UploadFormState {
   drinkName: string;
   description: string;
   category: string;
   price: number;
 }
 
-export interface NewFormState extends FormState {
-  url: string;
-}
-
 export interface DrinksCategory {
   drink_id: string;
-  drinkCategory: string;
+  drinkCategory: CategoryType;
 }
 
 export interface InputFieldProps {
@@ -30,29 +28,13 @@ export interface InputFieldProps {
 }
 
 export interface SelectFieldProps extends InputFieldProps {}
+
 export interface FileInputProps {
   file: File | null;
-  handleFileChange: (e: ChangeEvent<HTMLInputElement>) => void;
   progress: number;
+  setProgress: React.Dispatch<React.SetStateAction<number>>;
+  setFile: React.Dispatch<React.SetStateAction<File | null>>;
 }
-
-export type CategoryType =
-  | 'Cognac'
-  | 'Juice'
-  | 'Whisky'
-  | 'Non alcoholic'
-  | 'Red wine'
-  | 'Champagne'
-  | 'Rum'
-  | 'Irish cream'
-  | 'White wine'
-  | 'Gin'
-  | 'Sparkling wine'
-  | 'Brandy'
-  | 'Juice'
-  | 'Tequila'
-  | 'Vodka'
-  | 'Others';
 
 export interface ProductsProps {
   category: CategoryType;
