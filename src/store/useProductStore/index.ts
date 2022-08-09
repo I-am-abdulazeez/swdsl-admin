@@ -9,6 +9,8 @@ const initialState: ProductState = {
   isEmptyProduct: false,
   isLoading: false,
   isLoadingError: false,
+  isLoadingProduct: false,
+  product: undefined,
 };
 
 export const useProductStore = create<ProductStore>()(
