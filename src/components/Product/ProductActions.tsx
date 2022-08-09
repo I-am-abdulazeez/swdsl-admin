@@ -1,15 +1,16 @@
-import { lazy, Suspense } from "react";
-import { HStack, Text } from "@chakra-ui/layout";
+import { lazy, Suspense } from 'react';
+import { HStack, Text } from '@chakra-ui/layout';
+import { ProductType } from 'src/types';
 
-const ProductDelete = lazy(() => import("./ProductDelete"));
-const ProductEdit = lazy(() => import("./ProductEdit"));
+const ProductDelete = lazy(() => import('./ProductDelete'));
+const ProductEdit = lazy(() => import('./ProductEdit'));
 
-const ProductActions = ({ snapshot }: any): JSX.Element => {
+const ProductActions = ({ product }: ProductType): JSX.Element => {
   return (
     <HStack>
       <Suspense fallback={<Text>Loading</Text>}>
-        <ProductEdit snapshot={snapshot} />
-        <ProductDelete snapshot={snapshot} />
+        <ProductEdit product={product} />
+        <ProductDelete product={product} />
       </Suspense>
     </HStack>
   );
