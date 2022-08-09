@@ -24,10 +24,13 @@ export type ProductState = {
   isEmptyProduct: boolean;
   isLoading: boolean | undefined;
   isLoadingError: boolean | undefined;
+  isLoadingProduct: boolean | undefined;
+  product: DocumentData | undefined;
 };
 
 export type ProductActions = {
   fetchProducts: () => void;
+  fetchSingleProduct: (id: string | undefined) => void;
 };
 
 export type ProductStore = ProductState & ProductActions;
