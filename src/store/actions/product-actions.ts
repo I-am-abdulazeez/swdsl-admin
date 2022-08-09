@@ -1,4 +1,10 @@
-import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import {
+  collection,
+  doc,
+  onSnapshot,
+  orderBy,
+  query,
+} from 'firebase/firestore';
 
 import { ProductActions } from '@store/types';
 import { useProductStore } from '@store/useProductStore';
@@ -34,6 +40,33 @@ export const productActions: ProductActions = {
           products: null,
           isLoadingError: true,
         }));
+        customToast({
+          title: error.message,
+          status: 'error',
+        });
+      }
+    );
+  },
+
+  fetchSingleProduct: (id) => {
+    useProductStore.setState((state) => ({ ...state, isLoadingProduct: true }));
+    const productRef = doc(firebaseFirstore, 'products', String(id));
+    onSnapshot(
+      productRef,
+      (docSnap) => {
+        useProductStore.setState((state) => ({
+          ...state,
+          isLoadingProduct: false,
+          product: { ...docSnap?.data(), id: docSnap?.id },
+        }));
+      },
+      (error) => {
+        useProductStore.setState((state) => ({
+          ...state,
+          isLoadingProduct: false,
+          product: undefined,
+        }));
+        console.log(error);
         customToast({
           title: error.message,
           status: 'error',
