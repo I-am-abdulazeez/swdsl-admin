@@ -11,6 +11,7 @@ const initialState: ProductState = {
   isLoadingError: false,
   isLoadingProduct: false,
   product: undefined,
+  isLoadingSave: false,
 };
 
 export const useProductStore = create<ProductStore>()(
