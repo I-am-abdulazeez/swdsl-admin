@@ -6,6 +6,7 @@ import {
   onSnapshot,
   orderBy,
   query,
+  setDoc,
 } from 'firebase/firestore';
 
 import { ProductActions } from '@store/types';
@@ -85,7 +86,7 @@ export const productActions: ProductActions = {
           isLoadingSave: false,
         }));
         customToast({
-          title: 'Data saved successfully',
+          title: 'Product added successfully',
           status: 'success',
         });
         reset();
@@ -96,6 +97,29 @@ export const productActions: ProductActions = {
           ...state,
           isLoadingSave: false,
         }));
+        customToast({
+          title: error.message,
+          status: 'error',
+        });
+      });
+  },
+  editProduct: async (id, data, onClose, setFile) => {
+    useProductStore.setState((state) => ({ ...state, isLoadingEdit: true }));
+    const productRef = doc(firebaseFirstore, 'products', String(id));
+    await setDoc(productRef, data)
+      .then(() => {
+        onClose();
+        useProductStore.setState((state) => ({
+          ...state,
+          isLoadingEdit: false,
+        }));
+        customToast({
+          title: 'Product updated successfully',
+          status: 'success',
+        });
+        setFile(null);
+      })
+      .catch((error: FirestoreError) => {
         customToast({
           title: error.message,
           status: 'error',
