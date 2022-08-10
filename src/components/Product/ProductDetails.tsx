@@ -1,25 +1,22 @@
 import { Box, HStack, Text, Flex, Heading, VStack } from '@chakra-ui/layout';
-import { lazy, useEffect, useLayoutEffect } from 'react';
+import { lazy, useLayoutEffect } from 'react';
 import { IconButton } from '@chakra-ui/button';
 import { Image } from '@chakra-ui/image';
 import { Spacer } from '@chakra-ui/react';
 import { Spinner } from '@chakra-ui/spinner';
 import { chakra } from '@chakra-ui/system';
-import { doc } from '@firebase/firestore';
-import { useFirestoreDocument } from '@react-query-firebase/firestore';
 import { RiArrowLeftLine } from 'react-icons/ri';
 
 import { useParams, useNavigate } from 'react-router-dom';
 
-import { firebaseFirstore } from '@lib/firebase';
-import { ProductDetailsParams } from 'src/types';
+import { ProductParams } from 'src/types';
 import { useProductStore } from '@store/useProductStore';
 
 const ProductBadge = lazy(() => import('./ProductBadge'));
 const ProductActions = lazy(() => import('./ProductActions'));
 
-const ProductDetails = (): JSX.Element => {
-  const { id } = useParams<ProductDetailsParams>();
+const ProductDetails: React.FC = () => {
+  const { id } = useParams<ProductParams>();
   const navigateTo = useNavigate();
 
   const { product } = useProductStore();
