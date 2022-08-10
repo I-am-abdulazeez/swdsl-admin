@@ -32,11 +32,9 @@ export type ProductType = {
   product: DocumentData | undefined;
 };
 
-export type ProductDetailsParams = {
+export type ProductParams = {
   id: string;
 };
-
-export type ProductEditParams = ProductDetailsParams;
 
 export type Product = {
   drinkName: string;
