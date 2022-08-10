@@ -26,7 +26,7 @@ const Upload: React.FC = () => {
       drinkName,
       description,
       category,
-      price: Number(price),
+      price,
       url,
       createdAt,
     };
@@ -56,6 +56,7 @@ const Upload: React.FC = () => {
           progress={progress}
           setFile={setFile}
           setProgress={setProgress}
+          isRequired={true}
         />
         <ButtonGroup mt={4} spacing={2}>
           <Button
