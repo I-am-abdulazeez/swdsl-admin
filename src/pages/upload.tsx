@@ -18,6 +18,7 @@ import { FileInput } from '@components/FormFields';
 import { drinkCategoriesArray } from '@data/index';
 import { UploadFormState } from '@interfaces/index';
 import { uploadImage } from '@utils/index';
+import { useProductStore } from '@store/useProductStore';
 
 const Upload: React.FC = () => {
   const { register, handleSubmit } = useForm<UploadFormState>();
@@ -28,9 +29,20 @@ const Upload: React.FC = () => {
   const [progress, setProgress] = useState<number>(0);
   const [createdAt, setCreatedAt] = useState<Timestamp | null>(null);
 
-  const handleUploadSubmit: SubmitHandler<UploadFormState> = (data) => {
-    console.log(data);
-    // mutationCollection.mutate(newFormState);
+  const saveProduct = useProductStore((state) => state.saveProduct);
+  const isLoading = useProductStore((state) => state.isLoadingSave);
+
+  const handleProductSubmit: SubmitHandler<UploadFormState> = (data) => {
+    const { category, price, description, drinkName } = data;
+    const newProductUpload = {
+      drinkName,
+      description,
+      category,
+      price: Number(price),
+      url,
+      createdAt,
+    };
+    saveProduct(newProductUpload);
   };
 
   const handleProductImageUpload = () => {
@@ -49,7 +61,7 @@ const Upload: React.FC = () => {
       <Text fontSize="xl" mb={5} fontWeight="semibold">
         Upload Drinks
       </Text>
-      <form onSubmit={handleSubmit(handleUploadSubmit)}>
+      <form onSubmit={handleSubmit(handleProductSubmit)}>
         <SimpleGrid columns={{ base: 1, sm: 2 }} spacing={6} textAlign="left">
           <FormControl>
             <FormLabel fontSize="14px">Drink name</FormLabel>
@@ -125,6 +137,7 @@ const Upload: React.FC = () => {
             variant="solid"
             isDisabled={!file || progress === 0}
             colorScheme="success"
+            isLoading={isLoading}
           >
             Save All
           </Button>
