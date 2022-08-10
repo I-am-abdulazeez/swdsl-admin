@@ -1,74 +1,15 @@
 import { ChangeEvent } from 'react';
 import { FormControl, FormLabel } from '@chakra-ui/form-control';
-import {
-  DrinksCategory,
-  FileInputProps,
-  InputFieldProps,
-  SelectFieldProps,
-  UploadFormState,
-} from '@interfaces/index';
+import { FileInputProps } from '@interfaces/index';
 import { Input } from '@chakra-ui/input';
-import { Select } from '@chakra-ui/select';
 import { chakra } from '@chakra-ui/system';
 import { Box, Text } from '@chakra-ui/layout';
 
-import { drinkCategoriesArray, fileTypes } from '@data/index';
+import { fileTypes } from '@data/index';
 
 import MotionBox from '../MotionBox';
 
 import { customToast } from '@utils/index';
-
-export const InputField = ({
-  name,
-  label,
-  handleChange,
-  placeHolder,
-  value,
-  type,
-  isRequired,
-}: InputFieldProps) => {
-  return (
-    <FormControl isRequired={isRequired} id={name}>
-      <FormLabel fontSize="14px">{label}</FormLabel>
-      <Input
-        value={value}
-        name={name}
-        onChange={handleChange}
-        type={type}
-        borderRadius="md"
-        placeholder={placeHolder}
-      />
-    </FormControl>
-  );
-};
-
-export const SelectField = ({
-  name,
-  value,
-  handleChange,
-  placeHolder,
-}: SelectFieldProps) => {
-  return (
-    <FormControl isRequired id={name}>
-      <FormLabel fontSize="14px">Drink Category</FormLabel>
-      <Select
-        value={value}
-        name={name}
-        onChange={handleChange}
-        borderRadius="md"
-        placeholder={placeHolder}
-      >
-        {drinkCategoriesArray.map(
-          ({ drinkCategory, drink_id }: DrinksCategory) => (
-            <option key={drink_id} value={drinkCategory}>
-              {drinkCategory}
-            </option>
-          )
-        )}
-      </Select>
-    </FormControl>
-  );
-};
 
 export const FileInput: React.FC<FileInputProps> = ({
   progress,
