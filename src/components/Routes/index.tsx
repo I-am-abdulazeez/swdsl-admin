@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 
 import { useAuthStore } from '@store/useAuthStore';
 
-export const PrivateRoute = ({ children }: PropsWithChildren) => {
+export const PrivateRoute = ({ children }: PropsWithChildren): JSX.Element => {
   const { isLoggedIn } = useAuthStore();
 
   if (isLoggedIn) {
@@ -16,7 +16,7 @@ export const PrivateRoute = ({ children }: PropsWithChildren) => {
     return <Navigate to="/login" replace />;
   }
 
-  return children;
+  return <>{children}</>;
 };
 
 export const AnonymousRoute = ({ children }: PropsWithChildren) => {
@@ -32,5 +32,5 @@ export const AnonymousRoute = ({ children }: PropsWithChildren) => {
     return <Navigate to="/dashboard" replace />;
   }
 
-  return children;
+  return <>{children}</>;
 };
