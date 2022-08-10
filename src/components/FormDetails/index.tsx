@@ -18,6 +18,9 @@ const FormDetails: React.FC<FormDetailsProps> = ({
   progress,
   setFile,
   setProgress,
+  showValue,
+  isRequired,
+  product,
 }) => {
   return (
     <>
@@ -25,24 +28,27 @@ const FormDetails: React.FC<FormDetailsProps> = ({
         <FormControl>
           <FormLabel fontSize="14px">Drink name</FormLabel>
           <Input
-            {...register('drinkName', { required: true })}
+            {...register('drinkName', { required: isRequired })}
             type={'text'}
             placeholder="Meridian"
+            defaultValue={(showValue && product?.drinkName) || ''}
           />
         </FormControl>
         <FormControl>
           <FormLabel fontSize="14px">Description</FormLabel>
           <Input
-            {...register('description', { required: true })}
+            {...register('description', { required: isRequired })}
             type={'text'}
             placeholder="Meridian wine is the best"
+            defaultValue={(showValue && product?.description) || ''}
           />
         </FormControl>
         <FormControl>
           <FormLabel fontSize="14px">Select Category</FormLabel>
           <Select
-            {...register('category', { required: true })}
+            {...register('category', { required: isRequired })}
             placeholder="Select category"
+            defaultValue={(showValue && product?.category) || ''}
           >
             {drinkCategoriesArray.map(({ drinkCategory, drink_id }) => (
               <option key={drink_id} value={drinkCategory}>
@@ -54,9 +60,10 @@ const FormDetails: React.FC<FormDetailsProps> = ({
         <FormControl>
           <FormLabel fontSize="14px">Price</FormLabel>
           <Input
-            {...register('price', { required: true })}
+            {...register('price', { required: isRequired })}
             type="number"
             placeholder="500 (in Dollars)"
+            defaultValue={(showValue && product?.price) || ''}
           />
         </FormControl>
       </SimpleGrid>
