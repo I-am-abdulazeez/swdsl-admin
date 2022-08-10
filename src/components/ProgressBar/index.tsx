@@ -1,8 +1,8 @@
-import { lazy, useEffect } from "react";
+import { lazy, useEffect } from 'react';
 
-import { useStorage } from "@hooks/useStorage";
+import { useStorage } from '@hooks/useStorage';
 
-const MotionBox = lazy(() => import("../MotionBox"));
+const MotionBox = lazy(() => import('../MotionBox'));
 
 const ProgressBar = ({ file, setFile }: any) => {
   const { progress, url } = useStorage(file);
@@ -21,7 +21,7 @@ const ProgressBar = ({ file, setFile }: any) => {
       bg="primary.400"
       mt={2}
       initial={{ width: 0 }}
-      animate={{ width: progress + "%" }}
+      animate={{ width: progress + '%' }}
     />
   );
 };
