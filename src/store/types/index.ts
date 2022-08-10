@@ -30,6 +30,7 @@ export type ProductState = {
   isLoadingProduct: boolean | undefined;
   product: DocumentData | undefined;
   isLoadingSave: boolean | undefined;
+  isLoadingEdit: boolean | undefined;
 };
 
 export type ProductActions = {
@@ -38,6 +39,12 @@ export type ProductActions = {
   saveProduct: (
     data: Product,
     reset: UseFormReset<UploadFormState>,
+    setFile: React.Dispatch<React.SetStateAction<File | null>>
+  ) => void;
+  editProduct: (
+    id: string | undefined,
+    data: DocumentData,
+    onClose: () => void,
     setFile: React.Dispatch<React.SetStateAction<File | null>>
   ) => void;
 };
