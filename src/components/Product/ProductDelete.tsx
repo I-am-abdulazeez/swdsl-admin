@@ -31,12 +31,12 @@ const ProductDelete = forwardRef(({ product }: ProductType, ref) => {
   const handleDocDeletion = (e: FormEvent) => {
     e.preventDefault();
     if (snapText === product?.drinkName) {
-      deleteProduct(id);
+      deleteProduct(id, onClose);
     } else {
       customToast({
         status: 'error',
         title: 'Product name does not match.',
-        description: ' Did you enter the name correctly?',
+        description: 'Did you enter the name correctly?',
       });
     }
   };
