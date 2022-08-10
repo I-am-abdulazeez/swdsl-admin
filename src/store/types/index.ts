@@ -2,6 +2,7 @@ import { User } from 'firebase/auth';
 import { DocumentData } from 'firebase/firestore';
 
 import { Admin } from '@interfaces/index';
+import { Product } from 'src/types';
 
 // Auth types
 export type AuthState = {
@@ -26,11 +27,13 @@ export type ProductState = {
   isLoadingError: boolean | undefined;
   isLoadingProduct: boolean | undefined;
   product: DocumentData | undefined;
+  isLoadingSave: boolean | undefined;
 };
 
 export type ProductActions = {
   fetchProducts: () => void;
   fetchSingleProduct: (id: string | undefined) => void;
+  saveProduct: (data: Product) => void;
 };
 
 export type ProductStore = ProductState & ProductActions;
