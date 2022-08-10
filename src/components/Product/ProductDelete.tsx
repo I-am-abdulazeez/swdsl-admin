@@ -36,7 +36,7 @@ const ProductDelete = forwardRef(({ product }: ProductType, ref) => {
       customToast({
         status: 'error',
         title: 'Product name does not match.',
-        description: ' Did you enter the name correctly?',
+        description: 'Did you enter the name correctly?',
       });
     }
   };
