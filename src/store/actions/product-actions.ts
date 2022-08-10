@@ -1,6 +1,8 @@
 import {
+  addDoc,
   collection,
   doc,
+  FirestoreError,
   onSnapshot,
   orderBy,
   query,
@@ -47,7 +49,6 @@ export const productActions: ProductActions = {
       }
     );
   },
-
   fetchSingleProduct: (id) => {
     useProductStore.setState((state) => ({ ...state, isLoadingProduct: true }));
     const productRef = doc(firebaseFirstore, 'products', String(id));
@@ -73,5 +74,30 @@ export const productActions: ProductActions = {
         });
       }
     );
+  },
+  saveProduct: async (data) => {
+    useProductStore.setState((state) => ({ ...state, isLoadingSave: true }));
+    const collectionRef = collection(firebaseFirstore, 'products');
+    await addDoc(collectionRef, data)
+      .then(() => {
+        useProductStore.setState((state) => ({
+          ...state,
+          isLoadingSave: false,
+        }));
+        customToast({
+          title: 'Data saved successfully',
+          status: 'success',
+        });
+      })
+      .catch((error: FirestoreError) => {
+        useProductStore.setState((state) => ({
+          ...state,
+          isLoadingSave: false,
+        }));
+        customToast({
+          title: error.message,
+          status: 'error',
+        });
+      });
   },
 };
