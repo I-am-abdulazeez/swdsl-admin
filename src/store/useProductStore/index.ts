@@ -13,6 +13,7 @@ const initialState: ProductState = {
   product: undefined,
   isLoadingSave: false,
   isLoadingEdit: false,
+  isLoadingDelete: false,
 };
 
 export const useProductStore = create<ProductStore>()(
