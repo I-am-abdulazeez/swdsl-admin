@@ -48,7 +48,7 @@ export type ProductActions = {
     onClose: () => void,
     setFile: React.Dispatch<React.SetStateAction<File | null>>
   ) => void;
-  deleteProduct: (id: string | undefined) => void;
+  deleteProduct: (id: string | undefined, onClose: () => void) => void;
 };
 
 export type ProductStore = ProductState & ProductActions;
