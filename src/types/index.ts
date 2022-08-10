@@ -25,7 +25,7 @@ export type UploadImageParams = {
   setUploadLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setProgress: React.Dispatch<React.SetStateAction<number>>;
   setUrl: React.Dispatch<React.SetStateAction<string>>;
-  setCreatedAt: React.Dispatch<React.SetStateAction<Timestamp | null>>;
+  setCreatedAt?: React.Dispatch<React.SetStateAction<Timestamp | null>>;
 };
 
 export type ProductType = {
