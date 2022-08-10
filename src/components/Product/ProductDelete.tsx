@@ -1,7 +1,8 @@
-import { Button, IconButton } from "@chakra-ui/button";
-import { useDisclosure } from "@chakra-ui/hooks";
-import { Input } from "@chakra-ui/input";
-import { Box, Text } from "@chakra-ui/layout";
+import { FormEvent, forwardRef, useState } from 'react';
+import { Button, IconButton } from '@chakra-ui/button';
+import { useDisclosure } from '@chakra-ui/hooks';
+import { Input } from '@chakra-ui/input';
+import { Box, Text } from '@chakra-ui/layout';
 import {
   Modal,
   ModalBody,
@@ -10,46 +11,32 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-} from "@chakra-ui/modal";
-import { chakra } from "@chakra-ui/system";
-import { useToast } from "@chakra-ui/toast";
-import { doc } from "@firebase/firestore";
-import { useFirestoreDocumentDeletion } from "@react-query-firebase/firestore";
-import { FormEvent, forwardRef, useState } from "react";
-import { RiDeleteBin2Line } from "react-icons/ri";
-import { useNavigate, useParams } from "react-router";
+} from '@chakra-ui/modal';
+import { chakra } from '@chakra-ui/system';
+import { RiDeleteBin6Line } from 'react-icons/ri';
+import { useParams } from 'react-router';
 
-import { firebaseFirstore } from "@lib/firebase";
+import { useProductStore } from '@store/useProductStore';
+import { customToast } from '@utils/index';
+import { ProductParams, ProductType } from 'src/types';
 
-type ProductDeletionParams = {
-  id: string;
-};
-
-const ProductDelete = forwardRef(({ snapshot }: any, stuffRef): JSX.Element => {
-  const toast = useToast();
-  const navigateTo = useNavigate();
-  const { id } = useParams<ProductDeletionParams>();
-  const [snapText, setSnapText] = useState<string>("");
+const ProductDelete = forwardRef(({ product }: ProductType, ref) => {
+  const { id } = useParams<ProductParams>();
+  const [snapText, setSnapText] = useState<string>('');
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const ref = doc(firebaseFirstore, "products", String(id));
-  const mutationDocDeletion = useFirestoreDocumentDeletion(ref, {
-    onSuccess: () => {
-      navigateTo(-1);
-    },
-  });
+
+  const deleteProduct = useProductStore((state) => state.deleteProduct);
+  const isLoading = useProductStore((state) => state.isLoadingDelete);
 
   const handleDocDeletion = (e: FormEvent) => {
     e.preventDefault();
-    if (snapText === snapshot?.drinkName) {
-      mutationDocDeletion.mutate();
+    if (snapText === product?.drinkName) {
+      deleteProduct(id);
     } else {
-      toast({
-        status: "error",
+      customToast({
+        status: 'error',
         description:
-          "Product name does not match. Did you enter the name correctly?",
-        isClosable: true,
-        variant: "subtle",
-        duration: 5000,
+          'Product name does not match. Did you enter the name correctly?',
       });
     }
   };
@@ -61,7 +48,7 @@ const ProductDelete = forwardRef(({ snapshot }: any, stuffRef): JSX.Element => {
         size="sm"
         colorScheme="red"
         variant="ghost"
-        icon={<RiDeleteBin2Line size="18px" />}
+        icon={<RiDeleteBin6Line size="18px" />}
       />
       <Modal
         isCentered
@@ -70,11 +57,11 @@ const ProductDelete = forwardRef(({ snapshot }: any, stuffRef): JSX.Element => {
         motionPreset="slideInBottom"
         closeOnOverlayClick={false}
       >
-        <ModalOverlay />
+        <ModalOverlay backdropFilter={'blur(5px)'} />
         <ModalContent>
           <ModalHeader>
-            Delete Product{" "}
-            <chakra.span color="error.700">{snapshot?.drinkName}</chakra.span>?
+            Delete Product{' '}
+            <chakra.span color="error.700">{product?.drinkName}</chakra.span>?
           </ModalHeader>
           <ModalCloseButton size="sm" />
           <form onSubmit={handleDocDeletion}>
@@ -83,17 +70,17 @@ const ProductDelete = forwardRef(({ snapshot }: any, stuffRef): JSX.Element => {
                 Are you sure? You can't undo this action afterwards.?
               </Text>
               <Text my={5} fontWeight="medium">
-                Please type{" "}
+                Please type{' '}
                 <chakra.span fontWeight="semibold" color="secondary.600">
-                  {snapshot?.drinkName}{" "}
-                </chakra.span>{" "}
+                  {product?.drinkName}{' '}
+                </chakra.span>{' '}
                 to confirm.
               </Text>
               <Input
                 isRequired
                 onChange={(e) => setSnapText(e.target.value)}
                 value={snapText}
-                placeholder={snapshot?.drinkName}
+                placeholder={product?.drinkName}
                 type="text"
               />
             </ModalBody>
@@ -101,7 +88,13 @@ const ProductDelete = forwardRef(({ snapshot }: any, stuffRef): JSX.Element => {
               <Button size="sm" mr={3} onClick={onClose}>
                 Close
               </Button>
-              <Button type="submit" size="sm" colorScheme="red" variant="solid">
+              <Button
+                type="submit"
+                size="sm"
+                colorScheme="red"
+                variant="solid"
+                isLoading={isLoading}
+              >
                 Delete Product
               </Button>
             </ModalFooter>
