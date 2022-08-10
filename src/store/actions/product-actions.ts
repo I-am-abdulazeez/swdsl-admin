@@ -1,6 +1,7 @@
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   FirestoreError,
   onSnapshot,
@@ -118,6 +119,24 @@ export const productActions: ProductActions = {
           status: 'success',
         });
         setFile(null);
+      })
+      .catch((error: FirestoreError) => {
+        customToast({
+          title: error.message,
+          status: 'error',
+        });
+      });
+  },
+  deleteProduct: async (id) => {
+    useProductStore.setState((state) => ({ ...state, isLoadingDelete: true }));
+    const productRef = doc(firebaseFirstore, 'products', String(id));
+    await deleteDoc(productRef)
+      .then(() => {
+        customToast({
+          title: 'Product deleted successfully',
+          status: 'success',
+        });
+        history.back();
       })
       .catch((error: FirestoreError) => {
         customToast({
