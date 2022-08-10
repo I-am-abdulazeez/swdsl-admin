@@ -6,31 +6,28 @@ import { unstable_HistoryRouter as Router } from 'react-router-dom';
 import { Router as history } from '@utils/index';
 
 import customTheme from '@assets/theme';
-import QueryClientWrapper from './client';
 
 const Navbar = lazy(() => import('@components/Navbar'));
 const Footer = lazy(() => import('@components/Footer'));
+import BackToTop from '@components/BackToTop';
 const App = lazy(() => import('./App'));
 
 const container = document.getElementById('app');
 const root = createRoot(container!);
 
 import './index.css';
-import BackToTop from '@components/BackToTop';
 
 root.render(
   <React.StrictMode>
     <Suspense fallback={<Text>Loading...</Text>}>
-      <QueryClientWrapper>
-        <ChakraProvider theme={customTheme}>
-          <Router history={history}>
-            <Navbar />
-            <App />
-            <Footer />
-            <BackToTop />
-          </Router>
-        </ChakraProvider>
-      </QueryClientWrapper>
+      <ChakraProvider theme={customTheme}>
+        <Router history={history}>
+          <Navbar />
+          <App />
+          <Footer />
+          <BackToTop />
+        </Router>
+      </ChakraProvider>
     </Suspense>
   </React.StrictMode>
 );
