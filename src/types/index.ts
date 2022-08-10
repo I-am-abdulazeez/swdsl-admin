@@ -35,3 +35,14 @@ export type ProductType = {
 export type ProductDetailsParams = {
   id: string;
 };
+
+export type ProductEditParams = ProductDetailsParams;
+
+export type Product = {
+  drinkName: string;
+  description: string;
+  category: string;
+  price: Number | string;
+  url: string;
+  createdAt: Timestamp | null;
+};
