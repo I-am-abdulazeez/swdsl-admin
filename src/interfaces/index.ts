@@ -1,4 +1,4 @@
-import { Timestamp } from 'firebase/firestore';
+import { DocumentData, Timestamp } from 'firebase/firestore';
 import React, { ChangeEvent } from 'react';
 import { UseFormRegister } from 'react-hook-form';
 import { CategoryType } from 'src/types';
@@ -60,4 +60,7 @@ export interface FormDetailsProps {
   progress: number;
   setFile: React.Dispatch<React.SetStateAction<File | null>>;
   setProgress: React.Dispatch<React.SetStateAction<number>>;
+  showValue?: boolean;
+  isRequired: boolean;
+  product?: DocumentData | undefined;
 }
