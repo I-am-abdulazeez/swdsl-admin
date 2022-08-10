@@ -1,5 +1,5 @@
 import { Timestamp } from 'firebase/firestore';
-import { ChangeEvent } from 'react';
+import React, { ChangeEvent } from 'react';
 import { UseFormRegister } from 'react-hook-form';
 import { CategoryType } from 'src/types';
 
@@ -52,4 +52,12 @@ export interface QueryClientWrapperProps {
 export interface Admin {
   email: string;
   password: string;
+}
+
+export interface FormDetailsProps {
+  register: UseFormRegister<UploadFormState>;
+  file: File | null;
+  progress: number;
+  setFile: React.Dispatch<React.SetStateAction<File | null>>;
+  setProgress: React.Dispatch<React.SetStateAction<number>>;
 }
