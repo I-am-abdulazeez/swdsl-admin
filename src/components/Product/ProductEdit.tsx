@@ -19,15 +19,14 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import FormDetails from '@components/FormDetails';
 
-import { useAuthStore } from '@store/useAuthStore';
 import { useProductStore } from '@store/useProductStore';
 
 import { uploadImage } from '@utils/index';
 import { UploadFormState } from '@interfaces/index';
-import { ProductEditParams, ProductType } from 'src/types';
+import { ProductParams, ProductType } from 'src/types';
 
 const ProductEdit = forwardRef(({ product }: ProductType, ref): JSX.Element => {
-  const { id } = useParams<ProductEditParams>();
+  const { id } = useParams<ProductParams>();
   const { register, handleSubmit } = useForm<UploadFormState>();
 
   const [file, setFile] = useState<File | null>(null);
@@ -36,7 +35,8 @@ const ProductEdit = forwardRef(({ product }: ProductType, ref): JSX.Element => {
   const [progress, setProgress] = useState<number>(0);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const isLoading = useProductStore((state) => state.isLoadingSave);
+  const editProduct = useProductStore((state) => state.editProduct);
+  const isLoading = useProductStore((state) => state.isLoadingEdit);
 
   const handleProductImageUpload = () => {
     uploadImage({
@@ -58,7 +58,7 @@ const ProductEdit = forwardRef(({ product }: ProductType, ref): JSX.Element => {
       price: price || product?.price,
     };
     console.log(newUpdate);
-    // docsEditMutation.mutate(newUpdate);
+    editProduct(id, newUpdate, onClose, setFile);
   };
 
   return (
@@ -79,7 +79,7 @@ const ProductEdit = forwardRef(({ product }: ProductType, ref): JSX.Element => {
         motionPreset="slideInBottom"
         closeOnOverlayClick={false}
       >
-        <ModalOverlay backdropFilter={'blur(4px)'} />
+        <ModalOverlay backdropFilter={'blur(5px)'} />
         <ModalContent>
           <ModalHeader>
             Edit Product{' '}
