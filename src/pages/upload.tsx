@@ -21,7 +21,7 @@ import { uploadImage } from '@utils/index';
 import { useProductStore } from '@store/useProductStore';
 
 const Upload: React.FC = () => {
-  const { register, handleSubmit } = useForm<UploadFormState>();
+  const { register, handleSubmit, reset } = useForm<UploadFormState>();
 
   const [uploadLoading, setUploadLoading] = useState<boolean>(false);
   const [file, setFile] = useState<File | null>(null);
@@ -42,7 +42,7 @@ const Upload: React.FC = () => {
       url,
       createdAt,
     };
-    saveProduct(newProductUpload);
+    saveProduct(newProductUpload, reset);
   };
 
   const handleProductImageUpload = () => {
