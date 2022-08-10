@@ -17,6 +17,7 @@ export const customToast = (options?: UseToastOptions | undefined) => {
     isClosable: true,
     containerStyle: {
       fontSize: '12px',
+      fontWeight: 600,
     },
     ...options,
   });
