@@ -31,7 +31,7 @@ const ProductDelete = forwardRef(({ product }: ProductType, ref) => {
   const handleDocDeletion = (e: FormEvent) => {
     e.preventDefault();
     if (snapText === product?.drinkName) {
-      deleteProduct(id);
+      deleteProduct(id, onClose);
     } else {
       customToast({
         status: 'error',
