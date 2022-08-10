@@ -121,24 +121,37 @@ export const productActions: ProductActions = {
         setFile(null);
       })
       .catch((error: FirestoreError) => {
+        useProductStore.setState((state) => ({
+          ...state,
+          isLoadingEdit: false,
+        }));
         customToast({
           title: error.message,
           status: 'error',
         });
       });
   },
-  deleteProduct: async (id) => {
+  deleteProduct: async (id, onClose) => {
     useProductStore.setState((state) => ({ ...state, isLoadingDelete: true }));
     const productRef = doc(firebaseFirstore, 'products', String(id));
     await deleteDoc(productRef)
       .then(() => {
+        useProductStore.setState((state) => ({
+          ...state,
+          isLoadingDelete: false,
+        }));
         customToast({
           title: 'Product deleted successfully',
           status: 'success',
         });
+        onClose();
         history.back();
       })
       .catch((error: FirestoreError) => {
+        useProductStore.setState((state) => ({
+          ...state,
+          isLoadingDelete: false,
+        }));
         customToast({
           title: error.message,
           status: 'error',
