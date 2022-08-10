@@ -42,7 +42,7 @@ const Upload: React.FC = () => {
       url,
       createdAt,
     };
-    saveProduct(newProductUpload, reset);
+    saveProduct(newProductUpload, reset, setFile);
   };
 
   const handleProductImageUpload = () => {

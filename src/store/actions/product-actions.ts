@@ -75,7 +75,7 @@ export const productActions: ProductActions = {
       }
     );
   },
-  saveProduct: async (data, reset) => {
+  saveProduct: async (data, reset, setFile) => {
     useProductStore.setState((state) => ({ ...state, isLoadingSave: true }));
     const collectionRef = collection(firebaseFirstore, 'products');
     await addDoc(collectionRef, data)
@@ -89,6 +89,7 @@ export const productActions: ProductActions = {
           status: 'success',
         });
         reset();
+        setFile(null);
       })
       .catch((error: FirestoreError) => {
         useProductStore.setState((state) => ({

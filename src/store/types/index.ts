@@ -4,6 +4,7 @@ import { DocumentData } from 'firebase/firestore';
 import { Admin, UploadFormState } from '@interfaces/index';
 import { Product } from 'src/types';
 import { UseFormReset } from 'react-hook-form';
+import React from 'react';
 
 // Auth types
 export type AuthState = {
@@ -34,7 +35,11 @@ export type ProductState = {
 export type ProductActions = {
   fetchProducts: () => void;
   fetchSingleProduct: (id: string | undefined) => void;
-  saveProduct: (data: Product, reset: UseFormReset<UploadFormState>) => void;
+  saveProduct: (
+    data: Product,
+    reset: UseFormReset<UploadFormState>,
+    setFile: React.Dispatch<React.SetStateAction<File | null>>
+  ) => void;
 };
 
 export type ProductStore = ProductState & ProductActions;
