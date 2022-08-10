@@ -67,7 +67,7 @@ export const uploadImage = ({
         const url = downloadURL;
         const createdAt = timestamp;
         setUrl(url);
-        setCreatedAt(createdAt);
+        setCreatedAt && setCreatedAt(createdAt);
         customToast({
           status: 'success',
           title: `Product image uploaded to storage successfully`,
