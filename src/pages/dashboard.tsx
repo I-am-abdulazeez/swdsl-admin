@@ -21,7 +21,7 @@ const Dashboard: React.FC = () => {
         justifyContent="space-between"
       >
         <Text mb={{ base: 4, md: 0 }} fontSize="xl" fontWeight="semibold">
-          Dashboard Page
+          Dashboard
         </Text>
         <DrinkSearch />
       </Flex>
