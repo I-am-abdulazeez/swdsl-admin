@@ -27,13 +27,13 @@ const Navbar: React.FC = () => {
       <Container maxW="container.lg">
         <Flex
           flexDirection={{ base: 'column', md: 'row' }}
-          h={{ base: 'auto', md: '10vh' }}
+          h={{ base: '12vh', md: '10vh' }}
           align="center"
           py={{ base: 4, md: 0 }}
         >
           <Brand />
           <Spacer />
-          <HStack spacing={2}>
+          <HStack spacing={2} mt={{ base: 2, md: 0 }}>
             {!user ? (
               <Link to="/">
                 <Button size={buttonSize} variant="ghost">
