@@ -1,12 +1,11 @@
 import { getDownloadURL, ref, uploadBytesResumable } from '@firebase/storage';
 import { useState, useEffect } from 'react';
 import { Timestamp } from 'firebase/firestore';
-import { useToast } from '@chakra-ui/toast';
 
 import { firebaseStorage, timestamp } from '@lib/firebase';
+import { customToast } from '@utils/index';
 
 export const useStorage = (file: File | null) => {
-  const toast = useToast();
   const [progress, setProgress] = useState<number>(0);
   const [error, setError] = useState('');
   const [url, setUrl] = useState('');
@@ -34,11 +33,9 @@ export const useStorage = (file: File | null) => {
       },
       (error) => {
         setError(error.message);
-        toast({
+        customToast({
           status: 'error',
           title: `${error.message}`,
-          isClosable: true,
-          duration: 3000,
         });
       },
       async () => {
@@ -49,11 +46,9 @@ export const useStorage = (file: File | null) => {
           const createdAt = timestamp;
           setUrl(url);
           setCreatedAt(createdAt);
-          toast({
+          customToast({
             status: 'success',
             title: `File upploaded to storage successfully`,
-            isClosable: true,
-            duration: 3000,
           });
         });
       }
