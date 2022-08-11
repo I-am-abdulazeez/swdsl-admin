@@ -1,10 +1,11 @@
 import { lazy, useEffect } from 'react';
 
 import { useStorage } from '@hooks/useStorage';
+import { ProgressBarProps } from '@interfaces/index';
 
 const MotionBox = lazy(() => import('../MotionBox'));
 
-const ProgressBar = ({ file, setFile }: any) => {
+const ProgressBar = ({ file, setFile }: ProgressBarProps) => {
   const { progress, url } = useStorage(file);
 
   console.log(progress, url);
