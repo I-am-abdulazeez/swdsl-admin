@@ -15,7 +15,7 @@ const Home: React.FC = () => {
 
   return (
     <Flex justify="center" align="center" height="70vh" width={'full'}>
-      <VStack spacing={3}>
+      <VStack spacing={3} textAlign="center">
         <Heading>ShayowithDSL Admin Page.</Heading>
         <Text>This is where all drinks uploads are done</Text>
         {!user ? (
