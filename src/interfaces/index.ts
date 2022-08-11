@@ -37,3 +37,8 @@ export interface FormDetailsProps {
   isRequired: boolean;
   product?: DocumentData | undefined;
 }
+
+export interface ProgressBarProps {
+  file: File | null;
+  setFile: React.Dispatch<React.SetStateAction<File | null>>;
+}
