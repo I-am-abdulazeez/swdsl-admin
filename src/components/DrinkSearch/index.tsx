@@ -9,7 +9,7 @@ import ProductBadge from '@components/Product/ProductBadge';
 import { useProductStore } from '@store/useProductStore';
 
 const DrinkSearch: React.FC = () => {
-  const { products } = useProductStore();
+  const products = useProductStore((state) => state.products);
   const [searchTerm, setSearchTerm] = useState<string>('');
 
   return (
