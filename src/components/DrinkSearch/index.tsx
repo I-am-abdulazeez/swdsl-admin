@@ -50,7 +50,7 @@ const DrinkSearch: React.FC = () => {
             })
             .map((drinkSnap) => {
               return (
-                <Link key={drinkSnap?.id} to={`product/${drinkSnap?.id}`}>
+                <Link key={drinkSnap?.id} to={`/product/${drinkSnap?.id}`}>
                   <HStack
                     cursor={'pointer'}
                     justify={'space-between'}
