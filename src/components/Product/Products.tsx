@@ -9,7 +9,7 @@ import { useProductStore } from '@store/useProductStore';
 const ProductList = lazy(() => import('./ProductList'));
 
 const Products: React.FC = () => {
-  const { products } = useProductStore();
+  const products = useProductStore((state) => state.products);
   const isLoading = useProductStore((state) => state.isLoading);
   const isEmptyProduct = useProductStore((state) => state.isEmptyProduct);
   const isLoadingError = useProductStore((state) => state.isLoadingError);
@@ -32,7 +32,10 @@ const Products: React.FC = () => {
         </HStack>
       )}
       {isLoadingError && <Text>Error Fetching product</Text>}
-      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={4}>
+      <Text fontSize="lg" fontWeight="medium" my={3}>
+        There are {products?.length} wines available
+      </Text>
+      <SimpleGrid columns={{ base: 1, md: 4 }} spacing={4}>
         {products?.map((product) => {
           return (
             <Link to={`/product/${product.id}`} key={product.id}>
