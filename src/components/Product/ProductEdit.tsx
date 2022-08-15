@@ -57,7 +57,6 @@ const ProductEdit = forwardRef(({ product }: ProductType, ref): JSX.Element => {
       url: url || product?.url,
       price: price || product?.price,
     };
-    console.log(newUpdate);
     editProduct(id, newUpdate, onClose, setFile);
   };
 
