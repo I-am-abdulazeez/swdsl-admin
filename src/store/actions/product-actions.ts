@@ -7,7 +7,7 @@ import {
   onSnapshot,
   orderBy,
   query,
-  setDoc,
+  updateDoc,
 } from 'firebase/firestore';
 
 import { ProductActions } from '@store/types';
@@ -69,7 +69,6 @@ export const productActions: ProductActions = {
           isLoadingProduct: false,
           product: undefined,
         }));
-        console.log(error);
         customToast({
           title: error.message,
           status: 'error',
@@ -107,7 +106,7 @@ export const productActions: ProductActions = {
   editProduct: async (id, data, onClose, setFile) => {
     useProductStore.setState((state) => ({ ...state, isLoadingEdit: true }));
     const productRef = doc(firebaseFirstore, 'products', String(id));
-    await setDoc(productRef, data)
+    await updateDoc(productRef, data)
       .then(() => {
         onClose();
         useProductStore.setState((state) => ({
