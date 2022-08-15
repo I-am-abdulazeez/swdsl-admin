@@ -37,7 +37,6 @@ export const authActions: AuthActions = {
           isLoggedIn: false,
           userId: '',
         }));
-        console.log(error);
         customToast({
           status: 'error',
           title: error.message,
@@ -60,7 +59,6 @@ export const authActions: AuthActions = {
         Router.push('/');
       })
       .catch((error: AuthError) => {
-        console.log(error);
         customToast({
           status: 'error',
           title: error.message,
