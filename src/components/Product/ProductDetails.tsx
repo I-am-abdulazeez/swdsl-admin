@@ -1,5 +1,5 @@
 import { Box, HStack, Text, Flex, Heading, VStack } from '@chakra-ui/layout';
-import { lazy, useLayoutEffect } from 'react';
+import { lazy, useEffect, useLayoutEffect } from 'react';
 import { IconButton } from '@chakra-ui/button';
 import { Image } from '@chakra-ui/image';
 import { Spacer } from '@chakra-ui/react';
@@ -19,14 +19,15 @@ const ProductDetails: React.FC = () => {
   const { id } = useParams<ProductParams>();
   const navigateTo = useNavigate();
 
-  const { product } = useProductStore();
+  const product = useProductStore((state) => state.product);
   const isLoading = useProductStore((state) => state.isLoadingProduct);
   const fetchSingleProduct = useProductStore(
     (state) => state.fetchSingleProduct
   );
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     fetchSingleProduct(id);
+    return () => useProductStore.destroy();
   }, []);
 
   if (isLoading) {
