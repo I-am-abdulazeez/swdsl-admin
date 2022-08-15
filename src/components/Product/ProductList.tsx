@@ -23,7 +23,7 @@ const ProductList = ({ product }: ProductType) => {
       <Image
         display={'block'}
         p={7}
-        height={'250px'}
+        height={'200px'}
         src={product?.url}
         alt={`product-${product?.drinkName}`}
       />
