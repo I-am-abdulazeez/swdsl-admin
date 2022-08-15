@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Button } from '@chakra-ui/button';
@@ -9,7 +9,7 @@ import { useAuthStore } from '@store/useAuthStore';
 const Home: React.FC = () => {
   const { user } = useAuthStore();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     console.log(user);
   });
 
