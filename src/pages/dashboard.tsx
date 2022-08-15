@@ -1,4 +1,4 @@
-import { lazy, Suspense, useLayoutEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Box, Text } from '@chakra-ui/layout';
 import { Flex } from '@chakra-ui/react';
 
@@ -10,8 +10,9 @@ const Products = lazy(() => import('@components/Product/Products'));
 const Dashboard: React.FC = () => {
   const fetchProducts = useProductStore((state) => state.fetchProducts);
 
-  useLayoutEffect(() => {
-    return () => fetchProducts();
+  useEffect(() => {
+    fetchProducts();
+    return () => useProductStore.destroy();
   });
 
   return (
@@ -23,6 +24,7 @@ const Dashboard: React.FC = () => {
         <Text mb={{ base: 4, md: 0 }} fontSize="xl" fontWeight="semibold">
           Dashboard
         </Text>
+
         <DrinkSearch />
       </Flex>
       <Suspense fallback={<Text>Loading</Text>}>
