@@ -6,12 +6,6 @@ import { useAuthStore } from '@store/useAuthStore';
 export const PrivateRoute = ({ children }: PropsWithChildren): JSX.Element => {
   const { isLoggedIn } = useAuthStore();
 
-  if (isLoggedIn) {
-    console.log('Yes, user exist');
-  } else {
-    console.log('No user');
-  }
-
   if (!isLoggedIn) {
     return <Navigate to="/login" replace />;
   }
@@ -21,12 +15,6 @@ export const PrivateRoute = ({ children }: PropsWithChildren): JSX.Element => {
 
 export const AnonymousRoute = ({ children }: PropsWithChildren) => {
   const { isLoggedIn } = useAuthStore();
-
-  if (isLoggedIn) {
-    console.log('Yes, user exist');
-  } else {
-    console.log('No user');
-  }
 
   if (isLoggedIn) {
     return <Navigate to="/dashboard" replace />;
