@@ -8,8 +8,6 @@ const MotionBox = lazy(() => import('../MotionBox'));
 const ProgressBar = ({ file, setFile }: ProgressBarProps) => {
   const { progress, url } = useStorage(file);
 
-  console.log(progress, url);
-
   useEffect(() => {
     if (url) {
       setFile(null);
