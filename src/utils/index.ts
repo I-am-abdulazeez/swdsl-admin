@@ -54,7 +54,6 @@ export const uploadImage = ({
       console.log('Upload is ' + progress + '% done');
     },
     (error) => {
-      console.log(error);
       setUploadLoading(false);
       customToast({
         status: 'error',
