@@ -16,7 +16,6 @@ const Login: React.FC = () => {
   const SignInAdmin = useAuthStore((state) => state.signInAdmin);
 
   const handleAdminLogin: SubmitHandler<Admin> = (data) => {
-    console.log(data);
     SignInAdmin(data);
   };
 
