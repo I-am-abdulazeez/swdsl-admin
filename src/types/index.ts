@@ -40,7 +40,7 @@ export type Product = {
   drinkName: string;
   description: string;
   category: string;
-  price: Number | string;
+  price: number;
   url: string;
   createdAt: Timestamp | null;
 };
