@@ -1,6 +1,10 @@
 import React from 'react';
 import { DocumentData } from 'firebase/firestore';
-import { UseFormRegister } from 'react-hook-form';
+import {
+  UseFormRegister,
+  UseFormSetValue,
+  UseFormUnregister,
+} from 'react-hook-form';
 import { CategoryType } from 'src/types';
 
 export interface UploadFormState {
@@ -8,6 +12,8 @@ export interface UploadFormState {
   description: string;
   category: string;
   price: number;
+  packsOrWholesale: boolean;
+  packSize: string;
 }
 
 export interface DrinksCategory {
@@ -29,13 +35,15 @@ export interface Admin {
 
 export interface FormDetailsProps {
   register: UseFormRegister<UploadFormState>;
+  unregister: UseFormUnregister<UploadFormState>;
+  setValue: UseFormSetValue<UploadFormState>;
   file: File | null;
   progress: number;
   setFile: React.Dispatch<React.SetStateAction<File | null>>;
   setProgress: React.Dispatch<React.SetStateAction<number>>;
   showValue?: boolean;
   isRequired: boolean;
-  product?: DocumentData | undefined;
+  product?: DocumentData | null;
 }
 
 export interface ProgressBarProps {
