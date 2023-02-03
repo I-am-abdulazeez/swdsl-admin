@@ -10,7 +10,7 @@ const initialState: ProductState = {
   isLoading: false,
   isLoadingError: false,
   isLoadingProduct: false,
-  product: undefined,
+  product: null,
   isLoadingSave: false,
   isLoadingEdit: false,
   isLoadingDelete: false,
