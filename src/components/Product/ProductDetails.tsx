@@ -1,8 +1,8 @@
 import { Box, HStack, Text, Flex, Heading, VStack } from '@chakra-ui/layout';
-import { lazy, useEffect, useLayoutEffect } from 'react';
+import { lazy, useEffect } from 'react';
 import { IconButton } from '@chakra-ui/button';
 import { Image } from '@chakra-ui/image';
-import { Spacer } from '@chakra-ui/react';
+import { Spacer, Tag } from '@chakra-ui/react';
 import { Spinner } from '@chakra-ui/spinner';
 import { chakra } from '@chakra-ui/system';
 import { RiArrowLeftLine } from 'react-icons/ri';
@@ -12,6 +12,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ProductParams } from 'src/types';
 import { useProductStore } from '@store/useProductStore';
 
+const ProductTag = lazy(() => import('./ProductTag'));
 const ProductBadge = lazy(() => import('./ProductBadge'));
 const ProductActions = lazy(() => import('./ProductActions'));
 
@@ -59,8 +60,11 @@ const ProductDetails: React.FC = () => {
             alt={product?.id}
           />
           <VStack align={'flex-start'}>
+            <HStack>
+              <Heading mt="0">{product?.drinkName}</Heading>
+              <ProductTag product={product} />
+            </HStack>
             <ProductBadge product={product} />
-            <Heading mt="0">{product?.drinkName}</Heading>
             <chakra.span mt="0" fontSize="md">
               {product?.description}
             </chakra.span>
