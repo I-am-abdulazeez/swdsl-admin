@@ -1,10 +1,12 @@
+import { Link } from 'react-router-dom';
+
 import { Box, HStack, SimpleGrid, Text } from '@chakra-ui/layout';
 import { Spinner } from '@chakra-ui/spinner';
 
 import { lazy, Suspense } from 'react';
-import { Link } from 'react-router-dom';
 
 import { useProductStore } from '@store/useProductStore';
+import { Skeleton, SkeletonText } from '@chakra-ui/react';
 
 const ProductList = lazy(() => import('./ProductList'));
 
@@ -39,7 +41,24 @@ const Products: React.FC = () => {
         {products?.map((product) => {
           return (
             <Link to={`/product/${product.id}`} key={product.id}>
-              <Suspense fallback={<Text>Loading...</Text>}>
+              <Suspense
+                fallback={
+                  <Box
+                    borderRadius={5}
+                    border={'1px solid #EDF2F7'}
+                    height={'350px'}
+                    p={4}
+                  >
+                    <Skeleton height={'200px'} />
+                    <SkeletonText
+                      noOfLines={3}
+                      spacing="4"
+                      mt="4"
+                      skeletonHeight="2"
+                    />
+                  </Box>
+                }
+              >
                 <ProductList product={product} />
               </Suspense>
             </Link>
