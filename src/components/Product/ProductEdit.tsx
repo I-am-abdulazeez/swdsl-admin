@@ -1,5 +1,4 @@
-import { Button, ButtonGroup, IconButton } from '@chakra-ui/button';
-import { useDisclosure } from '@chakra-ui/hooks';
+import { forwardRef, useState } from 'react';
 import { Box } from '@chakra-ui/layout';
 import {
   Modal,
@@ -11,8 +10,9 @@ import {
   ModalOverlay,
 } from '@chakra-ui/modal';
 import { chakra } from '@chakra-ui/system';
+import { Button, ButtonGroup, IconButton } from '@chakra-ui/button';
+import { useDisclosure } from '@chakra-ui/hooks';
 
-import { forwardRef, useState } from 'react';
 import { RiPencilLine } from 'react-icons/ri';
 import { useParams } from 'react-router';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -25,9 +25,10 @@ import { uploadImage } from '@utils/index';
 import { UploadFormState } from '@interfaces/index';
 import { ProductParams, ProductType } from 'src/types';
 
-const ProductEdit = forwardRef(({ product }: ProductType, ref): JSX.Element => {
+const ProductEdit = forwardRef(({ product }: ProductType, ref) => {
   const { id } = useParams<ProductParams>();
-  const { register, handleSubmit } = useForm<UploadFormState>();
+  const { register, handleSubmit, watch, unregister, reset, setValue } =
+    useForm<UploadFormState>();
 
   const [file, setFile] = useState<File | null>(null);
   const [uploadLoading, setUploadLoading] = useState<boolean>(false);
@@ -48,15 +49,17 @@ const ProductEdit = forwardRef(({ product }: ProductType, ref): JSX.Element => {
     });
   };
 
-  const handleProductEdit: SubmitHandler<UploadFormState> = (data) => {
-    const { drinkName, description, category, price } = data;
+  const handleProductUpdate: SubmitHandler<UploadFormState> = (data) => {
     const newUpdate = {
-      drinkName: drinkName || product?.drinkName,
-      description: description || product?.description,
-      category: category || product?.category,
+      drinkName: data.drinkName || product?.drinkName,
+      description: data.description || product?.description,
+      category: data.category || product?.category,
       url: url || product?.url,
-      price: price || product?.price,
+      price: Number(data.price) || Number(product?.price),
+      packSize: data.packSize || product?.packSize,
+      packsOrWholesale: data.packsOrWholesale,
     };
+
     editProduct(id, newUpdate, onClose, setFile);
   };
 
@@ -85,7 +88,7 @@ const ProductEdit = forwardRef(({ product }: ProductType, ref): JSX.Element => {
             <chakra.span color="success.700">{product?.drinkName}</chakra.span>?
           </ModalHeader>
           <ModalCloseButton size="sm" />
-          <form onSubmit={handleSubmit(handleProductEdit)}>
+          <form onSubmit={handleSubmit(handleProductUpdate)}>
             <ModalBody>
               <FormDetails
                 register={register}
@@ -96,6 +99,8 @@ const ProductEdit = forwardRef(({ product }: ProductType, ref): JSX.Element => {
                 showValue={true}
                 isRequired={false}
                 product={product}
+                unregister={unregister}
+                setValue={setValue}
               />
             </ModalBody>
             <ModalFooter>
@@ -106,7 +111,7 @@ const ProductEdit = forwardRef(({ product }: ProductType, ref): JSX.Element => {
                   isDisabled={!file || progress === 100}
                   size="sm"
                 >
-                  Upload Image First
+                  Upload Image
                 </Button>
                 <Button
                   size="sm"
@@ -115,7 +120,7 @@ const ProductEdit = forwardRef(({ product }: ProductType, ref): JSX.Element => {
                   isLoading={isLoading}
                   colorScheme="success"
                 >
-                  Update All
+                  Update Product
                 </Button>
               </ButtonGroup>
             </ModalFooter>
