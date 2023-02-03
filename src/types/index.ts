@@ -28,10 +28,6 @@ export type UploadImageParams = {
   setCreatedAt?: React.Dispatch<React.SetStateAction<Timestamp | null>>;
 };
 
-export type ProductType = {
-  product: DocumentData | undefined;
-};
-
 export type ProductParams = {
   id: string;
 };
@@ -43,4 +39,10 @@ export type Product = {
   price: number;
   url: string;
   createdAt: Timestamp | null;
+  packsOrWholesale?: boolean;
+  packSize?: string;
+};
+
+export type ProductType = {
+  product: DocumentData | null;
 };
