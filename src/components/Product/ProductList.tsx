@@ -1,17 +1,27 @@
 import { lazy } from 'react';
+
 import { Image } from '@chakra-ui/image';
-import { Box, Heading, HStack, Stack, Text, VStack } from '@chakra-ui/layout';
+import {
+  Box,
+  Divider,
+  Heading,
+  HStack,
+  Stack,
+  Text,
+  VStack,
+} from '@chakra-ui/layout';
 import { chakra } from '@chakra-ui/system';
 
 import { numberWithCommas } from '@utils/index';
 import { ProductType } from 'src/types';
+import ProductTag from './ProductTag';
 
 const ProductBadge = lazy(() => import('./ProductBadge'));
 
 const ProductList = ({ product }: ProductType) => {
   return (
     <VStack
-      transition="all 0.3s ease-in-out"
+      transition={'all 0.3s ease-in-out'}
       _hover={{
         shadow: 'sm',
         cursor: 'pointer',
@@ -21,14 +31,15 @@ const ProductList = ({ product }: ProductType) => {
       spacing={1}
     >
       <Image
-        display={'block'}
-        p={7}
-        height={'200px'}
+        p={4}
+        height={'150px'}
+        borderRadius={'lg'}
         src={product?.url}
         alt={`product-${product?.drinkName}`}
       />
-      <Stack spacing={2} p={4} width={'full'}>
+      <Stack spacing={2} p={3} width={'full'}>
         <Box>
+          <ProductBadge product={product} />
           <HStack>
             <Heading
               textOverflow={'ellipsis'}
@@ -39,37 +50,43 @@ const ProductList = ({ product }: ProductType) => {
             >
               {product?.drinkName}
             </Heading>
-            <ProductBadge product={product} />
+            <ProductTag product={product} />
           </HStack>
-          <Text fontWeight="semibold" fontSize="sm">
+          <Text
+            fontWeight="semibold"
+            fontSize="sm"
+            textOverflow={'ellipsis'}
+            whiteSpace={'nowrap'}
+            overflow={'hidden'}
+          >
             {product?.description}
           </Text>
         </Box>
         <Box>
           <chakra.span fontSize={'20px'} fontWeight={'semibold'}>
-            Price:{' '}
             <chakra.span fontWeight="medium" color="secondary.600">
               &#36;
               {numberWithCommas(product?.price)}
             </chakra.span>
           </chakra.span>
         </Box>
-        <Box>
-          <chakra.span
-            fontSize="sm"
-            color="gray.400"
-            fontWeight="medium"
-            mt="0px !important"
-          >
-            CreatedAt:{' '}
-            <chakra.span>
-              {new Date(product?.createdAt.seconds * 1000).toLocaleDateString(
-                'en-US'
-              )}
-            </chakra.span>{' '}
-          </chakra.span>
-        </Box>
       </Stack>
+      <Divider />
+      <Box p={2}>
+        <chakra.span
+          fontSize="sm"
+          color="gray.400"
+          fontWeight="medium"
+          mt="0px !important"
+        >
+          Upload date:{' '}
+          <chakra.span>
+            {new Date(product?.createdAt.seconds * 1000).toLocaleDateString(
+              'en-US'
+            )}
+          </chakra.span>{' '}
+        </chakra.span>
+      </Box>
     </VStack>
   );
 };
