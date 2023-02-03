@@ -8,6 +8,8 @@ import ProductBadge from '@components/Product/ProductBadge';
 
 import { useProductStore } from '@store/useProductStore';
 
+import ProductTag from '@components/Product/ProductTag';
+
 const DrinkSearch: React.FC = () => {
   const products = useProductStore((state) => state.products);
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -62,6 +64,7 @@ const DrinkSearch: React.FC = () => {
                     }}
                   >
                     <Text fontWeight={'normal'}>{drinkSnap?.drinkName}</Text>
+                    <ProductTag product={drinkSnap} />
                     <ProductBadge product={drinkSnap} />
                   </HStack>
                 </Link>
