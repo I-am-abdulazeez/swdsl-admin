@@ -5,7 +5,7 @@ import { ProductType } from 'src/types';
 const ProductDelete = lazy(() => import('./ProductDelete'));
 const ProductEdit = lazy(() => import('./ProductEdit'));
 
-const ProductActions = ({ product }: ProductType): JSX.Element => {
+const ProductActions = ({ product }: ProductType) => {
   return (
     <HStack>
       <Suspense fallback={<Text>Loading</Text>}>
