@@ -28,7 +28,7 @@ export type ProductState = {
   isLoading: boolean | undefined;
   isLoadingError: boolean | undefined;
   isLoadingProduct: boolean | undefined;
-  product: DocumentData | undefined;
+  product: DocumentData | null;
   isLoadingSave: boolean | undefined;
   isLoadingEdit: boolean | undefined;
   isLoadingDelete: boolean | undefined;
