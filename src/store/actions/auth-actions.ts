@@ -26,7 +26,7 @@ export const authActions: AuthActions = {
         }));
         customToast({
           status: 'success',
-          title: 'Logged in successfully',
+          title: 'Welcome Admin',
         });
         Router.push('/dashboard');
       })
