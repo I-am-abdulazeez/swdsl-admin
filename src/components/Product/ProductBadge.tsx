@@ -5,6 +5,7 @@ import { ProductType } from 'src/types';
 const ProductBadge: React.FC<ProductType> = ({ product }) => {
   return (
     <Badge
+      rounded={'md'}
       colorScheme={
         product?.category === 'Cognac'
           ? 'whatsapp'
