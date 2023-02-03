@@ -6,10 +6,7 @@ const ProductTag: React.FC<ProductType> = ({ product }) => {
     <>
       {product?.packsOrWholesale && (
         <Tag
-          mb={1}
-          borderRadius={3}
           fontWeight={'semibold'}
-          alignSelf={'end'}
           fontSize={'12px'}
           colorScheme={
             product?.packSize === '12 Packs' ? 'primary' : 'secondary'
