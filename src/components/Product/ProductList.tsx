@@ -14,9 +14,9 @@ import { chakra } from '@chakra-ui/system';
 
 import { numberWithCommas } from '@utils/index';
 import { ProductType } from 'src/types';
-import ProductTag from './ProductTag';
 
 const ProductBadge = lazy(() => import('./ProductBadge'));
+const ProductTag = lazy(() => import('./ProductTag'));
 
 const ProductList = ({ product }: ProductType) => {
   return (
