@@ -6,14 +6,12 @@ import { productActions } from '@store/actions/product-actions';
 
 const initialState: ProductState = {
   products: null,
-  isEmptyProduct: false,
-  isLoading: false,
-  isLoadingError: false,
-  isLoadingProduct: false,
   product: null,
-  isLoadingSave: false,
-  isLoadingEdit: false,
-  isLoadingDelete: false,
+  isEmptyProduct: false,
+  isFetchingProducts: false,
+  isFetchingError: false,
+  isFetchingProduct: false,
+  isLoading: false,
 };
 
 export const useProductStore = create<ProductStore>()(
