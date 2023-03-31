@@ -12,9 +12,9 @@ const ProductList = lazy(() => import('./ProductList'));
 
 const Products: React.FC = () => {
   const products = useProductStore((state) => state.products);
-  const isLoading = useProductStore((state) => state.isLoading);
+  const isLoading = useProductStore((state) => state.isFetchingProducts);
   const isEmptyProduct = useProductStore((state) => state.isEmptyProduct);
-  const isLoadingError = useProductStore((state) => state.isLoadingError);
+  const isLoadingError = useProductStore((state) => state.isFetchingError);
 
   return (
     <Box mt={8}>
