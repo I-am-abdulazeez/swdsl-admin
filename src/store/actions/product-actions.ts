@@ -17,7 +17,10 @@ import { customToast } from '@utils/index';
 
 export const productActions: ProductActions = {
   fetchProducts: () => {
-    useProductStore.setState((state) => ({ ...state, isLoading: true }));
+    useProductStore.setState((state) => ({
+      ...state,
+      isFetchingProducts: true,
+    }));
     const productQuery = query(
       collection(firebaseFirstore, 'products'),
       orderBy('createdAt', 'desc')
@@ -29,8 +32,8 @@ export const productActions: ProductActions = {
         useProductStore.setState((state) => ({
           ...state,
           isEmptyProduct: false,
-          isLoading: false,
-          isLoadingError: false,
+          isFetchingProducts: false,
+          isFetchingError: false,
           products: snapshot?.docs.map((doc) => {
             return { ...doc?.data(), id: doc.id };
           }),
@@ -40,9 +43,9 @@ export const productActions: ProductActions = {
         useProductStore.setState((state) => ({
           ...state,
           isEmptyProduct: true,
-          isLoading: false,
+          isFetchingProducts: false,
           products: null,
-          isLoadingError: true,
+          isFetchingError: true,
         }));
         customToast({
           title: error.message,
@@ -52,21 +55,24 @@ export const productActions: ProductActions = {
     );
   },
   fetchSingleProduct: (id) => {
-    useProductStore.setState((state) => ({ ...state, isLoadingProduct: true }));
+    useProductStore.setState((state) => ({
+      ...state,
+      isFetchingProduct: true,
+    }));
     const productRef = doc(firebaseFirstore, 'products', String(id));
     onSnapshot(
       productRef,
       (docSnap) => {
         useProductStore.setState((state) => ({
           ...state,
-          isLoadingProduct: false,
+          isFetchingProduct: false,
           product: { ...docSnap?.data(), id: docSnap?.id },
         }));
       },
       (error) => {
         useProductStore.setState((state) => ({
           ...state,
-          isLoadingProduct: false,
+          isFetchingProduct: false,
           product: undefined,
         }));
         customToast({
@@ -77,13 +83,13 @@ export const productActions: ProductActions = {
     );
   },
   saveProduct: async (data, reset, setFile) => {
-    useProductStore.setState((state) => ({ ...state, isLoadingSave: true }));
+    useProductStore.setState((state) => ({ ...state, isLoading: true }));
     const collectionRef = collection(firebaseFirstore, 'products');
     await addDoc(collectionRef, data)
       .then(() => {
         useProductStore.setState((state) => ({
           ...state,
-          isLoadingSave: false,
+          isLoading: false,
         }));
         customToast({
           title: 'Product added successfully',
@@ -95,7 +101,7 @@ export const productActions: ProductActions = {
       .catch((error: FirestoreError) => {
         useProductStore.setState((state) => ({
           ...state,
-          isLoadingSave: false,
+          isLoading: false,
         }));
         customToast({
           title: error.message,
@@ -104,14 +110,14 @@ export const productActions: ProductActions = {
       });
   },
   editProduct: async (id, data, onClose, setFile) => {
-    useProductStore.setState((state) => ({ ...state, isLoadingEdit: true }));
+    useProductStore.setState((state) => ({ ...state, isLoading: true }));
     const productRef = doc(firebaseFirstore, 'products', String(id));
     await updateDoc(productRef, data)
       .then(() => {
         onClose();
         useProductStore.setState((state) => ({
           ...state,
-          isLoadingEdit: false,
+          isLoading: false,
         }));
         customToast({
           title: 'Product updated successfully',
@@ -122,7 +128,7 @@ export const productActions: ProductActions = {
       .catch((error: FirestoreError) => {
         useProductStore.setState((state) => ({
           ...state,
-          isLoadingEdit: false,
+          isLoading: false,
         }));
         customToast({
           title: error.message,
@@ -131,13 +137,13 @@ export const productActions: ProductActions = {
       });
   },
   deleteProduct: async (id, onClose) => {
-    useProductStore.setState((state) => ({ ...state, isLoadingDelete: true }));
+    useProductStore.setState((state) => ({ ...state, isLoading: true }));
     const productRef = doc(firebaseFirstore, 'products', String(id));
     await deleteDoc(productRef)
       .then(() => {
         useProductStore.setState((state) => ({
           ...state,
-          isLoadingDelete: false,
+          isLoading: false,
         }));
         customToast({
           title: 'Product deleted successfully',
@@ -149,7 +155,7 @@ export const productActions: ProductActions = {
       .catch((error: FirestoreError) => {
         useProductStore.setState((state) => ({
           ...state,
-          isLoadingDelete: false,
+          isLoading: false,
         }));
         customToast({
           title: error.message,
