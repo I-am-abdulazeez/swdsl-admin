@@ -9,10 +9,6 @@ import { useAuthStore } from '@store/useAuthStore';
 const Home: React.FC = () => {
   const { user } = useAuthStore();
 
-  useEffect(() => {
-    console.log(user);
-  });
-
   return (
     <Flex justify="center" align="center" height="70vh" width={'full'}>
       <VStack spacing={3} textAlign="center">
