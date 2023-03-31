@@ -21,7 +21,7 @@ const ProductDetails: React.FC = () => {
   const navigateTo = useNavigate();
 
   const product = useProductStore((state) => state.product);
-  const isLoading = useProductStore((state) => state.isLoadingProduct);
+  const isLoading = useProductStore((state) => state.isFetchingProduct);
   const fetchSingleProduct = useProductStore(
     (state) => state.fetchSingleProduct
   );
