@@ -26,7 +26,7 @@ const ProductDelete = forwardRef(({ product }: ProductType, ref) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const deleteProduct = useProductStore((state) => state.deleteProduct);
-  const isLoading = useProductStore((state) => state.isLoadingDelete);
+  const isLoading = useProductStore((state) => state.isLoading);
 
   const handleDocDeletion = (e: FormEvent) => {
     e.preventDefault();
