@@ -35,8 +35,6 @@ export interface Admin {
 
 export interface FormDetailsProps {
   register: UseFormRegister<UploadFormState>;
-  unregister: UseFormUnregister<UploadFormState>;
-  setValue: UseFormSetValue<UploadFormState>;
   file: File | null;
   progress: number;
   setFile: React.Dispatch<React.SetStateAction<File | null>>;
