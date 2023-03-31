@@ -24,14 +24,12 @@ export type AuthStore = AuthState & AuthActions;
 // Product types
 export type ProductState = {
   products: DocumentData[] | null;
-  isEmptyProduct: boolean;
-  isLoading: boolean | undefined;
-  isLoadingError: boolean | undefined;
-  isLoadingProduct: boolean | undefined;
   product: DocumentData | null;
-  isLoadingSave: boolean | undefined;
-  isLoadingEdit: boolean | undefined;
-  isLoadingDelete: boolean | undefined;
+  isEmptyProduct: boolean;
+  isFetchingProducts: boolean | undefined;
+  isFetchingProduct: boolean | undefined;
+  isFetchingError: boolean | undefined;
+  isLoading: boolean | undefined;
 };
 
 export type ProductActions = {
