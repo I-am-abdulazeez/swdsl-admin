@@ -27,8 +27,7 @@ import { ProductParams, ProductType } from 'src/types';
 
 const ProductEdit = forwardRef(({ product }: ProductType, ref) => {
   const { id } = useParams<ProductParams>();
-  const { register, handleSubmit, watch, unregister, reset, setValue } =
-    useForm<UploadFormState>();
+  const { register, handleSubmit } = useForm<UploadFormState>();
 
   const [file, setFile] = useState<File | null>(null);
   const [uploadLoading, setUploadLoading] = useState<boolean>(false);
@@ -37,7 +36,7 @@ const ProductEdit = forwardRef(({ product }: ProductType, ref) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const editProduct = useProductStore((state) => state.editProduct);
-  const isLoading = useProductStore((state) => state.isLoadingEdit);
+  const isLoading = useProductStore((state) => state.isLoading);
 
   const handleProductImageUpload = () => {
     uploadImage({
@@ -56,8 +55,6 @@ const ProductEdit = forwardRef(({ product }: ProductType, ref) => {
       category: data.category || product?.category,
       url: url || product?.url,
       price: Number(data.price) || Number(product?.price),
-      packSize: data.packSize || product?.packSize,
-      packsOrWholesale: data.packsOrWholesale,
     };
 
     editProduct(id, newUpdate, onClose, setFile);
@@ -99,8 +96,6 @@ const ProductEdit = forwardRef(({ product }: ProductType, ref) => {
                 showValue={true}
                 isRequired={false}
                 product={product}
-                unregister={unregister}
-                setValue={setValue}
               />
             </ModalBody>
             <ModalFooter>
