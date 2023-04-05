@@ -13,8 +13,6 @@ const ProductBadge: React.FC<ProductType> = ({ product }) => {
           ? 'orange'
           : product?.category === 'Whiskey'
           ? 'purple'
-          : product?.category === 'Non alcoholic'
-          ? 'teal'
           : product?.category === 'Red wine'
           ? 'red'
           : product?.category === 'Champagne'
@@ -36,7 +34,7 @@ const ProductBadge: React.FC<ProductType> = ({ product }) => {
           : product?.category === 'Vodka'
           ? 'pink'
           : product?.category === 'Others'
-          ? 'telegram'
+          ? 'teal'
           : undefined
       }
     >

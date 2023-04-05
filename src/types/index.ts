@@ -4,7 +4,6 @@ export type CategoryType =
   | 'Cognac'
   | 'Juice'
   | 'Whisky'
-  | 'Non alcoholic'
   | 'Red wine'
   | 'Champagne'
   | 'Rum'
