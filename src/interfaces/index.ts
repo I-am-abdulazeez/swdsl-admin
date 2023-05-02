@@ -42,6 +42,8 @@ export interface FormDetailsProps {
   showValue?: boolean;
   isRequired: boolean;
   product?: DocumentData | null;
+  unregister: UseFormUnregister<UploadFormState>;
+  setValue: UseFormSetValue<UploadFormState>;
 }
 
 export interface ProgressBarProps {

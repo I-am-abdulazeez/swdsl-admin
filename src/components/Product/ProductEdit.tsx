@@ -27,7 +27,8 @@ import { ProductParams, ProductType } from 'src/types';
 
 const ProductEdit = forwardRef(({ product }: ProductType, ref) => {
   const { id } = useParams<ProductParams>();
-  const { register, handleSubmit } = useForm<UploadFormState>();
+  const { register, handleSubmit, setValue, unregister } =
+    useForm<UploadFormState>();
 
   const [file, setFile] = useState<File | null>(null);
   const [uploadLoading, setUploadLoading] = useState<boolean>(false);
@@ -55,6 +56,8 @@ const ProductEdit = forwardRef(({ product }: ProductType, ref) => {
       category: data.category || product?.category,
       url: url || product?.url,
       price: Number(data.price) || Number(product?.price),
+      packSize: data.packSize || product?.packSize,
+      packsOrWholesale: data.packsOrWholesale,
     };
 
     editProduct(id, newUpdate, onClose, setFile);
@@ -72,7 +75,7 @@ const ProductEdit = forwardRef(({ product }: ProductType, ref) => {
       />
       <Modal
         isCentered
-        size="lg"
+        size="2xl"
         onClose={onClose}
         isOpen={isOpen}
         motionPreset="slideInBottom"
@@ -96,6 +99,8 @@ const ProductEdit = forwardRef(({ product }: ProductType, ref) => {
                 showValue={true}
                 isRequired={false}
                 product={product}
+                setValue={setValue}
+                unregister={unregister}
               />
             </ModalBody>
             <ModalFooter>

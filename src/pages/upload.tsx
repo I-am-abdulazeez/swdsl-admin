@@ -9,7 +9,8 @@ import { useProductStore } from '@store/useProductStore';
 import FormDetails from '@components/FormDetails';
 
 const Upload: React.FC = () => {
-  const { register, handleSubmit, reset } = useForm<UploadFormState>();
+  const { register, handleSubmit, reset, unregister, setValue } =
+    useForm<UploadFormState>();
 
   const [uploadLoading, setUploadLoading] = useState<boolean>(false);
   const [file, setFile] = useState<File | null>(null);
@@ -28,6 +29,8 @@ const Upload: React.FC = () => {
       price: Number(data.price),
       url,
       createdAt,
+      packSize: data.packSize,
+      packsOrWholesale: data.packsOrWholesale,
     };
     saveProduct(newProductUpload, reset, setFile);
   };
@@ -56,6 +59,8 @@ const Upload: React.FC = () => {
           setFile={setFile}
           setProgress={setProgress}
           isRequired={true}
+          unregister={unregister}
+          setValue={setValue}
         />
         <ButtonGroup mt={4} spacing={2}>
           <Button
